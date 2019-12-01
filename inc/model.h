@@ -5,6 +5,10 @@
 
 // use vector to create object lists
 #include <vector>
+#include <line>
+#include <iostream>
+#include <fstream>
+#include <string>
 
 
 class model
@@ -17,6 +21,10 @@ class model
 
   //destructor
   ~model();
+
+  // Function to read the model file
+  // string nameOfModelfile ? maybe
+  void readFile();
 
   //get functions
   int getNumberOfVertices();

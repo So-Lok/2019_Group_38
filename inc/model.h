@@ -1,50 +1,52 @@
-// model.h
-
-#ifndef MODEL_H
-#define MODEL_H
+#ifndef MODEL_H_INCLUDED
+#define MODEL_H_INCLUDED
 
 // use vector to create object lists
 #include <vector>
-#include <line>
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <sstream>
+
+
+using namespace std;
 
 
 class model
 {
-  public:
+public:
 
-  // constructor
-  // constructor should read a .vtk file
-  model();
+    // constructor
+    // constructor should read a .vtk file
+    model();
 
-  //destructor
-  ~model();
+    //destructor
+    ~model();
 
-  // Function to read the model file
-  // string nameOfModelfile ? maybe
-  void readFile();
+    // Function to read the model file
+    // string nameOfModelfile ? maybe
+    void readFile();
 
-  //get functions
-  int getNumberOfVertices();
+    //get functions
+    int getNumberOfVertices();
 
-  // needs data type
-  getNumberOfCellsAndType();
+    // needs data type
+//    getNumberOfCellsAndType();
 
-  // Calculates the centre of the model using the vertices vector values
-  vector calculateModelCentre();
-
-
-
-  private:
+    // Calculates the centre of the model using the vertices vector values
+ //   vector calculateModelCentre();
 
 
-  vector();
-  material();
-  cell();
 
-}
+private:
+
+    // vector list of vertices
+  //  <vector>vertices();
+ //   material();
+ //   cell();
+
+};
 
 
-#endif
+
+#endif // MODEL_H_INCLUDED

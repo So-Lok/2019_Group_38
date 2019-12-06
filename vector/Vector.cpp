@@ -23,7 +23,7 @@ vectorClass::vectorClass(int vectorIdIn,float xCoordIn,float yCoordIn,float zCoo
 	this->zCoord = zCoordIn;
 }
 //copy constructor
-vectorClass::vectorClass(vectorClass &vectorToCopy) {
+vectorClass::vectorClass(vectorClass& vectorToCopy) {
 	vectorId = vectorToCopy.vectorId;
 	xCoord = vectorToCopy.xCoord;
 	yCoord = vectorToCopy.yCoord;

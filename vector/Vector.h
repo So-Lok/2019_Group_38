@@ -20,7 +20,7 @@ public:
 	vectorClass(int vectorId,float xCoord, float yCoord, float zCoord);
 	
 	//copy constructor
-	vectorClass(vectorClass* vectorToCopy);
+	vectorClass(vectorClass& vectorToCopy);
 	
 	//get function
 	float get_X();

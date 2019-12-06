@@ -8,7 +8,6 @@
 
 /*myVector::myVector(std::vector<int> v) {
 
-	vec = v;
 }*/
 
 myVector::myVector(float new_x, float new_y, float new_z) 

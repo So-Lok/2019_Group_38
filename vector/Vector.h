@@ -8,16 +8,11 @@ class myVector{
 private:
 	float x, y, z;
 
-
-
 public:
 	//myVector(std::vector<int> v);
 	myVector(float new_x, float new_y, float new_z);
 	std::vector<int> vect;
 	~myVector();
-	int rand_numx;
-	int rand_numy;
-	int rand_numz;
 	float get_x();
 	float get_y();
 	float get_z();

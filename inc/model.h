@@ -8,6 +8,8 @@
 #include <string>
 #include <sstream>
 
+#include "vectorClass.h"
+#include "material.h"
 
 using namespace std;
 
@@ -36,14 +38,16 @@ public:
     // Calculates the centre of the model using the vertices vector values
  //   vector calculateModelCentre();
 
+    void dispVectorList();
 
+    void dispMaterials();
 
 private:
 
     // vector list of vertices
-  //  <vector>vertices();
- //   material();
- //   cell();
+    std::vector<vectorClass> vectorList;
+    std::vector<material> materials;
+   //std::vector<cell> cells;
 
 };
 

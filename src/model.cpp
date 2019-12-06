@@ -17,28 +17,24 @@ model::~model()
 // read file function, string could also be the path location of the model - file string nameOfModelfile
 void model::readFile()
 {
+    /* Function variables used to store values*/
+    int id;
     /* Temporary material variables*/
-    unsigned int id;
-    unsigned int density;
+    int density;
     string colour;
     string name;
 
     /*Temporary vector variables */
-    // temp therefore just use the id variable in materials
-    // as the id will be wiped every loop
     float xCoord;
     float yCoord;
     float zCoord;
 
     /*Temporary cell variables - id, type, */
-    // id
     char type;
-    // the number of vertex ids varies and therefore there will need to be a for loop to store them depending on the type
+    // the number of vertex ids varies and therefore
+    // there will need to be a for loop to store them depending on the type
     // of cell
-    int vertexId;
-   // int numV;
-
-   short vId1, vId2, vId3, vId4, vId5, vId6, vId7, vId8;
+    short vId1, vId2, vId3, vId4, vId5, vId6, vId7, vId8;
 
 
     // create a string variable to contain the information on each line
@@ -74,12 +70,11 @@ void model::readFile()
                 can set the variable types up
                 */
 
-                /*
-                At this stage instead of being stored within the temporary variables declared above,
-                the data will be stored within a <vector> array of the other classes
-                */
+
                 ssline >> id >> density >> colour >> name;
-                cout << id << "\n" << density << "\n" << colour << "\n" << name << "\n";    // display
+                material newMaterial(id, density, colour, name);
+                materials.push_back(newMaterial);
+              //  cout << id << "\n" << density << "\n" << colour << "\n" << name << "\n";    // display
 
             }
 
@@ -89,7 +84,13 @@ void model::readFile()
                 stringstream ssline(line);
                 ssline.ignore(1);
                 ssline >> id >> xCoord >> yCoord >> zCoord;
-                cout << "Vectors :" << id << " " << xCoord << " " << yCoord << " " << zCoord << "\n";
+                // construct a vector using id and coordinates
+                vectorClass newVector(id, xCoord, yCoord, zCoord);
+                // push the constructed vector class into the vectorClass list called vectorList
+                vectorList.push_back(newVector);
+
+                // displays vector out
+                //cout << "Vectors :" << id << " " << xCoord << " " << yCoord << " " << zCoord << "\n";
             }
 
             // looks for lines with the cell identifier
@@ -100,24 +101,32 @@ void model::readFile()
                 ssline.ignore(1);
                 ssline >> id >> type;
 
-                cout << id << " " << type << " ";
+               // cout << id << " " << type << " ";
 
 
 
                 if(type == 'h')
                 {
-                    //numV = 8;
                     ssline.ignore(3);
                     ssline >>  vId1 >>  vId2 >>  vId3 >>  vId4
-                            >>  vId5 >>  vId6 >>  vId7 >>  vId8;
+                           >>  vId5 >>  vId6 >>  vId7 >>  vId8;
 
-                    cout <<  vId1 <<  vId2 <<  vId3 <<  vId4
-                            <<  vId5 <<  vId6 <<  vId7 <<  vId8;
+                    //cout <<  vId1 <<  vId2 <<  vId3 <<  vId4
+                       //  <<  vId5 <<  vId6 <<  vId7 <<  vId8;
                 }
 
                 if(type == 't')
+                {
                     ssline.ignore(3);
-               // if(type == 'p')
+                    ssline >>  vId1 >>  vId2 >>  vId3 >>  vId4;
+                }
+
+
+                if(type == 'p')
+                {
+                    ssline.ignore(3);
+                    ssline >>  vId1 >>  vId2 >>  vId3 >>  vId4 >>  vId5;
+                }
 
 
 
@@ -134,22 +143,50 @@ void model::readFile()
     }
 }
 
+void model::dispVectorList()
+{
+    int listSize = vectorList.size();
+
+    for(int i = 0; i < listSize;i++)
+    {
+        cout
+        << vectorList[i].getId() << " "
+        << vectorList[i].getX() << " "
+        << vectorList[i].getY() << " "
+        << vectorList[i].getZ() << "\n";
+
+    }
+
+}
+
+void model::dispMaterials()
+{
+    int listSize = materials.size();
+
+    for(int i = 0; i < listSize;i++)
+    {
+        cout << "Test:"
+        << materials[i].getMatId() << " "
+        << materials[i].getDensity() << " "
+        << materials[i].getColour() << " "
+        << materials[i].getMatName() << "\n";
+    }
+}
 
 
 
 
-/*
 
 
 int model::getNumberOfVertices()
 {
-
+    return this->vectorList.size();
 }
-
+/*
 // data type required model::getNumberOfCellsAndType();
 // calculation of the model
 // should use a object list of the vertices to calculate the centre
-//vector model::calculateModelCentre()
+// vector model::calculateModelCentre()
 {
 
 }

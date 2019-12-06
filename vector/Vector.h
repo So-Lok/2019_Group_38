@@ -42,7 +42,7 @@ public:
 	friend vectorClass cross_product(const vectorClass& vec1, vectorClass& vec2);
 	
 	//print function if needed
-	void printV();
+	//void printV();
 
 	
 

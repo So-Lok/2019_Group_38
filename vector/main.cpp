@@ -20,7 +20,7 @@ int main() {
 	subtract = v1 - v2;
 	subtract.printV*/
 
-	std::cout << v1.get_ID();
+	std::cout << v1.get_ID() << "," <<v1.get_X();
 	
 
 	

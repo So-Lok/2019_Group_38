@@ -106,9 +106,10 @@ vectorClass vectorClass::operator-(const vectorClass& vec2) {
 }
 
 //print function
+/*
 void vectorClass::printV() {
 	std::cout << "<" <<xCoord << ","<< yCoord<< "," << zCoord<< ">\n";
-}
+}*/
 
 
 

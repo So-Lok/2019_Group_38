@@ -4,21 +4,45 @@
 #include <ctime>
 #include <numeric>
 
-class myVector{
+class vectorClass{
 private:
-	float x, y, z;
+	float  xCoord, yCoord, zCoord;
+	int vectorId;
 
 public:
-	//myVector(std::vector<int> v);
-	myVector(float new_x, float new_y, float new_z);
-	std::vector<int> vect;
-	~myVector();
-	float get_x();
-	float get_y();
-	float get_z();
+	//constructor
+	vectorClass();
+	
+	//deconstructor
+	~vectorClass();
+	
+	//overide constructor
+	vectorClass(int vectorId,float xCoord, float yCoord, float zCoord);
+	
+	//copy constructor
+	vectorClass(vectorClass* vectorToCopy);
+	
+	//get function
+	float get_X();
+	float get_Y();
+	float get_Z();
+	int get_ID();
+	
+	//set function
+	float set_X(float xCoord);
+	float set_Y(float yCoord);
+	float set_Z(float zCoord);
+	void set_Value(int vectorId,float xCoord, float yCoord , float zCoord);
+	
+	//calculation function
 	float magnitude();
-	float dot_product(const myVector& vec1,myVector& vec2);
-	float cross_product(const myVector& vec1, myVector& vec2);
+	vectorClass operator+(const vectorClass& vec2);
+	vectorClass operator-(const vectorClass& vec2);
+	friend float dot_product(const vectorClass& vec1,vectorClass& vec2);
+	friend vectorClass cross_product(const vectorClass& vec1, vectorClass& vec2);
+	
+	//print function if needed
+	void printV();
 
 	
 

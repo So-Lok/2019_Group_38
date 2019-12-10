@@ -13,9 +13,9 @@ model::~model()
 {
 
 }
-
+// Model Functions -----------------------------------------------------------------
 // read file function, string could also be the path location of the model - file string nameOfModelfile
-void model::readFile()
+void model::readFile(const char* fileName)
 {
     //* Function variables used to store values*//
     int id;
@@ -39,7 +39,7 @@ void model::readFile()
     string line;
 
     // input the file into the stream
-    ifstream modelFile("ExampleModel1.mod");
+    ifstream modelFile(fileName);
 
     // conditional statement in case error occurs when opening the file
     if(modelFile.is_open())
@@ -86,6 +86,7 @@ void model::readFile()
                 // push the constructed vector class into the vectorClass list called vectorList
                 vectorList.push_back(newVector);
 
+
                 // displays vector out
                 //cout << "Vectors :" << id << " " << xCoord << " " << yCoord << " " << zCoord << "\n";
             }
@@ -108,9 +109,29 @@ void model::readFile()
                     ssline >>  vId1 >>  vId2 >>  vId3 >>  vId4
                            >>  vId5 >>  vId6 >>  vId7 >>  vId8;
 
-                    // derived class constructor
+                    // create temporary vector
+                    vectorClass temp1; vectorClass temp2;
+                    vectorClass temp3; vectorClass temp4;
+                    vectorClass temp5; vectorClass temp6;
+                    vectorClass temp7; vectorClass temp8;
+                    // Setting all variables to the temporary vectors
+                    // Needs compacting later
+
+                    temp1.setAll(vId1, vectorList[vId1].getX(), vectorList[vId1].getY(), vectorList[vId1].getZ());
+                    temp2.setAll(vId2, vectorList[vId2].getX(), vectorList[vId2].getY(), vectorList[vId2].getZ());
+                    temp3.setAll(vId3, vectorList[vId3].getX(), vectorList[vId3].getY(), vectorList[vId3].getZ());
+                    temp4.setAll(vId4, vectorList[vId4].getX(), vectorList[vId4].getY(), vectorList[vId4].getZ());
+                    temp5.setAll(vId5, vectorList[vId5].getX(), vectorList[vId5].getY(), vectorList[vId5].getZ());
+                    temp6.setAll(vId6, vectorList[vId6].getX(), vectorList[vId6].getY(), vectorList[vId6].getZ());
+                    temp7.setAll(vId7, vectorList[vId7].getX(), vectorList[vId7].getY(), vectorList[vId7].getZ());
+                    temp8.setAll(vId8, vectorList[vId8].getX(), vectorList[vId8].getY(), vectorList[vId8].getZ());
+
+
+                    // class constructor with vectors
                     cell newCell(id, type, matId, vId1, vId2, vId3, vId4,
-                                                        vId5, vId6, vId7, vId8);
+                                                  vId5, vId6, vId7, vId8,
+                                                  temp1, temp2, temp3, temp4,
+                                                  temp5, temp6, temp7, temp8);
                     cells.push_back(newCell);
 
                    // cout <<  vId1 <<  vId2 <<  vId3 <<  vId4
@@ -122,8 +143,18 @@ void model::readFile()
                 {
 
                     ssline >>  vId1 >>  vId2 >>  vId3 >>  vId4;
-                    // derived class constructor
-                    cell newCell(id, type, matId, vId1, vId2, vId3, vId4);
+                    // create temporary vector
+                    vectorClass temp1; vectorClass temp2;
+                    vectorClass temp3; vectorClass temp4;
+
+                    temp1.setAll(vId1, vectorList[vId1].getX(), vectorList[vId1].getY(), vectorList[vId1].getZ());
+                    temp2.setAll(vId2, vectorList[vId2].getX(), vectorList[vId2].getY(), vectorList[vId2].getZ());
+                    temp3.setAll(vId3, vectorList[vId3].getX(), vectorList[vId3].getY(), vectorList[vId3].getZ());
+                    temp4.setAll(vId4, vectorList[vId4].getX(), vectorList[vId4].getY(), vectorList[vId4].getZ());
+
+
+                    cell newCell(id, type, matId, vId1, vId2, vId3, vId4,
+                                                  temp1, temp2, temp3, temp4);
                     cells.push_back(newCell);
                 }
 
@@ -132,8 +163,20 @@ void model::readFile()
                 {
 
                     ssline >>  vId1 >>  vId2 >>  vId3 >>  vId4 >>  vId5;
-                    // derived class constructor
-                    cell newCell(id, type, matId, vId1, vId2, vId3, vId4, vId5);
+                    // create temporary vector
+                    vectorClass temp1; vectorClass temp2;
+                    vectorClass temp3; vectorClass temp4; vectorClass temp5;
+
+                    temp1.setAll(vId1, vectorList[vId1].getX(), vectorList[vId1].getY(), vectorList[vId1].getZ());
+                    temp2.setAll(vId2, vectorList[vId2].getX(), vectorList[vId2].getY(), vectorList[vId2].getZ());
+                    temp3.setAll(vId3, vectorList[vId3].getX(), vectorList[vId3].getY(), vectorList[vId3].getZ());
+                    temp4.setAll(vId4, vectorList[vId4].getX(), vectorList[vId4].getY(), vectorList[vId4].getZ());
+                    temp5.setAll(vId5, vectorList[vId5].getX(), vectorList[vId5].getY(), vectorList[vId5].getZ());
+
+
+                    cell newCell(id, type, matId, vId1, vId2, vId3, vId4, vId5,
+                                                  temp1, temp2, temp3, temp4,
+                                                  temp5);
                     cells.push_back(newCell);
                 }
 
@@ -144,6 +187,69 @@ void model::readFile()
     }
 
 
+}
+
+/* Save/export current model file */
+
+void model::saveCurrentModelToFile(const char* fileName)
+{
+    // create index/counter for looping
+    unsigned int i;
+
+    // create ofstream variable, file, to output to
+    std::ofstream outputFile(fileName, std::ofstream::out);
+
+    for(i = 0; i<materials.size();i++)
+    {
+        outputFile
+        << "m "
+        << materials[i].getMatId() << " "
+        << materials[i].getDensity() << " "
+        << materials[i].getColour() << " "
+        << materials[i].getMatName() << "\n";
+    }
+
+    for(i = 0; i<vectorList.size();i++)
+    {
+        outputFile
+        << "v "
+        << vectorList[i].getId() << " "
+        << vectorList[i].getX() << " "
+        << vectorList[i].getY() << " "
+        << vectorList[i].getZ() << "\n";
+    }
+
+
+    for(i = 0; i<materials.size();i++)
+    {
+        outputFile
+        << "c "
+        << cells[i].getCellId() << " "
+        << cells[i].getType() << " "
+        << cells[i].getMatId() << " ";
+        for(unsigned int j =0; j<cells[i].vectorIdList.size();j++)
+            outputFile << cells[i].vectorIdList[j] << " ";
+
+        outputFile << "\n";
+    }
+}
+// /Model Functions --------------------------------------------------------
+
+// Calculation Functions
+
+float model::calcModelVolume()
+{
+    float totalVolume = 0;
+    int cellsSize = cells.size();
+    // send the list of vectors to cell so that each cell can calculate its volume
+    for(int i = 0; i< cellsSize; i++)
+    {
+        totalVolume = totalVolume + cells[i].calcVolume();
+        //cells[i].dispCellVectors();
+        //cout << totalVolume << "\n";
+    }
+
+    return totalVolume;
 }
 
 /* Display functions */ //-----------------------------------------------------------------
@@ -237,5 +343,33 @@ int model::getNumberOfVertices()
 {
     return this->vectorList.size();
 }
+
+float model::calcModelWeight()
+{
+    // create limits for for loops based on material and cell array size
+    int numCells = cells.size();
+    int numMaterials = materials.size();
+
+    float weight=0;
+
+    for(int i=0;i<numCells;i++)
+    {
+        // get the material Id of the current material
+        int currentMat = cells[i].getMatId();
+        for(int j=0;j<numMaterials;j++)
+        {
+            // get the density of the material in the current cell
+            int density = materials[currentMat].getDensity();
+            weight = weight + cells[i].calcWeight(density);
+        }
+
+    }
+
+    return weight;
+}
+
+
+
+
 
 

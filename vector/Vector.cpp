@@ -12,17 +12,17 @@ vectorClass::vectorClass() {
 
 //deconstructor
 vectorClass::~vectorClass() {
-	
+
 }
 
 //overide constructor
-vectorClass::vectorClass(int vectorIdIn,float xCoordIn,float yCoordIn,float zCoordIn) { 
+vectorClass::vectorClass(int vectorIdIn,float xCoordIn,float yCoordIn,float zCoordIn) {
 	vectorId = vectorIdIn; //to set the value for testing, ID
 	xCoord = xCoordIn; //set x value
 	yCoord = yCoordIn; //set y value
 	zCoord = zCoordIn; //set z value
 }
-//copy constructor 
+//copy constructor
 vectorClass::vectorClass(vectorClass& vectorToCopy) { //in case you want to create a new class with the same fuction as vectorClass
 	vectorId = vectorToCopy.vectorId; //set id value
 	xCoord = vectorToCopy.xCoord; //set x value
@@ -51,7 +51,7 @@ float vectorClass::get_Z() {
 
 //print vector
 void vectorClass::print_Vector(int vectorIdIn, float* xCoordIn, float* yCoordIn, float* zCoordIn) {
-	*xCoordIn = xCoord; //set the value to x coordinate 
+	*xCoordIn = xCoord; //set the value to x coordinate
 	*yCoordIn = yCoord; //set the value to y coordinate
 	*zCoordIn = zCoord; //set the vlaue to z coordinate
 	//for example (1,&x,&y,&z)
@@ -62,7 +62,7 @@ void vectorClass::print_Vector(int vectorIdIn, float* xCoordIn, float* yCoordIn,
 //set x
 float vectorClass::set_X(float xCoordIn) {
 	xCoord = xCoordIn; //set value to x coordinate
-	return xCoord; 
+	return xCoord;
 }
 //set y
 float vectorClass::set_Y(float yCoordIn) {
@@ -77,7 +77,7 @@ float vectorClass::set_Z(float zCoordIn) {
 //set value to the vector
 void vectorClass::set_Value(int vectorIdIn, float xCoordIn, float yCoordIn, float zCoordIn) {
 	vectorId = vectorIdIn; //set all the value to the variable in the vector
-	xCoord = xCoordIn; //set to x 
+	xCoord = xCoordIn; //set to x
 	yCoord = yCoordIn; //set to y
 	zCoord = zCoordIn; //set to z
 }
@@ -86,7 +86,7 @@ void vectorClass::set_Value(int vectorIdIn, float xCoordIn, float yCoordIn, floa
 
 //magnitude
 float vectorClass::magnitude() {
-	return sqrt((xCoord * xCoord) + (yCoord * yCoord) + (zCoord * zCoord)); //return the magnitude 
+	return sqrt((xCoord * xCoord) + (yCoord * yCoord) + (zCoord * zCoord)); //return the magnitude
 }
 
 //dot product
@@ -121,10 +121,3 @@ vectorClass vectorClass::operator-(const vectorClass& vec2) {
 	result.set_Z(zCoord - vec2.zCoord); //calculate and set to the z coordinate
 	return result; //return the result in the require format
 }
-
-
-
-
-
-
-

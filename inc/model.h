@@ -25,18 +25,15 @@ public:
     //destructor
     ~model();
 
-    // function to read in model file
-    void readFile();
+    // Model file functions
+    void readFile(const char* fileName);
+    void saveCurrentModelToFile(const char* fileName);
 
-    void saveCurrentModelToFile();
-
-    int getNumberOfVertices();
-
-    // Calculates the centre of the model using the vertices vector values
+    /* Calculation Functions */
    vectorClass calculateModelCentre();
-
-
-
+   float calcModelVolume();
+   float calcModelWeight();
+   void calcOverallDimensions();
 
 
  /* Display function */
@@ -49,7 +46,7 @@ public:
     void dispNumberOfCellsAndType();
 
     void dispNumberOfVertices();
-
+    int getNumberOfVertices();
 
 
 private:

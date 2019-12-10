@@ -1,9 +1,57 @@
-// test file for model.cpp
+#include <iostream>
 
+#include "model.h"
+#include "vectorClass.h"
 
+using namespace std;
 
-
-int main(int argc, char argv*[] )
+int main()
 {
-  
+    model test;
+
+    vectorClass testV(1 ,2, 1, 1);
+    vectorClass test2(1,2,3,1);
+
+    /* Vector Functions */
+    /*
+    float result = testV.scalarProduct(testV, test2);
+    cout << result << " ";
+    vectorClass vresult = testV.vectorProduct(testV, test2);
+    cout << vresult.getX() << " " << vresult.getY() << " " << vresult.getZ() <<  " | ";
+    // add
+    vresult = testV+test2;
+    cout << vresult.getX() << " " << vresult.getY() << " " << vresult.getZ() <<  " | ";
+    // subtract
+    vresult = testV-test2;
+    cout << vresult.getX() << " " << vresult.getY() << " " << vresult.getZ() <<  " | ";
+
+    //cout << testV.getX() << testV.getY() << testV.getZ();
+*/
+    /* Model Functions */
+    // Tasks -----------------------
+
+    // To test create a character array to store the file name
+    char modelFile[20] = "ExampleModel3.mod";
+    test.readFile(modelFile);
+
+   // char name[20] = "test1.mod";
+    // test.saveCurrentModelToFile(name);
+    float volume;
+    volume = test.calcModelVolume();
+    cout << "Volume " <<volume; //ex1 works
+
+    float weight;
+    weight = test.calcModelWeight();
+    cout << "WEIGHT : " << weight<< endl;
+
+    //test.dispNumberOfCellsAndType();
+   // test.dispCells();
+   // test.dispNumberOfVertices();
+    // /Tasks --------------------
+/*
+    test.dispMaterials();
+    test.dispVectorList();
+    test.dispCells();
+
+*/
 }

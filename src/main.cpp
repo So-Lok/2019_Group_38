@@ -31,14 +31,14 @@ int main()
     // Tasks -----------------------
 
     // To test create a character array to store the file name
-    char modelFile[20] = "ExampleModel3.mod";
+    char modelFile[20] = "ExampleModel2.mod";
     test.readFile(modelFile);
 
    // char name[20] = "test1.mod";
     // test.saveCurrentModelToFile(name);
     float volume;
     volume = test.calcModelVolume();
-    cout << "Volume " <<volume; //ex1 works
+    cout << "Volume " <<volume << endl; //ex1 works
 
     // Weight Test
     float weight;

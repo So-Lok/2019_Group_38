@@ -351,19 +351,21 @@ float model::calcModelWeight()
     int numMaterials = materials.size();
 
     float weight=0;
-
-    for(int i=0;i<numCells;i++)
+    // for all materials
+    for(int i = 0;i<numMaterials;i++)
     {
-        // get the material Id of the current material
-        int currentMat = cells[i].getMatId();
-        for(int j=0;j<numMaterials;j++)
+        int matIdx = materials[i].getMatId();
+        int density = materials[i].getDensity();
+        // select only the cells of material i
+        for(int j=0;j<numCells;j++)
         {
-            // get the density of the material in the current cell
-            int density = materials[currentMat].getDensity();
-            weight = weight + cells[i].calcWeight(density);
+            if(matIdx == cells[j].getMatId())
+            {
+                weight = weight + cells[j].calcWeight(density);
+            }
         }
-
     }
+
 
     return weight;
 }
@@ -396,6 +398,9 @@ vectorClass model::calculateModelCentre()
     return modelCentre;
 }
 
+void model::calcOverallDimensions()
+{
 
+}
 
 

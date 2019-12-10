@@ -40,9 +40,17 @@ int main()
     volume = test.calcModelVolume();
     cout << "Volume " <<volume; //ex1 works
 
+    // Weight Test
     float weight;
     weight = test.calcModelWeight();
-    cout << "WEIGHT : " << weight<< endl;
+    cout << "Weight : " << weight<< endl;
+
+    // Centre of Gravity
+    cout <<
+     "X Coord: " << test.calculateModelCentre().getX() << endl <<
+     "Y Coord: " << test.calculateModelCentre().getY() << endl <<
+     "Z Coord: " << test.calculateModelCentre().getZ() << endl;
+
 
     //test.dispNumberOfCellsAndType();
    // test.dispCells();

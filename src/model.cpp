@@ -368,7 +368,33 @@ float model::calcModelWeight()
     return weight;
 }
 
+vectorClass model::calculateModelCentre()
+{
+    int numCells = cells.size();
+    vectorClass modelCentre;
 
+    float xTotal=0;
+    float yTotal=0;
+    float zTotal=0;
+
+    for(int i=0;i<numCells;i++)
+    {
+        xTotal = xTotal + cells[i].centreOfGravity().getX();
+        yTotal = yTotal + cells[i].centreOfGravity().getY();
+        zTotal = zTotal + cells[i].centreOfGravity().getZ();
+
+    }
+
+    xTotal = xTotal/numCells;
+    yTotal = yTotal/numCells;
+    zTotal = zTotal/numCells;
+
+    modelCentre.setX(xTotal);
+    modelCentre.setY(yTotal);
+    modelCentre.setZ(zTotal);
+
+    return modelCentre;
+}
 
 
 

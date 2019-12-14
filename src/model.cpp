@@ -401,11 +401,15 @@ vectorClass model::calculateModelCentre()
 // calculates and displays the overall dimensions to the user
 void model::calcOverallDimensions()
 {
-    float minX=0, maxX=0, minY=0, maxY=0, minZ=0, maxZ=0;
+    float
+    minX=vectorList[0].getX(), maxX=vectorList[0].getX(),
+    minY=vectorList[0].getY(), maxY=vectorList[0].getY(),
+    minZ=vectorList[0].getZ(), maxZ=vectorList[0].getZ();
 
     // vector list size - for looping
     int vlistSize = vectorList.size();
 
+    // Finding max and min xyz
     for(int i = 0; i<vlistSize; i++)
     {
         // comparisons to get the highest and lowest xyz vector coordinates
@@ -418,15 +422,25 @@ void model::calcOverallDimensions()
         // Y dimensions
         if(vectorList[i].getY() > maxY)
             maxY = vectorList[i].getY();
-        if(vectorList[i].getX() < minY)
+        if(vectorList[i].getY() < minY)
             minY = vectorList[i].getY();
 
         // Z dimensions
         if(vectorList[i].getZ() > maxZ)
             maxZ = vectorList[i].getZ();
-        if(vectorList[i].getX() < minZ)
+        if(vectorList[i].getZ() < minZ)
             minZ = vectorList[i].getZ();
     }
+
+    // calculating the lengths
+    float xLength, yLength, zLength;
+
+    xLength = maxX - minX;
+    yLength = maxY - minY;
+    zLength = maxZ - minZ;
+
+    cout << " Overall Dimensions " << endl << "--------------------\n"
+         << " X: " << xLength << " | Y: " << yLength << " | Z: " << zLength << endl;
 
 
 

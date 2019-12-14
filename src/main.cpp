@@ -9,48 +9,34 @@ int main()
 {
     model test;
 
-    vectorClass testV(1 ,2, 1, 1);
-    vectorClass test2(1,2,3,1);
-
-    /* Vector Functions */
-    /*
-    float result = testV.scalarProduct(testV, test2);
-    cout << result << " ";
-    vectorClass vresult = testV.vectorProduct(testV, test2);
-    cout << vresult.getX() << " " << vresult.getY() << " " << vresult.getZ() <<  " | ";
-    // add
-    vresult = testV+test2;
-    cout << vresult.getX() << " " << vresult.getY() << " " << vresult.getZ() <<  " | ";
-    // subtract
-    vresult = testV-test2;
-    cout << vresult.getX() << " " << vresult.getY() << " " << vresult.getZ() <<  " | ";
-
-    //cout << testV.getX() << testV.getY() << testV.getZ();
-*/
     /* Model Functions */
     // Tasks -----------------------
 
     // To test create a character array to store the file name
-    char modelFile[20] = "ExampleModel2.mod";
+    char modelFile[20] = "ExampleModel3.mod";
     test.readFile(modelFile);
 
    // char name[20] = "test1.mod";
     // test.saveCurrentModelToFile(name);
     float volume;
     volume = test.calcModelVolume();
-    cout << "Volume " <<volume << endl; //ex1 works
+    cout << " Volume: " <<volume << endl; //ex1 works
 
     // Weight Test
     float weight;
     weight = test.calcModelWeight();
-    cout << "Weight : " << weight<< endl;
+    cout << " Weight: " << weight <<  endl;
+
 
     // Centre of Gravity
-    cout <<
-     "X Coord: " << test.calculateModelCentre().getX() << endl <<
-     "Y Coord: " << test.calculateModelCentre().getY() << endl <<
-     "Z Coord: " << test.calculateModelCentre().getZ() << endl;
+    cout << " Centre of gravity approximation: \n---------------------------------\n" <<
+     " X Coord: " << test.calculateModelCentre().getX() << endl <<
+     " Y Coord: " << test.calculateModelCentre().getY() << endl <<
+     " Z Coord: " << test.calculateModelCentre().getZ() << endl <<
+     "---------------------------------" << endl;
 
+    // Overall Dimensions
+    test.calcOverallDimensions();
 
     //test.dispNumberOfCellsAndType();
    // test.dispCells();
@@ -62,4 +48,29 @@ int main()
     test.dispCells();
 
 */
+
+    // Display for all models
+
+    model example1;
+    model example2;
+    model example3;
+
+    char modelFile1[20] = "ExampleModel1.mod";
+    char modelFile2[20] = "ExampleModel2.mod";
+    char modelFile3[20] = "ExampleModel3.mod";
+
+    // Example Model #1
+
+    // Reading the file
+    example1.readFile(modelFile1);
+
+
+
+
+
+
+
+
+
+
 }

@@ -15,14 +15,14 @@ Whilst in the empty build file do the following
 
 ```
 cmake -G "MinGW Makefiles" ..
-mingw-make
+mingw32-make
 modelTest.exe
 ```
 
 # Using Visual Studio Compiler
 
 Please note that depending on the version of Visual Studio you are using the code may differ slightly.
-You can use ```cmake --help``` to find the *generator* code that you need.
+You can use ```cmake --help``` to find the **generator** code that you need.
 
 IMPORTANT: Make sure you have started up the Visual Stuido Environment for this to work
 To do this you will need to navigate to the vcvarsall.bat file and run the .bat through cmd, using amd64 after the path.

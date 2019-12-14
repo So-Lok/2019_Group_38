@@ -10,6 +10,7 @@ project( model )
 
 include_directories( inc )
 include_directories( src )
+include_directories( modelFiles )
 
 # add a library (model.cpp)
 # library name and then the file to make into a library
@@ -20,9 +21,9 @@ add_library( model src/model.cpp inc/model.h
 
 # create the execuatable using the test main
 
-add_executable( modelVisualiser src/main.cpp )
+add_executable( modelTest src/main.cpp )
 
-target_link_libraries( modelVisualiser model )
+target_link_libraries( modelTest model )
 
 
 

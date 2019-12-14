@@ -440,7 +440,8 @@ void model::calcOverallDimensions()
     zLength = maxZ - minZ;
 
     cout << " Overall Dimensions " << endl << "--------------------\n"
-         << " X: " << xLength << " | Y: " << yLength << " | Z: " << zLength << endl;
+         << " X: " << xLength << " | Y: " << yLength << " | Z: " << zLength << endl
+         << "--------------------" << endl;
 
 
 

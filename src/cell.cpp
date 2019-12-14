@@ -181,9 +181,9 @@ float cell::calcVolume()
         // 6*volume currently
         //cout << dotProdTerm.scalarProduct(crossProdTerm, ab);
         volume = fabs(dotProdTerm.scalarProduct(crossProdTerm, ab));
-        cout << volume << endl;
+       // cout << volume << endl;
         volume = volume/6;
-        cout << volume << " tetra" << endl;
+       // cout << volume << " tetra" << endl;
         return volume;
 
 
@@ -275,7 +275,7 @@ float cell::calcVolume()
         term1 = fabs(term1);
         term2 = fabs(term2);
         term3 = fabs(term3);
-        cout << term1 << " " << term2 << " " << term3 <<endl;
+        //cout << term1 << " " << term2 << " " << term3 <<endl;
          volume = (term1 + term2 + term3)/6;
         //cout << volume << " | hexa \n";
         return volume;

@@ -26,4 +26,13 @@ add_executable( modelTest src/main.cpp )
 target_link_libraries( modelTest model )
 
 
+# copy example model files to the build folder so that executable 
+# can use the files
+
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/modelFiles/ExampleModel1.mod
+	  ${CMAKE_CURRENT_SOURCE_DIR}/modelFiles/ExampleModel2.mod
+	  ${CMAKE_CURRENT_SOURCE_DIR}/modelFiles/ExampleModel3.mod	
+DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
+
 

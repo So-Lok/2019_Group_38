@@ -4,9 +4,25 @@ cmake_minimum_required( VERSION 2.8 )
 # Name of the project
 project( model )
 
+
+
+# include directories to look into
+
+include_directories( inc )
+include_directories( src )
+
 # add a library (model.cpp)
 # library name and then the file to make into a library
-add_library( model model.cpp )
+add_library( model src/model.cpp inc/model.h 
+ 		   src/cell.cpp inc/cell.h
+		   src/vectorClass.cpp inc/vectorClass.h
+		   src/material.cpp inc/material.h)
 
-#
+# create the execuatable using the test main
+
+add_executable( modelVisualiser src/main.cpp )
+
+target_link_libraries( modelVisualiser model )
+
+
 

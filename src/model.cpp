@@ -398,8 +398,37 @@ vectorClass model::calculateModelCentre()
     return modelCentre;
 }
 
+// calculates and displays the overall dimensions to the user
 void model::calcOverallDimensions()
 {
+    float minX=0, maxX=0, minY=0, maxY=0, minZ=0, maxZ=0;
+
+    // vector list size - for looping
+    int vlistSize = vectorList.size();
+
+    for(int i = 0; i<vlistSize; i++)
+    {
+        // comparisons to get the highest and lowest xyz vector coordinates
+        // X dimensions
+        if(vectorList[i].getX() > maxX)
+            maxX = vectorList[i].getX();
+        if(vectorList[i].getX() < minX)
+            minX = vectorList[i].getX();
+
+        // Y dimensions
+        if(vectorList[i].getY() > maxY)
+            maxY = vectorList[i].getY();
+        if(vectorList[i].getX() < minY)
+            minY = vectorList[i].getY();
+
+        // Z dimensions
+        if(vectorList[i].getZ() > maxZ)
+            maxZ = vectorList[i].getZ();
+        if(vectorList[i].getX() < minZ)
+            minZ = vectorList[i].getZ();
+    }
+
+
 
 }
 

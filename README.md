@@ -5,10 +5,10 @@
 ## How to run the program
 
 Navigate to the root directory in cmd and use the following commands to create a build folder
-
+```
 mkdir build
 cd build
-
+```
 # Using minGW
 
 Whilst in the empty build file do the following 

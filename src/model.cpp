@@ -13,13 +13,13 @@ model::~model()
 {
 
 }
-
+// Model Functions -----------------------------------------------------------------
 // read file function, string could also be the path location of the model - file string nameOfModelfile
-void model::readFile()
+void model::readFile(const char* fileName)
 {
-    /* Function variables used to store values*/
+    //* Function variables used to store values*//
     int id;
-    /* Temporary material variables*/
+    /* Temporary material variables */
     int density;
     string colour;
     string name;
@@ -29,11 +29,9 @@ void model::readFile()
     float yCoord;
     float zCoord;
 
-    /*Temporary cell variables - id, type, */
+    /*Temporary cell variables */
     char type;
-    // the number of vertex ids varies and therefore
-    // there will need to be a for loop to store them depending on the type
-    // of cell
+    int matId;
     short vId1, vId2, vId3, vId4, vId5, vId6, vId7, vId8;
 
 
@@ -41,7 +39,7 @@ void model::readFile()
     string line;
 
     // input the file into the stream
-    ifstream modelFile("ExampleModel1.mod");
+    ifstream modelFile(fileName);
 
     // conditional statement in case error occurs when opening the file
     if(modelFile.is_open())
@@ -49,7 +47,6 @@ void model::readFile()
         // loops until every line has been read
         // Loop will read and store data depending on the information in the file
 
-        // For each line a new object will need to be created and then added to a vector list of the object
         while(getline(modelFile,line))
         {
 
@@ -89,6 +86,7 @@ void model::readFile()
                 // push the constructed vector class into the vectorClass list called vectorList
                 vectorList.push_back(newVector);
 
+
                 // displays vector out
                 //cout << "Vectors :" << id << " " << xCoord << " " << yCoord << " " << zCoord << "\n";
             }
@@ -96,52 +94,165 @@ void model::readFile()
             // looks for lines with the cell identifier
             if(line[0] == 'c')
             {
-                //cout << line;
+                //cout << "\n"<< line << "\n"; // Testing input
                 stringstream ssline(line);
                 ssline.ignore(1);
-                ssline >> id >> type;
+                ssline >> id >> type >> matId;
 
                // cout << id << " " << type << " ";
 
 
-
+                // hexahedron cell
                 if(type == 'h')
                 {
-                    ssline.ignore(3);
+
                     ssline >>  vId1 >>  vId2 >>  vId3 >>  vId4
                            >>  vId5 >>  vId6 >>  vId7 >>  vId8;
 
-                    //cout <<  vId1 <<  vId2 <<  vId3 <<  vId4
-                       //  <<  vId5 <<  vId6 <<  vId7 <<  vId8;
+                    // create temporary vector
+                    vectorClass temp1; vectorClass temp2;
+                    vectorClass temp3; vectorClass temp4;
+                    vectorClass temp5; vectorClass temp6;
+                    vectorClass temp7; vectorClass temp8;
+                    // Setting all variables to the temporary vectors
+                    // Needs compacting later
+
+                    temp1.setAll(vId1, vectorList[vId1].getX(), vectorList[vId1].getY(), vectorList[vId1].getZ());
+                    temp2.setAll(vId2, vectorList[vId2].getX(), vectorList[vId2].getY(), vectorList[vId2].getZ());
+                    temp3.setAll(vId3, vectorList[vId3].getX(), vectorList[vId3].getY(), vectorList[vId3].getZ());
+                    temp4.setAll(vId4, vectorList[vId4].getX(), vectorList[vId4].getY(), vectorList[vId4].getZ());
+                    temp5.setAll(vId5, vectorList[vId5].getX(), vectorList[vId5].getY(), vectorList[vId5].getZ());
+                    temp6.setAll(vId6, vectorList[vId6].getX(), vectorList[vId6].getY(), vectorList[vId6].getZ());
+                    temp7.setAll(vId7, vectorList[vId7].getX(), vectorList[vId7].getY(), vectorList[vId7].getZ());
+                    temp8.setAll(vId8, vectorList[vId8].getX(), vectorList[vId8].getY(), vectorList[vId8].getZ());
+
+
+                    // class constructor with vectors
+                    cell newCell(id, type, matId, vId1, vId2, vId3, vId4,
+                                                  vId5, vId6, vId7, vId8,
+                                                  temp1, temp2, temp3, temp4,
+                                                  temp5, temp6, temp7, temp8);
+                    cells.push_back(newCell);
+
+                   // cout <<  vId1 <<  vId2 <<  vId3 <<  vId4
+                        //r <<  vId5 <<  vId6 <<  vId7 <<  vId8;
                 }
 
+                // tetrahedron cell
                 if(type == 't')
                 {
-                    ssline.ignore(3);
+
                     ssline >>  vId1 >>  vId2 >>  vId3 >>  vId4;
+                    // create temporary vector
+                    vectorClass temp1; vectorClass temp2;
+                    vectorClass temp3; vectorClass temp4;
+
+                    temp1.setAll(vId1, vectorList[vId1].getX(), vectorList[vId1].getY(), vectorList[vId1].getZ());
+                    temp2.setAll(vId2, vectorList[vId2].getX(), vectorList[vId2].getY(), vectorList[vId2].getZ());
+                    temp3.setAll(vId3, vectorList[vId3].getX(), vectorList[vId3].getY(), vectorList[vId3].getZ());
+                    temp4.setAll(vId4, vectorList[vId4].getX(), vectorList[vId4].getY(), vectorList[vId4].getZ());
+
+
+                    cell newCell(id, type, matId, vId1, vId2, vId3, vId4,
+                                                  temp1, temp2, temp3, temp4);
+                    cells.push_back(newCell);
                 }
 
-
+                // Pyramid cell
                 if(type == 'p')
                 {
-                    ssline.ignore(3);
+
                     ssline >>  vId1 >>  vId2 >>  vId3 >>  vId4 >>  vId5;
+                    // create temporary vector
+                    vectorClass temp1; vectorClass temp2;
+                    vectorClass temp3; vectorClass temp4; vectorClass temp5;
+
+                    temp1.setAll(vId1, vectorList[vId1].getX(), vectorList[vId1].getY(), vectorList[vId1].getZ());
+                    temp2.setAll(vId2, vectorList[vId2].getX(), vectorList[vId2].getY(), vectorList[vId2].getZ());
+                    temp3.setAll(vId3, vectorList[vId3].getX(), vectorList[vId3].getY(), vectorList[vId3].getZ());
+                    temp4.setAll(vId4, vectorList[vId4].getX(), vectorList[vId4].getY(), vectorList[vId4].getZ());
+                    temp5.setAll(vId5, vectorList[vId5].getX(), vectorList[vId5].getY(), vectorList[vId5].getZ());
+
+
+                    cell newCell(id, type, matId, vId1, vId2, vId3, vId4, vId5,
+                                                  temp1, temp2, temp3, temp4,
+                                                  temp5);
+                    cells.push_back(newCell);
                 }
-
-
-
 
             }
 
-
-
-
-
         }
 
+    }
 
+
+}
+
+/* Save/export current model file */
+
+void model::saveCurrentModelToFile(const char* fileName)
+{
+    // create index/counter for looping
+    unsigned int i;
+
+    // create ofstream variable, file, to output to
+    std::ofstream outputFile(fileName, std::ofstream::out);
+
+    for(i = 0; i<materials.size();i++)
+    {
+        outputFile
+        << "m "
+        << materials[i].getMatId() << " "
+        << materials[i].getDensity() << " "
+        << materials[i].getColour() << " "
+        << materials[i].getMatName() << "\n";
+    }
+
+    for(i = 0; i<vectorList.size();i++)
+    {
+        outputFile
+        << "v "
+        << vectorList[i].getId() << " "
+        << vectorList[i].getX() << " "
+        << vectorList[i].getY() << " "
+        << vectorList[i].getZ() << "\n";
+    }
+
+
+    for(i = 0; i<materials.size();i++)
+    {
+        outputFile
+        << "c "
+        << cells[i].getCellId() << " "
+        << cells[i].getType() << " "
+        << cells[i].getMatId() << " ";
+        for(unsigned int j =0; j<cells[i].vectorIdList.size();j++)
+            outputFile << cells[i].vectorIdList[j] << " ";
+
+        outputFile << "\n";
     }
 }
+// /Model Functions --------------------------------------------------------
+
+// Calculation Functions
+
+float model::calcModelVolume()
+{
+    float totalVolume = 0;
+    int cellsSize = cells.size();
+    // send the list of vectors to cell so that each cell can calculate its volume
+    for(int i = 0; i< cellsSize; i++)
+    {
+        totalVolume = totalVolume + cells[i].calcVolume();
+        //cells[i].dispCellVectors();
+        //cout << totalVolume << "\n";
+    }
+
+    return totalVolume;
+}
+
+/* Display functions */ //-----------------------------------------------------------------
 
 void model::dispVectorList()
 {
@@ -154,7 +265,6 @@ void model::dispVectorList()
         << vectorList[i].getX() << " "
         << vectorList[i].getY() << " "
         << vectorList[i].getZ() << "\n";
-
     }
 
 }
@@ -165,7 +275,7 @@ void model::dispMaterials()
 
     for(int i = 0; i < listSize;i++)
     {
-        cout << "Test:"
+        cout
         << materials[i].getMatId() << " "
         << materials[i].getDensity() << " "
         << materials[i].getColour() << " "
@@ -173,21 +283,168 @@ void model::dispMaterials()
     }
 }
 
+void model::dispCells()
+{
+    int listSize = cells.size();
+    // loops for all cells
+    for(int i = 0; i < listSize;i++)
+    {
+
+        cout << "\n" <<"Cell " << i << ": "
+        << cells[i].getCellId() << " "
+        << cells[i].getType() << " "
+        << cells[i].getMatId() << "\n";
 
 
+        // Loops through all vector IDs within the current cell
+        for(unsigned int j =0; j<cells[i].vectorIdList.size();j++)
+            cout <<cells[i].vectorIdList[j] << " ";
+    }
 
+}
 
+void model::dispNumberOfCellsAndType()
+{
+    // counters for each cell type
+    int numT = 0, numH = 0, numP = 0;
+    int listSize = cells.size();
+    for(int i = 0; i < listSize;i++)
+    {
+        if(cells[i].getType() == 't')
+        {
+            numT++;
+        }
+        else if(cells[i].getType() == 'h')
+        {
+            numH++;
+        }
+        else
+        {
+            numP++;
+        }
+    }
+
+    cout << "Number of cells : " << listSize << "\n";
+    cout
+    << "Tetrahedron cells: " << numT
+    << "\nHexahedron cells: " << numH
+    << "\nPyramid cells " << numP << "\n";
+
+}
+
+void model::dispNumberOfVertices()
+{
+   int numV = this->vectorList.size();
+   cout << "The number of vertices in this model is: " <<numV << "\n";
+}
+// Display functions END // -------------------------------------------------------------------------------
 
 int model::getNumberOfVertices()
 {
     return this->vectorList.size();
 }
-/*
-// data type required model::getNumberOfCellsAndType();
-// calculation of the model
-// should use a object list of the vertices to calculate the centre
-// vector model::calculateModelCentre()
+
+float model::calcModelWeight()
 {
+    // create limits for for loops based on material and cell array size
+    int numCells = cells.size();
+    int numMaterials = materials.size();
+
+    float weight=0;
+    // for all materials
+    for(int i = 0;i<numMaterials;i++)
+    {
+        int matIdx = materials[i].getMatId();
+        int density = materials[i].getDensity();
+        // select only the cells of material i
+        for(int j=0;j<numCells;j++)
+        {
+            if(matIdx == cells[j].getMatId())
+            {
+                weight = weight + cells[j].calcWeight(density);
+            }
+        }
+    }
+
+
+    return weight;
+}
+
+vectorClass model::calculateModelCentre()
+{
+    int numCells = cells.size();
+    vectorClass modelCentre;
+
+    float xTotal=0;
+    float yTotal=0;
+    float zTotal=0;
+
+    for(int i=0;i<numCells;i++)
+    {
+        xTotal = xTotal + cells[i].centreOfGravity().getX();
+        yTotal = yTotal + cells[i].centreOfGravity().getY();
+        zTotal = zTotal + cells[i].centreOfGravity().getZ();
+
+    }
+
+    xTotal = xTotal/numCells;
+    yTotal = yTotal/numCells;
+    zTotal = zTotal/numCells;
+
+    modelCentre.setX(xTotal);
+    modelCentre.setY(yTotal);
+    modelCentre.setZ(zTotal);
+
+    return modelCentre;
+}
+
+// calculates and displays the overall dimensions to the user
+void model::calcOverallDimensions()
+{
+    float
+    minX=vectorList[0].getX(), maxX=vectorList[0].getX(),
+    minY=vectorList[0].getY(), maxY=vectorList[0].getY(),
+    minZ=vectorList[0].getZ(), maxZ=vectorList[0].getZ();
+
+    // vector list size - for looping
+    int vlistSize = vectorList.size();
+
+    // Finding max and min xyz
+    for(int i = 0; i<vlistSize; i++)
+    {
+        // comparisons to get the highest and lowest xyz vector coordinates
+        // X dimensions
+        if(vectorList[i].getX() > maxX)
+            maxX = vectorList[i].getX();
+        if(vectorList[i].getX() < minX)
+            minX = vectorList[i].getX();
+
+        // Y dimensions
+        if(vectorList[i].getY() > maxY)
+            maxY = vectorList[i].getY();
+        if(vectorList[i].getY() < minY)
+            minY = vectorList[i].getY();
+
+        // Z dimensions
+        if(vectorList[i].getZ() > maxZ)
+            maxZ = vectorList[i].getZ();
+        if(vectorList[i].getZ() < minZ)
+            minZ = vectorList[i].getZ();
+    }
+
+    // calculating the lengths
+    float xLength, yLength, zLength;
+
+    xLength = maxX - minX;
+    yLength = maxY - minY;
+    zLength = maxZ - minZ;
+
+    cout << " Overall Dimensions " << endl << "--------------------\n"
+         << " X: " << xLength << " | Y: " << yLength << " | Z: " << zLength << endl
+         << "--------------------" << endl;
+
+
 
 }
-*/
+
+

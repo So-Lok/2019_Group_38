@@ -38,4 +38,20 @@ string material::getMatName()
     return this->matName;
 }
 
+void material::setMatId(int matIdToSet)
+{
+    matId = matIdToSet;
+}
 
+void material::setDensity(int densityToSet)
+{
+    density = densityToSet;
+}
+void material::setColour(string colourToSet)
+{
+    colour = colourToSet;
+}
+void material::setMatName(string matNameToSet)
+{
+    matName = matNameToSet;
+}

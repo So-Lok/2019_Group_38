@@ -10,6 +10,7 @@
 
 #include "vectorClass.h"
 #include "material.h"
+#include "cell.h"
 
 using namespace std;
 
@@ -19,35 +20,41 @@ class model
 public:
 
     // constructor
-    // constructor should read a .vtk file
     model();
 
     //destructor
     ~model();
 
-    // Function to read the model file
-    // string nameOfModelfile ? maybe
-    void readFile();
+    // Model file functions
+    void readFile(const char* fileName);
+    void saveCurrentModelToFile(const char* fileName);
 
-    //get functions
-    int getNumberOfVertices();
+    /* Calculation Functions */
+   vectorClass calculateModelCentre();
+   float calcModelVolume();
+   float calcModelWeight();
+   void calcOverallDimensions();
 
-    // needs data type
-//    getNumberOfCellsAndType();
 
-    // Calculates the centre of the model using the vertices vector values
- //   vector calculateModelCentre();
-
+ /* Display function */
     void dispVectorList();
 
     void dispMaterials();
+
+    void dispCells();
+
+    void dispNumberOfCellsAndType();
+
+    void dispNumberOfVertices();
+    int getNumberOfVertices();
+
 
 private:
 
     // vector list of vertices
     std::vector<vectorClass> vectorList;
     std::vector<material> materials;
-   //std::vector<cell> cells;
+    std::vector<cell> cells;
 
 };
 

@@ -26,10 +26,10 @@ public:
 
     /* Set functions*/
 
-    int setMatId();
-    int setDensity();
-    string setColour();
-    string setMatName();
+    void setMatId(int matIdToSet);
+    void setDensity(int densityToSet);
+    void setColour(string colourToSet);
+    void setMatName(string matNameToSet);
 
 
 

@@ -9,7 +9,7 @@ foreach(p
 endforeach()
 
 
-PROJECT( QtVTKExample )
+PROJECT( modelViewer )
 
 # The CMake build process might generate some new files in the current
 # directory. This makes sure they can be found.
@@ -43,7 +43,7 @@ include( ${VTK_USE_FILE} )
 
 # Define the executable output and its sources
 
-add_executable( QtVTKExample MACOSX_BUNDLE
+add_executable( modelViewer MACOSX_BUNDLE
                 main.cpp mainwindow.cpp
                 mainwindow.h
                 mainwindow.ui
@@ -53,7 +53,7 @@ add_executable( QtVTKExample MACOSX_BUNDLE
 
 # Tell CMake that the executable depends on the Qt::Widget libraries.
 
-target_link_libraries( QtVTKExample Qt5::Widgets )
+target_link_libraries( modelViewer Qt5::Widgets )
 # Tell CMake that the executable depends on the VTK libraries
 
-target_link_libraries( QtVTKExample ${VTK_LIBRARIES} )
+target_link_libraries( modelViewer ${VTK_LIBRARIES} )

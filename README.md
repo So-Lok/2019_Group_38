@@ -2,7 +2,7 @@
 
 # Group 38  
 
-## How to run the program
+## How to run Semester 1 program
 
 Navigate to the root directory in cmd and use the following commands to create a build folder
 ```
@@ -41,6 +41,27 @@ cmake -G "Visual Studio 16 2019" ..
 msbuild model.sln
 Debug\modelTest.exe
 ```
+
+## Running Semester 2 program 05/03
+
+Navgigate to the modelViewer directory, create a build folder and in the build folder create generate the files with the following code.
+The following may differ depending on the location of your vtk and qt files.
+
+```
+set PATH=%PATH%;C:\VTK\MSVC2017_64\bin;C:\Qt\5.12.5\msvc2017_64\bin // ignore this line if you have already setup the path
+cmake -DCMAKE_PREFIX_PATH="C:\VTK\MSVC2017_64\bin;C:\Qt\5.12.5\msvc2017_64\bin" -G"Visual Studio 16 2019" ..
+// use the compiler for the version of visual studio which you have installed.
+
+// building the code
+msbuild modelViewer.sln
+
+// if build is successful 
+Debug\modelViewer.exe
+
+
+```
+
+
 
 
 

@@ -3,7 +3,6 @@
 // vtk headers
 
 #include <vtkSmartPointer.h>
-#include <vtkCubeSource.h>
 #include <vtkActor.h>
 #include <vtkProperty.h>
 #include <vtkCamera.h>
@@ -15,6 +14,9 @@
 #include <vtkNamedColors.h>
 #include <vtkNew.h>
 #include <vtkGenericOpenGLRenderWindow.h>
+
+// sources
+#include <vtkCubeSource.h>
 
 // reading
 #include <vtkSTLReader.h>
@@ -31,6 +33,11 @@
 #include <vtkClipDataSet.h>
 #include <vtkShrinkFilter.h>
 
+// Box widget
+#include <vtkBoxWidget.h>
+#include <vtkCommand.h>
+#include <vtkTransform.h>
+
 
 // QT headers for opening a file
 
@@ -42,7 +49,13 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+/** @file
+ * This file defines the functions used in the mainwindow
+ */
 
+/**
+ *
+ */
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -87,6 +100,8 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+
 
 
 // function for updating render with filters

@@ -80,7 +80,7 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>50</x>
@@ -123,7 +123,14 @@
     </property>
     <addaction name="actionOpen"/>
    </widget>
+   <widget class="QMenu" name="menuWidgets">
+    <property name="title">
+     <string>Widgets</string>
+    </property>
+    <addaction name="actionBox"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuWidgets"/>
   </widget>
   <widget class="QToolBar" name="toolBar">
    <property name="windowTitle">
@@ -141,7 +148,7 @@
    <property name="icon">
     <iconset>
      <normaloff>Icons/fileopen.png</normaloff>
-     <normalon>../../../../../Downloads/fileopen.png</normalon>Icons/fileopen.png</iconset>
+     <normalon>../../../../Downloads/fileopen.png</normalon>Icons/fileopen.png</iconset>
    </property>
    <property name="text">
     <string>Open</string>
@@ -151,6 +158,14 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionBox">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Box Widget</string>
    </property>
   </action>
  </widget>

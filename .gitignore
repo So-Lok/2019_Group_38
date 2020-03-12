@@ -5,4 +5,9 @@
 *.exe
 *.o
 *.so
+*.obj
+*.lib
+*.a
+*.exp
+
 build/

@@ -3,6 +3,7 @@
 
 
 
+
 #include <QMainWindow>
 #include <vtkSmartPointer.h>
 #include <vtkRenderer.h>
@@ -45,11 +46,13 @@ public:
     // checkboxes
   //  void clipChecked();
 
+
     //object color////
     void handleObjectColor();
 
     //Background color //
     void handleBackgroundColor();
+
 
 private:
     Ui::MainWindow *ui;
@@ -72,8 +75,10 @@ private:
     vtkSmartPointer<vtkCamera> camera;
     // to store a copy of the current sourrce
     vtkSmartPointer<vtkAlgorithm> source;
+
     //color
     vtkSmartPointer<vtkNamedColors> colors;
+
 };
 
 

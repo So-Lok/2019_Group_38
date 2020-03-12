@@ -43,6 +43,7 @@
 
 
 
+
 // QT headers for opening a file
 
 //#include <QMessageBox>
@@ -95,6 +96,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->shrinkFilter, &QCheckBox::released, this, &MainWindow::updateFilters);
     connect(ui->ObjectColor, &QPushButton::released, this, &MainWindow::handleObjectColor);
     connect(ui->BackgroundColor, &QPushButton::released, this, &MainWindow::handleBackgroundColor);
+
+
+
     // default model cube
     handleCube();
 
@@ -405,6 +409,7 @@ void MainWindow::actionOpen()
   updateFilters();
 }
 
+
 //Change object color
 void MainWindow::handleObjectColor()
 {
@@ -427,4 +432,6 @@ void MainWindow::handleBackgroundColor()
         ui->qvtkWidget->GetRenderWindow()->Render();
     }
 }
+
+
 

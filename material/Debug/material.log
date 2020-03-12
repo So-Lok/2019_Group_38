@@ -1,0 +1,32 @@
+﻿  main.cpp
+  Material.cpp
+C:\Users\pop_a\Desktop\material\main.cpp(1,10): fatal error C1083: Cannot open include file: 'isostream': No such file or directory
+C:\Users\pop_a\Desktop\material\Material.cpp(6,1): error C2511: 'std::string Material::getName(void)': overloaded member function not found in 'Material'
+C:\Users\pop_a\Desktop\material\Material.h(8): message : see declaration of 'Material'
+C:\Users\pop_a\Desktop\material\Material.cpp(7,13): error C2597: illegal reference to non-static member 'Material::name'
+C:\Users\pop_a\Desktop\material\Material.cpp(10,36): error C2761: 'void Material::setName(std::string)': redeclaration of member is not allowed
+C:\Users\pop_a\Desktop\material\Material.cpp(11,1): error C2447: '{': missing function header (old-style formal list?)
+C:\Users\pop_a\Desktop\material\Material.cpp(16,1): error C2511: 'std::string Material::getColour(void)': overloaded member function not found in 'Material'
+C:\Users\pop_a\Desktop\material\Material.h(8): message : see declaration of 'Material'
+C:\Users\pop_a\Desktop\material\Material.cpp(17,15): error C2597: illegal reference to non-static member 'Material::colour'
+C:\Users\pop_a\Desktop\material\Material.cpp(19,40): error C2761: 'void Material::setColour(std::string)': redeclaration of member is not allowed
+C:\Users\pop_a\Desktop\material\Material.cpp(20,1): error C2447: '{': missing function header (old-style formal list?)
+C:\Users\pop_a\Desktop\material\Material.cpp(25,1): error C2511: 'int Material::getDensity(void)': overloaded member function not found in 'Material'
+C:\Users\pop_a\Desktop\material\Material.h(8): message : see declaration of 'Material'
+C:\Users\pop_a\Desktop\material\Material.cpp(26,16): error C2597: illegal reference to non-static member 'Material::density'
+C:\Users\pop_a\Desktop\material\Material.cpp(29,1): error C2511: 'void Material::setDensity(int)': overloaded member function not found in 'Material'
+C:\Users\pop_a\Desktop\material\Material.h(8): message : see declaration of 'Material'
+C:\Users\pop_a\Desktop\material\Material.cpp(30,2): error C2671: 'Material::setDensity': static member functions do not have 'this' pointers
+C:\Users\pop_a\Desktop\material\Material.cpp(33,15): error C2039: 'getID': is not a member of 'Material'
+C:\Users\pop_a\Desktop\material\Material.h(8): message : see declaration of 'Material'
+C:\Users\pop_a\Desktop\material\Material.cpp(35,9): error C2065: 'ID': undeclared identifier
+C:\Users\pop_a\Desktop\material\Material.cpp(38,16): error C2039: 'setID': is not a member of 'Material'
+C:\Users\pop_a\Desktop\material\Material.h(8): message : see declaration of 'Material'
+C:\Users\pop_a\Desktop\material\Material.cpp(40,2): error C2355: 'this': can only be referenced inside non-static member functions or non-static data member initializers
+C:\Users\pop_a\Desktop\material\Material.cpp(47,27): error C2143: syntax error: missing ';' before 'this'
+C:\Users\pop_a\Desktop\material\Material.cpp(47,38): error C2676: binary '<<': 'std::string' does not define this operator or a conversion to a type acceptable to the predefined operator
+C:\Users\pop_a\Desktop\material\Material.cpp(53,75): error C2761: 'void Material::setAll(std::string,std::string,float,float)': redeclaration of member is not allowed
+C:\Users\pop_a\Desktop\material\Material.cpp(54,1): error C2447: '{': missing function header (old-style formal list?)
+C:\Users\pop_a\Desktop\material\Material.cpp(63,72): error C2761: '{ctor}': redeclaration of member is not allowed
+  Generating Code...
+C:\Users\pop_a\Desktop\material\Material.cpp(64,1): error C2447: '{': missing function header (old-style formal list?)

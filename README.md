@@ -61,7 +61,16 @@ Debug\modelViewer.exe
 
 ```
 
+## Updating your forked repo
 
+# How to set up remote upstream (if you have not already from week 2)
+```
+git remote add https://github.com/So-Lok/2019_Group_38.git
+```
+# How to update your own repo
+```
+git pull upstream master
+```
 
 
 

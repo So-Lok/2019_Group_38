@@ -15,6 +15,8 @@
 #include <vtkNamedColors.h>
 
 
+
+
 namespace Ui {
 class MainWindow;
 }
@@ -42,6 +44,9 @@ public:
 
     // checkboxes
   //  void clipChecked();
+  
+  ;
+
 
     //object color////
     void handleObjectColor();
@@ -71,10 +76,14 @@ private:
     vtkSmartPointer<vtkCamera> camera;
     // to store a copy of the current sourrce
     vtkSmartPointer<vtkAlgorithm> source;
+<<<<<<< HEAD
 
     //color
     vtkSmartPointer<vtkNamedColors> colors;
 
+=======
+   
+>>>>>>> 4b0aaa701a9c6f2cfd3914b3ffb6d2a64c278bb4
 };
 
  

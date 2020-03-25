@@ -33,6 +33,9 @@
 #include <vtkClipDataSet.h>
 #include <vtkShrinkFilter.h>
 
+// color
+#include <vtkNamedColors.h>
+
 // Box widget
 #include <vtkBoxWidget.h>
 #include <vtkCommand.h>
@@ -89,6 +92,12 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->cameraReset, &QPushButton::released, this, &MainWindow::handleResetView);
     connect(ui->clipFilter, &QCheckBox::released, this, &MainWindow::updateFilters);
     connect(ui->shrinkFilter, &QCheckBox::released, this, &MainWindow::updateFilters);
+<<<<<<< HEAD
+    connect(ui->ObjectColor, &QPushButton::released, this, &MainWindow::handleObjectColor);
+    connect(ui->BackgroundColor, &QPushButton::released, this, &MainWindow::handleBackgroundColor);
+=======
+   
+>>>>>>> 4b0aaa701a9c6f2cfd3914b3ffb6d2a64c278bb4
 
     // default model cube
     handleCube();
@@ -399,3 +408,30 @@ void MainWindow::actionOpen()
 
   updateFilters();
 }
+
+<<<<<<< HEAD
+//Change object color
+void MainWindow::handleObjectColor()
+{
+    QColor QTcolor = QColorDialog::getColor(Qt::white, this);
+    if (QTcolor.isValid())
+    {
+        actor->GetProperty()->SetColor(QTcolor.redF(), QTcolor.greenF(), QTcolor.blueF());
+        //ui->qvtkWidget->GetRenderWindow()->AddRenderer( renderer );
+        ui->qvtkWidget->GetRenderWindow()->Render();
+    }
+}
+
+//Change background color
+void MainWindow::handleBackgroundColor()
+{
+    QColor QTcolor = QColorDialog::getColor(Qt::white, this);
+    if (QTcolor.isValid())
+    {
+        renderer->SetBackground(QTcolor.redF(), QTcolor.greenF(), QTcolor.blueF());
+        ui->qvtkWidget->GetRenderWindow()->Render();
+    }
+}
+
+=======
+>>>>>>> 4b0aaa701a9c6f2cfd3914b3ffb6d2a64c278bb4

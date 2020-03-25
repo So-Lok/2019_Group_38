@@ -9,6 +9,11 @@
 // for use of reverse access to the source
 #include <vtkAlgorithmOutput.h>
 
+///color//
+#include <QColorDialog>
+#include <QColor>
+#include <vtkNamedColors.h>
+
 
 namespace Ui {
 class MainWindow;
@@ -37,6 +42,13 @@ public:
 
     // checkboxes
   //  void clipChecked();
+  
+  //object color////
+    void handleObjectColor();
+
+    //Background color //
+    void handleBackgroundColor();
+
 
 private:
     Ui::MainWindow *ui;
@@ -59,6 +71,9 @@ private:
     vtkSmartPointer<vtkCamera> camera;
     // to store a copy of the current sourrce
     vtkSmartPointer<vtkAlgorithm> source;
+    //color
+    vtkSmartPointer<vtkNamedColors> colors;
+
 };
 
 

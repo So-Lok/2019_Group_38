@@ -29,40 +29,9 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    //shape buttons
-    void handleCube();
-    void handlePyrmaid();
-
-    // actions
-    void actionOpen();
-
-    // model buttons
-    void handleResetView();
-
-    // display/render function, for use of filters.
-    void updateFilters();
-
-    // checkboxes
-  //  void clipChecked();
-  
-  ;
-
-
-    //object color////
-    void handleObjectColor();
-
-    //Background color //
-    void handleBackgroundColor();
-
-
-private:
-    Ui::MainWindow *ui;
-
     // filter boolean
     bool applyClip;
     bool applyShrink;
-
-    // vtkSmartPointer definitions
 
     vtkSmartPointer<vtkRenderer> renderer;
     vtkNew<vtkGenericOpenGLRenderWindow> renderWindow;
@@ -76,14 +45,35 @@ private:
     vtkSmartPointer<vtkCamera> camera;
     // to store a copy of the current sourrce
     vtkSmartPointer<vtkAlgorithm> source;
-<<<<<<< HEAD
-
     //color
     vtkSmartPointer<vtkNamedColors> colors;
+    //light
+    vtkSmartPointer<vtkLight> light;
 
-=======
    
->>>>>>> 4b0aaa701a9c6f2cfd3914b3ffb6d2a64c278bb4
+  
+private slots:
+    //shape buttons
+    void handleCube();
+    void handlePyrmaid();
+    // actions
+    void actionOpen();
+    // model buttons
+    void handleResetView();
+    // display/render function, for use of filters.
+    void updateFilters();
+    //object color////
+    void handleObjectColor();
+    //Background color //
+    void handleBackgroundColor();
+    //light intensity//
+    void on_Slider_sliderMoved(int position);
+    void on_checkBox_clicked(bool checked);
+   
+
+private:
+    Ui::MainWindow *ui;
+ 
 };
 
  

@@ -6,30 +6,30 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>851</width>
-    <height>544</height>
+    <width>1248</width>
+    <height>843</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QVTKOpenGLWidget" name="qvtkWidget">
+   <widget class="QVTKOpenGLWidget" name="qvtkWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>20</y>
-      <width>571</width>
-      <height>291</height>
+      <x>10</x>
+      <y>10</y>
+      <width>1231</width>
+      <height>421</height>
      </rect>
     </property>
    </widget>
    <widget class="QPushButton" name="cameraReset">
     <property name="geometry">
      <rect>
-      <x>250</x>
-      <y>320</y>
-      <width>131</width>
+      <x>20</x>
+      <y>530</y>
+      <width>161</width>
       <height>31</height>
      </rect>
     </property>
@@ -37,80 +37,11 @@
      <string>Reset Camera</string>
     </property>
    </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>320</y>
-      <width>181</width>
-      <height>27</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout">
-       <item>
-        <widget class="QPushButton" name="cubeButton">
-         <property name="text">
-          <string>Cube</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pyramidButton">
-         <property name="text">
-          <string>Pyramid</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>360</y>
-      <width>162</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
-     <item>
-      <widget class="QCheckBox" name="clipFilter">
-       <property name="text">
-        <string>Clip Filter</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QCheckBox" name="shrinkFilter">
-       <property name="text">
-        <string>Shrink Filter</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
    <widget class="QPushButton" name="ObjectColor">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>360</y>
+      <x>280</x>
+      <y>500</y>
       <width>151</width>
       <height>41</height>
      </rect>
@@ -122,14 +53,105 @@
    <widget class="QPushButton" name="BackgroundColor">
     <property name="geometry">
      <rect>
-      <x>400</x>
-      <y>360</y>
-      <width>191</width>
+      <x>280</x>
+      <y>450</y>
+      <width>171</width>
       <height>41</height>
      </rect>
     </property>
     <property name="text">
      <string>Background Color</string>
+    </property>
+   </widget>
+   <widget class="QSlider" name="Slider">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>530</y>
+      <width>141</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBox">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>480</y>
+      <width>141</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>ON/OFF</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>450</y>
+      <width>141</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Light intensity</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="shrinkFilter">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>450</y>
+      <width>161</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Shrink Filter</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="clipFilter">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>480</y>
+      <width>141</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Clip Filter</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pyramidButton">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>490</y>
+      <width>80</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Pyramid</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="cubeButton">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>450</y>
+      <width>80</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Cube</string>
     </property>
    </widget>
   </widget>
@@ -139,7 +161,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>851</width>
+     <width>1248</width>
      <height>21</height>
     </rect>
    </property>
@@ -198,7 +220,7 @@
  <customwidgets>
   <customwidget>
    <class>QVTKOpenGLWidget</class>
-   <extends>QOpenGLWidget</extends>
+   <extends>QWidget</extends>
    <header>QVTKOpenGLWidget.h</header>
   </customwidget>
  </customwidgets>

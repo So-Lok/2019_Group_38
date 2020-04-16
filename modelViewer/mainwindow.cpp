@@ -36,6 +36,10 @@
 // color
 #include <vtkNamedColors.h>
 
+//light
+#include <vtkLight.h>
+
+
 // Box widget
 #include <vtkBoxWidget.h>
 #include <vtkCommand.h>
@@ -92,15 +96,24 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->cameraReset, &QPushButton::released, this, &MainWindow::handleResetView);
     connect(ui->clipFilter, &QCheckBox::released, this, &MainWindow::updateFilters);
     connect(ui->shrinkFilter, &QCheckBox::released, this, &MainWindow::updateFilters);
-<<<<<<< HEAD
     connect(ui->ObjectColor, &QPushButton::released, this, &MainWindow::handleObjectColor);
     connect(ui->BackgroundColor, &QPushButton::released, this, &MainWindow::handleBackgroundColor);
-=======
    
->>>>>>> 4b0aaa701a9c6f2cfd3914b3ffb6d2a64c278bb4
-
     // default model cube
     handleCube();
+
+    /////light intensity/////
+
+    light = vtkSmartPointer<vtkLight>::New();
+    light->SetLightTypeToSceneLight();
+    light->SetPosition(5, 5, 15);
+    light->SetPositional(true);
+    light->SetConeAngle(10);
+    light->SetFocalPoint(0, 0, 0);
+    light->SetDiffuseColor(1, 1, 1);
+    light->SetAmbientColor(1, 1, 1);
+    light->SetSpecularColor(1, 1, 1);
+    light->SetIntensity(0.5);
 
 
 }
@@ -409,7 +422,7 @@ void MainWindow::actionOpen()
   updateFilters();
 }
 
-<<<<<<< HEAD
+
 //Change object color
 void MainWindow::handleObjectColor()
 {
@@ -430,8 +443,34 @@ void MainWindow::handleBackgroundColor()
     {
         renderer->SetBackground(QTcolor.redF(), QTcolor.greenF(), QTcolor.blueF());
         ui->qvtkWidget->GetRenderWindow()->Render();
+        
     }
 }
 
-=======
->>>>>>> 4b0aaa701a9c6f2cfd3914b3ffb6d2a64c278bb4
+void MainWindow::on_Slider_sliderMoved(int position)
+{
+    if (ui->checkBox->isChecked()) {
+        light->SetIntensity((float)(100 - position) / 100);
+    }
+    else {
+        light->SetIntensity(0.5);
+    }
+    renderer->AddLight(light);
+    ui->qvtkWidget->GetRenderWindow()->Render();
+}
+
+//checked box before adjust the light intensity
+void MainWindow::on_checkBox_clicked(bool checked)
+{
+    if (checked) {
+        light->SetIntensity((float)(100 - ui->Slider->value()) / 100);
+    }
+    else {
+        light->SetIntensity(0.5);
+    }
+
+    renderer->AddLight(light);
+    ui->qvtkWidget->GetRenderWindow()->Render();
+}
+
+

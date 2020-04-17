@@ -1,0 +1,13 @@
+# Contents of .gitignore
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+*.obj
+*.lib
+*.a
+*.exp
+
+build/

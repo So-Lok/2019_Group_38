@@ -203,7 +203,6 @@ void MainWindow::updateFilters()
   }
 
 
-
 }
 
 

@@ -132,6 +132,32 @@
      <string>Background Color</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="xaxisButton">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>390</y>
+      <width>51</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>X plane</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="xaxisButton2">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>390</y>
+      <width>51</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>-X Plane</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QMenuBar" name="menubar">

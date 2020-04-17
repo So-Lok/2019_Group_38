@@ -52,7 +52,13 @@ public:
     void handleObjectColor();
 
     //Background color //
-    void handleBackgroundColor();
+    void handleBackgroundColor(); 
+
+	//-X plane view bottom 
+	void handleViewx();
+
+	//-X plane view bottom
+	void handleViewx2();
 
 
 private:

@@ -142,7 +142,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>X plane</string>
+     <string>X  plane</string>
     </property>
    </widget>
    <widget class="QPushButton" name="xaxisButton2">

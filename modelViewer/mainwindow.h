@@ -16,7 +16,6 @@
 
 
 
-
 namespace Ui {
 class MainWindow;
 }

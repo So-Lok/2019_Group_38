@@ -80,9 +80,13 @@ MainWindow::MainWindow(QWidget *parent) :
     renderer = vtkSmartPointer<vtkRenderer>::New();
     // render window made in qt and therefore assign the renderer to the qt window
     ui->qvtkWidget->GetRenderWindow()->AddRenderer(renderer);
+
     //no need to tell widget to render and start the interaction, qt does this
 
     actor = vtkSmartPointer<vtkActor>::New();
+
+    //create a light 
+    light = vtkSmartPointer<vtkLight>::New();
 
     // Define icon Files
     // file is determined by where you run the exe from
@@ -206,10 +210,11 @@ void MainWindow::updateFilters()
 }
 
 
-// Resets the camera of the model, both zoom and rotation of the model
+// Resets the of the model, both zoom and rotation of the model
 // to  a default which can be set
 
 void MainWindow::handleResetView()
+
 {
   // New camera pointer is created
   camera = vtkSmartPointer<vtkCamera>::New();
@@ -271,6 +276,11 @@ void MainWindow::handlePyrmaid()
   //Create an actor and mapper
   vtkSmartPointer<vtkNamedColors> colors =
                   vtkSmartPointer<vtkNamedColors>::New();
+
+  //light intensity
+  vtkSmartPointer<vtkLight> light =
+      vtkSmartPointer<vtkLight>::New();
+
   //vtkSmartPointer<vtkDataSetMapper>
   mapper = vtkSmartPointer<vtkDataSetMapper>::New();
   mapper->SetInputData(ug);
@@ -333,6 +343,11 @@ void MainWindow::handleCube()
   // code for colours
   vtkSmartPointer<vtkNamedColors> colors =
                   vtkSmartPointer<vtkNamedColors>::New();
+
+  //light intensity 
+
+  vtkSmartPointer<vtkLight> light =
+      vtkSmartPointer<vtkLight>::New();
   // colour of the object
   actor->GetProperty()->SetColor( colors->GetColor3d("Magenta").GetData() );
 
@@ -403,6 +418,10 @@ void MainWindow::actionOpen()
   vtkSmartPointer<vtkNamedColors> colors =
                   vtkSmartPointer<vtkNamedColors>::New();
 
+  ///for light intensity//
+  vtkSmartPointer<vtkLight> light =
+      vtkSmartPointer<vtkLight>::New();
+
   renderer->AddActor(actor);
   renderer->SetBackground( colors->GetColor3d("Silver").GetData()); // Background color green
   actor->GetProperty()->SetColor( colors->GetColor3d("Magenta").GetData() );
@@ -457,6 +476,8 @@ void MainWindow::on_Slider_sliderMoved(int position)
     }
     renderer->AddLight(light);
     ui->qvtkWidget->GetRenderWindow()->Render();
+    
+
 }
 
 //checked box before adjust the light intensity

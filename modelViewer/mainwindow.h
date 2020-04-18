@@ -13,6 +13,8 @@
 #include <QColorDialog>
 #include <QColor>
 #include <vtkNamedColors.h>
+//light//
+#include <vtkLight.h>
 
 
 
@@ -29,9 +31,32 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    //shape buttons
+    void handleCube();
+    void handlePyrmaid();
+    // actions
+    void actionOpen();
+    // model buttons
+    void handleResetView();
+    // display/render function, for use of filters.
+    void updateFilters();
+    //object color////
+    void handleObjectColor();
+    //Background color //
+    void handleBackgroundColor();
+  
+private slots:
+    void on_Slider_sliderMoved(int position);
+    void on_checkBox_clicked(bool checked);
+ 
+private:
+    Ui::MainWindow* ui;
+
     // filter boolean
     bool applyClip;
     bool applyShrink;
+
+    // vtkSmartPointer definitions
 
     vtkSmartPointer<vtkRenderer> renderer;
     vtkNew<vtkGenericOpenGLRenderWindow> renderWindow;
@@ -50,33 +75,10 @@ public:
     //light
     vtkSmartPointer<vtkLight> light;
 
-   
-  
-private slots:
-    //shape buttons
-    void handleCube();
-    void handlePyrmaid();
-    // actions
-    void actionOpen();
-    // model buttons
-    void handleResetView();
-    // display/render function, for use of filters.
-    void updateFilters();
-    //object color////
-    void handleObjectColor();
-    //Background color //
-    void handleBackgroundColor();
-    //light intensity//
-    void on_Slider_sliderMoved(int position);
-    void on_checkBox_clicked(bool checked);
-   
 
-private:
-    Ui::MainWindow *ui;
- 
+   
 };
 
- 
 
 
 #endif // MAINWINDOW_H

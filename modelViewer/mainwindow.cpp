@@ -92,12 +92,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->cameraReset, &QPushButton::released, this, &MainWindow::handleResetView);
     connect(ui->clipFilter, &QCheckBox::released, this, &MainWindow::updateFilters);
     connect(ui->shrinkFilter, &QCheckBox::released, this, &MainWindow::updateFilters);
-<<<<<<< HEAD
+
+    // colour functions
     connect(ui->ObjectColor, &QPushButton::released, this, &MainWindow::handleObjectColor);
     connect(ui->BackgroundColor, &QPushButton::released, this, &MainWindow::handleBackgroundColor);
-=======
-   
->>>>>>> 4b0aaa701a9c6f2cfd3914b3ffb6d2a64c278bb4
+
 
     // default model cube
     handleCube();
@@ -409,7 +408,7 @@ void MainWindow::actionOpen()
   updateFilters();
 }
 
-<<<<<<< HEAD
+
 //Change object color
 void MainWindow::handleObjectColor()
 {
@@ -432,6 +431,3 @@ void MainWindow::handleBackgroundColor()
         ui->qvtkWidget->GetRenderWindow()->Render();
     }
 }
-
-=======
->>>>>>> 4b0aaa701a9c6f2cfd3914b3ffb6d2a64c278bb4

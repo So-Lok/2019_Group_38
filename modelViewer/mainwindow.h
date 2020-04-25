@@ -44,8 +44,6 @@ public:
 
     // checkboxes
   //  void clipChecked();
-  
-  ;
 
 
     //object color////
@@ -76,17 +74,13 @@ private:
     vtkSmartPointer<vtkCamera> camera;
     // to store a copy of the current sourrce
     vtkSmartPointer<vtkAlgorithm> source;
-<<<<<<< HEAD
 
     //color
     vtkSmartPointer<vtkNamedColors> colors;
 
-=======
-   
->>>>>>> 4b0aaa701a9c6f2cfd3914b3ffb6d2a64c278bb4
 };
 
- 
+
 
 
 #endif // MAINWINDOW_H

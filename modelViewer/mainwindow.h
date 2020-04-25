@@ -13,6 +13,8 @@
 #include <QColorDialog>
 #include <QColor>
 #include <vtkNamedColors.h>
+//light//
+#include <vtkLight.h>
 
 
 
@@ -32,29 +34,24 @@ public:
     //shape buttons
     void handleCube();
     void handlePyrmaid();
-
     // actions
     void actionOpen();
-
     // model buttons
     void handleResetView();
-
     // display/render function, for use of filters.
     void updateFilters();
 
-    // checkboxes
-  //  void clipChecked();
-
-
     //object color////
     void handleObjectColor();
-
     //Background color //
     void handleBackgroundColor();
-
-
+  
+private slots:
+    void on_Slider_sliderMoved(int position);
+    void on_checkBox_clicked(bool checked);
+ 
 private:
-    Ui::MainWindow *ui;
+    Ui::MainWindow* ui;
 
     // filter boolean
     bool applyClip;
@@ -77,8 +74,8 @@ private:
 
     //color
     vtkSmartPointer<vtkNamedColors> colors;
-
-};
+    //light
+    vtkSmartPointer<vtkLight> light;
 
 
 

@@ -36,6 +36,10 @@
 // color
 #include <vtkNamedColors.h>
 
+//light
+#include <vtkLight.h>
+
+
 // Box widget
 #include <vtkBoxWidget.h>
 #include <vtkCommand.h>
@@ -76,9 +80,13 @@ MainWindow::MainWindow(QWidget *parent) :
     renderer = vtkSmartPointer<vtkRenderer>::New();
     // render window made in qt and therefore assign the renderer to the qt window
     ui->qvtkWidget->GetRenderWindow()->AddRenderer(renderer);
+
     //no need to tell widget to render and start the interaction, qt does this
 
     actor = vtkSmartPointer<vtkActor>::New();
+
+    //create a light 
+    light = vtkSmartPointer<vtkLight>::New();
 
     // Define icon Files
     // file is determined by where you run the exe from
@@ -100,6 +108,19 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // default model cube
     handleCube();
+
+    /////light intensity/////
+
+    light = vtkSmartPointer<vtkLight>::New();
+    light->SetLightTypeToSceneLight();
+    light->SetPosition(5, 5, 15);
+    light->SetPositional(true);
+    light->SetConeAngle(10);
+    light->SetFocalPoint(0, 0, 0);
+    light->SetDiffuseColor(1, 1, 1);
+    light->SetAmbientColor(1, 1, 1);
+    light->SetSpecularColor(1, 1, 1);
+    light->SetIntensity(0.5);
 
 
 }
@@ -192,10 +213,11 @@ void MainWindow::updateFilters()
 }
 
 
-// Resets the camera of the model, both zoom and rotation of the model
+// Resets the of the model, both zoom and rotation of the model
 // to  a default which can be set
 
 void MainWindow::handleResetView()
+
 {
   // New camera pointer is created
   camera = vtkSmartPointer<vtkCamera>::New();
@@ -257,6 +279,11 @@ void MainWindow::handlePyrmaid()
   //Create an actor and mapper
   vtkSmartPointer<vtkNamedColors> colors =
                   vtkSmartPointer<vtkNamedColors>::New();
+
+  //light intensity
+  vtkSmartPointer<vtkLight> light =
+      vtkSmartPointer<vtkLight>::New();
+
   //vtkSmartPointer<vtkDataSetMapper>
   mapper = vtkSmartPointer<vtkDataSetMapper>::New();
   mapper->SetInputData(ug);
@@ -319,6 +346,11 @@ void MainWindow::handleCube()
   // code for colours
   vtkSmartPointer<vtkNamedColors> colors =
                   vtkSmartPointer<vtkNamedColors>::New();
+
+  //light intensity 
+
+  vtkSmartPointer<vtkLight> light =
+      vtkSmartPointer<vtkLight>::New();
   // colour of the object
   actor->GetProperty()->SetColor( colors->GetColor3d("Magenta").GetData() );
 
@@ -389,6 +421,10 @@ void MainWindow::actionOpen()
   vtkSmartPointer<vtkNamedColors> colors =
                   vtkSmartPointer<vtkNamedColors>::New();
 
+  ///for light intensity//
+  vtkSmartPointer<vtkLight> light =
+      vtkSmartPointer<vtkLight>::New();
+
   renderer->AddActor(actor);
   renderer->SetBackground( colors->GetColor3d("Silver").GetData()); // Background color green
   actor->GetProperty()->SetColor( colors->GetColor3d("Magenta").GetData() );
@@ -429,5 +465,37 @@ void MainWindow::handleBackgroundColor()
     {
         renderer->SetBackground(QTcolor.redF(), QTcolor.greenF(), QTcolor.blueF());
         ui->qvtkWidget->GetRenderWindow()->Render();
+        
     }
 }
+
+
+void MainWindow::on_Slider_sliderMoved(int position)
+{
+    if (ui->checkBox->isChecked()) {
+        light->SetIntensity((float)(100 - position) / 100);
+    }
+    else {
+        light->SetIntensity(0.5);
+    }
+    renderer->AddLight(light);
+    ui->qvtkWidget->GetRenderWindow()->Render();
+    
+
+}
+
+//checked box before adjust the light intensity
+void MainWindow::on_checkBox_clicked(bool checked)
+{
+    if (checked) {
+        light->SetIntensity((float)(100 - ui->Slider->value()) / 100);
+    }
+    else {
+        light->SetIntensity(0.5);
+    }
+
+    renderer->AddLight(light);
+    ui->qvtkWidget->GetRenderWindow()->Render();
+}
+
+

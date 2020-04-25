@@ -100,9 +100,12 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->cameraReset, &QPushButton::released, this, &MainWindow::handleResetView);
     connect(ui->clipFilter, &QCheckBox::released, this, &MainWindow::updateFilters);
     connect(ui->shrinkFilter, &QCheckBox::released, this, &MainWindow::updateFilters);
+
+    // colour functions
     connect(ui->ObjectColor, &QPushButton::released, this, &MainWindow::handleObjectColor);
     connect(ui->BackgroundColor, &QPushButton::released, this, &MainWindow::handleBackgroundColor);
-   
+
+
     // default model cube
     handleCube();
 
@@ -465,6 +468,7 @@ void MainWindow::handleBackgroundColor()
         
     }
 }
+
 
 void MainWindow::on_Slider_sliderMoved(int position)
 {

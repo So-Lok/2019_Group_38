@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>851</width>
-    <height>544</height>
+    <height>565</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -138,7 +138,7 @@
       <x>40</x>
       <y>390</y>
       <width>51</width>
-      <height>20</height>
+      <height>21</height>
      </rect>
     </property>
     <property name="text">
@@ -156,6 +156,71 @@
     </property>
     <property name="text">
      <string>-X Plane</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="YaxisButton">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>420</y>
+      <width>51</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Y  plane</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="YaxisButton2">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>420</y>
+      <width>51</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>-Y  plane</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="xaxisButton_5">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>51</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>X  plane</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ZaxisButton">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>450</y>
+      <width>51</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Z  plane</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ZaxisButton2">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>450</y>
+      <width>51</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>-Z  plane</string>
     </property>
    </widget>
   </widget>

@@ -57,9 +57,20 @@ public:
 	void handleViewx();
 
 	//-X plane view bottom
-	void handleViewx2();
-
-
+	void handleViewx2(); 
+       
+        //Y plane view bottom 
+         void handleViewy(); 
+        
+        //-Y plane view bottom 
+         void handleViewy2(); 
+ 
+        //Z plane view bottom 
+         void handleViewz(); 
+ 
+        //-Z plane view bottom 
+         void handleViewz2(); 
+       
 private:
     Ui::MainWindow *ui;
 

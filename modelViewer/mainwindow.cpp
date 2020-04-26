@@ -431,8 +431,6 @@ void MainWindow::widgetBox()
     interactor->TerminateApp();
   }
 
-  //interactor->TerminateApp();
-
 }
 // definitions of buttons
 
@@ -490,6 +488,11 @@ void MainWindow::actionOpen()
 
   // Render the new model straight away
   renderWindow->Render();
+
+  if(ui->widgetBox->isChecked() )
+  {
+    ui->widgetBox->toggle();
+  }
 
   updateFilters();
 }

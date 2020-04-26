@@ -1,7 +1,6 @@
 // mainwindow.cpp
 
 // vtk headers
-
 #include <vtkSmartPointer.h>
 #include <vtkActor.h>
 #include <vtkProperty.h>

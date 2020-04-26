@@ -39,11 +39,11 @@
 //light
 #include <vtkLight.h>
 
-
 // Box widget
-#include <vtkBoxWidget.h>
-#include <vtkCommand.h>
-#include <vtkTransform.h>
+#include <vtkInteractorStyleTrackballCamera.h>
+
+
+
 
 
 // QT headers for opening a file
@@ -85,8 +85,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     actor = vtkSmartPointer<vtkActor>::New();
 
-    //create a light 
+    //create a light
     light = vtkSmartPointer<vtkLight>::New();
+
+    // box widget initialisation
+     boxWidget = vtkSmartPointer<vtkBoxWidget>::New();
 
     // Define icon Files
     // file is determined by where you run the exe from
@@ -94,12 +97,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->actionOpen->setIcon(QIcon("../Icons/fileopen.png"));
 
     // configure actions and pushbuttons
-    connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::actionOpen);
     connect(ui->cubeButton, &QPushButton::released, this, &MainWindow::handleCube);
     connect(ui->pyramidButton, &QPushButton::released, this, &MainWindow::handlePyrmaid);
     connect(ui->cameraReset, &QPushButton::released, this, &MainWindow::handleResetView);
     connect(ui->clipFilter, &QCheckBox::released, this, &MainWindow::updateFilters);
     connect(ui->shrinkFilter, &QCheckBox::released, this, &MainWindow::updateFilters);
+
+    // configure tool bar actions/button
+    connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::actionOpen);
+    connect(ui->widgetBox, &QAction::toggled, this, &MainWindow::widgetBox);
 
     // colour functions
     connect(ui->ObjectColor, &QPushButton::released, this, &MainWindow::handleObjectColor);
@@ -211,6 +217,7 @@ void MainWindow::updateFilters()
 
 
 }
+
 
 
 // Resets the of the model, both zoom and rotation of the model
@@ -347,7 +354,7 @@ void MainWindow::handleCube()
   vtkSmartPointer<vtkNamedColors> colors =
                   vtkSmartPointer<vtkNamedColors>::New();
 
-  //light intensity 
+  //light intensity
 
   vtkSmartPointer<vtkLight> light =
       vtkSmartPointer<vtkLight>::New();
@@ -383,7 +390,50 @@ void MainWindow::handleCube()
 
 }
 
+/**
+*
+*
+**/
+void MainWindow::widgetBox()
+{
+  if(ui->widgetBox->isChecked() )
+  {
+    interactor = vtkSmartPointer<vtkRenderWindowInteractor>::New();
+    interactor->SetRenderWindow( renderWindow );
 
+    vtkSmartPointer<vtkInteractorStyleTrackballCamera> style =
+                      vtkSmartPointer<vtkInteractorStyleTrackballCamera>::New();
+    // qvtk is the open gl  render window
+    interactor->SetInteractorStyle(style); //->GetRenderWindow() after qvtk
+
+    boxWidget->SetInteractor(interactor );
+
+    boxWidget->SetProp3D( actor );
+    boxWidget->SetPlaceFactor( 1.25 ); // Make the box 1.25x larger than the actor
+    boxWidget->PlaceWidget();
+
+    vtkSmartPointer<vtkMyCallback> callback =
+                    vtkSmartPointer<vtkMyCallback>::New();
+    boxWidget->AddObserver( vtkCommand::InteractionEvent, callback );
+
+    boxWidget->On();
+
+
+    renderWindow->Render();
+    interactor->Start();
+
+
+  }
+  else
+  {
+    boxWidget->Off();
+    renderWindow->Render();
+    interactor->TerminateApp();
+  }
+
+  //interactor->TerminateApp();
+
+}
 // definitions of buttons
 
 void MainWindow::actionOpen()
@@ -465,7 +515,7 @@ void MainWindow::handleBackgroundColor()
     {
         renderer->SetBackground(QTcolor.redF(), QTcolor.greenF(), QTcolor.blueF());
         ui->qvtkWidget->GetRenderWindow()->Render();
-        
+
     }
 }
 
@@ -480,7 +530,7 @@ void MainWindow::on_Slider_sliderMoved(int position)
     }
     renderer->AddLight(light);
     ui->qvtkWidget->GetRenderWindow()->Render();
-    
+
 
 }
 
@@ -497,5 +547,3 @@ void MainWindow::on_checkBox_clicked(bool checked)
     renderer->AddLight(light);
     ui->qvtkWidget->GetRenderWindow()->Render();
 }
-
-

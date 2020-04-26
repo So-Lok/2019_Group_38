@@ -9,5 +9,6 @@
 *.lib
 *.a
 *.exp
+*.ui.autosave
 
 build/

@@ -16,6 +16,11 @@
 //light//
 #include <vtkLight.h>
 
+// Box widget
+#include <vtkBoxWidget.h>
+#include <vtkCommand.h>
+#include <vtkTransform.h>
+
 
 
 
@@ -34,7 +39,8 @@ public:
     //shape buttons
     void handleCube();
     void handlePyrmaid();
-    // actions
+    // Tool bar functions
+    void widgetBox();
     void actionOpen();
     // model buttons
     void handleResetView();
@@ -45,11 +51,11 @@ public:
     void handleObjectColor();
     //Background color //
     void handleBackgroundColor();
-  
+
 private slots:
     void on_Slider_sliderMoved(int position);
     void on_checkBox_clicked(bool checked);
- 
+
 private:
     Ui::MainWindow* ui;
 
@@ -61,7 +67,6 @@ private:
 
     vtkSmartPointer<vtkRenderer> renderer;
     vtkNew<vtkGenericOpenGLRenderWindow> renderWindow;
-    // test using this for filters
     vtkSmartPointer<vtkDataSetMapper> mapper;
     // actionOpen uses vtkPolyDataMapper,
 
@@ -77,7 +82,35 @@ private:
     //light
     vtkSmartPointer<vtkLight> light;
 
+    vtkSmartPointer<vtkBoxWidget> boxWidget;
+    vtkSmartPointer<vtkRenderWindowInteractor> interactor;
 
 
+};
+
+// call back used for box widget
+
+/**
+ *  A callback class used to synchronise the box widget with the object
+ *  so that it can be transformed
+ *
+ */
+
+class vtkMyCallback : public vtkCommand
+{
+public:
+  static vtkMyCallback *New()
+  {
+    return new vtkMyCallback;
+  }
+  virtual void Execute(vtkObject *caller, unsigned long, void*)
+  {
+    vtkSmartPointer<vtkTransform> t =
+              vtkSmartPointer<vtkTransform>::New();
+    vtkBoxWidget *widget = reinterpret_cast<vtkBoxWidget*>(caller);
+    widget->GetTransform(t);
+    widget->GetProp3D()->SetUserTransform(t);
+  }
+};
 
 #endif // MAINWINDOW_H

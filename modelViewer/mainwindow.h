@@ -21,6 +21,10 @@
 #include <vtkCommand.h>
 #include <vtkTransform.h>
 
+// close event
+#include <QCloseEvent>
+#include <QMessageBox>
+
 
 
 
@@ -36,6 +40,8 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    // closeEvent
+    void closeEvent(QCloseEvent *event);
     //shape buttons
     void handleCube();
     void handlePyrmaid();

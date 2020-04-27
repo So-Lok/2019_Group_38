@@ -55,6 +55,7 @@
 
 
 
+
 // QT headers for opening a file
 
 //#include <QMessageBox>
@@ -81,6 +82,7 @@ MainWindow::MainWindow(QWidget *parent) :
     // render window made in qt and therefore assign the renderer to the qt window
     ui->qvtkWidget->GetRenderWindow()->AddRenderer(renderer);
     actor = vtkSmartPointer<vtkActor>::New();
+    mapper = vtkSmartPointer<vtkDataSetMapper>::New();
 
     // initialisation for features
     light = vtkSmartPointer<vtkLight>::New();
@@ -108,15 +110,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // start up
     renderer->RemoveAllViewProps();
-    mapper = vtkSmartPointer<vtkDataSetMapper>::New();
-    actor->SetMapper(mapper);
-    actor->GetProperty()->EdgeVisibilityOff();
-
-  //  renderer->SetBackground( colors->GetColor3d("Silver").GetData() );
-    //renderer->SetBackground( colors->GetColor3d("Silver").GetData() );
-  //  renderWindow->Render();
-
-  //  handleCube();
 
     /////light intensity/////
 
@@ -130,19 +123,23 @@ MainWindow::MainWindow(QWidget *parent) :
     light->SetAmbientColor(1, 1, 1);
     light->SetSpecularColor(1, 1, 1);
     light->SetIntensity(0.5);
-
-
 }
 
+/**
+* @function mainwindow destructor
+**/
 MainWindow::~MainWindow()
 {
     delete ui;
 }
 
 
-
-
 // function for updating render with filters
+/**
+* @function Updates the render with any filters selected.
+*
+* Removes all filters and reapplies then if they have been checked
+**/
 
 void MainWindow::updateFilters()
 {
@@ -217,15 +214,17 @@ void MainWindow::updateFilters()
     renderWindow->Render();
   }
 
-
-
 }
+
+
 
 
 
 // Resets the of the model, both zoom and rotation of the model
 // to  a default which can be set
-
+/**
+* @function resets the camera of the render window so that the model is on screen
+**/
 void MainWindow::handleResetView()
 
 {
@@ -245,6 +244,12 @@ void MainWindow::handleResetView()
   renderWindow->Render();
 }
 
+
+// for mod get rid of pyramid and cube buttons so that they are used by inserting points
+
+/**
+* @function generates a pyramid
+*/
 void MainWindow::handlePyrmaid()
 {
   // create a array of points
@@ -313,18 +318,16 @@ void MainWindow::handlePyrmaid()
   camera = vtkSmartPointer<vtkCamera>::New();
   // 0,0,0 focal point is default when making new camera
   //camera->SetFocalPoint(0,0,0);
-  camera->SetFocalPoint(0,-10,0);
-  renderer->SetActiveCamera(camera);
+//  camera->SetFocalPoint(0,-10,0);
+//  renderer->SetActiveCamera(camera);
   renderer->ResetCamera(); // resets the zoom
   renderer->ResetCameraClippingRange(); // if the model is zoomed offscreen
   // /reset camera angle----------------
+
   // render the pyramid as soon as button is pushed
   renderWindow->Render();
 
   updateFilters();
-
-
-
 }
 
 void MainWindow::handleCube()
@@ -345,7 +348,6 @@ void MainWindow::handleCube()
   actor->GetProperty()->EdgeVisibilityOff();
 
   //light intensity
-
   vtkSmartPointer<vtkLight> light =
       vtkSmartPointer<vtkLight>::New();
 
@@ -355,30 +357,18 @@ void MainWindow::handleCube()
   // create a copy of the current source to be used with filters if necessary
   source = actor->GetMapper()->GetInputConnection(0, 0)->GetProducer();
 
-  //---- reset the camera angle------
-  camera = vtkSmartPointer<vtkCamera>::New();
-  // 0,0,0 focal point is default when making new camera
-  camera->SetFocalPoint(1,-1,0);
-  renderer->SetActiveCamera(camera);
-  renderer->ResetCamera(); // resets the zoom
+  // changes the zoom of the camera so that the model fits onto the screen
+  renderer->ResetCamera(); // resets the zoom and location of camera
   renderer->ResetCameraClippingRange(); // if the model is zoomed offscreen
-  // /reset camera angle----------------
-
   //  renderer->GetActiveCamera()->Azimuth(30);
   //  renderer->GetActiveCamera()->Elevation(30);
 
-
-
-  // render the cube as soon as button is pushed
-  renderWindow->Render();
-
   updateFilters();
-
 
 }
 
 /**
-*  Box Widget is a
+*  @function
 *
 **/
 void MainWindow::widgetBox()
@@ -405,9 +395,8 @@ void MainWindow::widgetBox()
 
     boxWidget->On();
 
-
     renderWindow->Render();
-    interactor->Enable();
+    interactor->Start();
 
 
   }
@@ -420,9 +409,11 @@ void MainWindow::widgetBox()
   }
 
 }
-// definitions of buttons
 
 
+/**
+* @function Allows the user to import a STL file into the renderer
+*/
 void MainWindow::actionOpen()
 {
   // open file explorer
@@ -434,6 +425,13 @@ void MainWindow::actionOpen()
   // set file up with a reader
   std::string inputFilename = fileName.toLocal8Bit().constData();
   //std::string inputFilename = fileName;
+
+  if(ui->widgetBox->isChecked() )
+  {
+    ui->widgetBox->toggle();
+    boxWidget->Off();
+    interactor->TerminateApp();
+  }
 
   vtkSmartPointer<vtkSTLReader> reader =
                   vtkSmartPointer<vtkSTLReader>::New();
@@ -475,10 +473,7 @@ void MainWindow::actionOpen()
   // Render the new model straight away
   renderWindow->Render();
 
-  if(ui->widgetBox->isChecked() )
-  {
-    ui->widgetBox->toggle();
-  }
+
 
   updateFilters();
 }
@@ -507,6 +502,18 @@ void MainWindow::handleBackgroundColor()
 
     }
 }
+
+/**
+* @function override of CloseEvent
+*
+* Used to terminate interactor if box widget is running whilst closing
+*/
+void MainWindow::closeEvent (QCloseEvent *event)
+{
+  interactor->TerminateApp();
+}
+
+
 
 
 void MainWindow::on_Slider_sliderMoved(int position)

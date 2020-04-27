@@ -52,10 +52,6 @@
 #include <vtkInteractorStyleTrackballCamera.h>
 
 
-
-
-
-
 // QT headers for opening a file
 
 //#include <QMessageBox>
@@ -131,6 +127,12 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::on_editFilters_clicked()
+{
+  opFilterDialog = new optionsFilter(this);
+  opFilterDialog->show();
 }
 
 

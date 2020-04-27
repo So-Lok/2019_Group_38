@@ -25,6 +25,9 @@
 #include <QCloseEvent>
 #include <QMessageBox>
 
+// Additonal windows
+#include "optionsfilter.h"
+
 
 
 
@@ -62,8 +65,13 @@ private slots:
     void on_Slider_sliderMoved(int position);
     void on_checkBox_clicked(bool checked);
 
+    // Advanced filter options
+    void on_editFilters_clicked();
+
 private:
     Ui::MainWindow* ui;
+
+    optionsFilter *opFilterDialog;
 
     // filter boolean
     bool applyClip;

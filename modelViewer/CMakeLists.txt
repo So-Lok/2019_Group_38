@@ -28,7 +28,8 @@ set( CMAKE_AUTOUIC ON )
 
 find_package( Qt5Widgets )
 
-set( UIS mainwindow.ui )
+# set UIs to be used
+set( UIS mainwindow.ui optionsfilter.ui)
 qt5_wrap_ui( UI_Srcs ${UIS} )
 
 # link icons
@@ -44,9 +45,9 @@ include( ${VTK_USE_FILE} )
 # Define the executable output and its sources
 
 add_executable( modelViewer MACOSX_BUNDLE
-                main.cpp mainwindow.cpp
-                mainwindow.h
-                mainwindow.ui
+                main.cpp mainwindow.cpp optionsfilter.cpp
+                mainwindow.h optionsfilter.h
+                mainwindow.ui optionsfilter.ui
                 ${UI_Srcs}
                 ${QRC_Srcs}
                 )

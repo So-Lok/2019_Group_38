@@ -1,4 +1,13 @@
-// mainwindow.cpp
+/********************************************************************************
+* @file mainwwindow.cpp
+* @brief Contains function definitions for features within the mainwindow
+*
+* Type of features
+* - Filters
+*
+**********************************************************************************/
+
+
 
 // vtk headers
 
@@ -56,9 +65,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-/** @file
- * This file defines the functions used in the mainwindow
- */
 
 /**
  *
@@ -68,52 +74,49 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    // standard call to setup the qt ui
     ui->setupUi(this);
-
-    // Now need to create a VTK render window and link it to the QtVTK widget
-    // Render window is created as a private variable in .h
-
     // note that qvtkWidget is the object name of the QtVTKOpenGLWidget
     ui->qvtkWidget->SetRenderWindow( renderWindow );
-    // Create a renderer, and render window
     renderer = vtkSmartPointer<vtkRenderer>::New();
     // render window made in qt and therefore assign the renderer to the qt window
     ui->qvtkWidget->GetRenderWindow()->AddRenderer(renderer);
-
-    //no need to tell widget to render and start the interaction, qt does this
-
     actor = vtkSmartPointer<vtkActor>::New();
 
-    //create a light
+    // initialisation for features
     light = vtkSmartPointer<vtkLight>::New();
 
-    // box widget initialisation
-     boxWidget = vtkSmartPointer<vtkBoxWidget>::New();
+    boxWidget = vtkSmartPointer<vtkBoxWidget>::New();
 
     // Define icon Files
     // file is determined by where you run the exe from
     // if you run withing debug then ../.. if in build then ../
     ui->actionOpen->setIcon(QIcon("../Icons/fileopen.png"));
 
-    // configure actions and pushbuttons
+    //configuration for all QT interactions
+    // Push buttons
     connect(ui->cubeButton, &QPushButton::released, this, &MainWindow::handleCube);
     connect(ui->pyramidButton, &QPushButton::released, this, &MainWindow::handlePyrmaid);
     connect(ui->cameraReset, &QPushButton::released, this, &MainWindow::handleResetView);
     connect(ui->clipFilter, &QCheckBox::released, this, &MainWindow::updateFilters);
     connect(ui->shrinkFilter, &QCheckBox::released, this, &MainWindow::updateFilters);
-
-    // configure tool bar actions/button
-    connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::actionOpen);
-    connect(ui->widgetBox, &QAction::toggled, this, &MainWindow::widgetBox);
-
-    // colour functions
     connect(ui->ObjectColor, &QPushButton::released, this, &MainWindow::handleObjectColor);
     connect(ui->BackgroundColor, &QPushButton::released, this, &MainWindow::handleBackgroundColor);
 
+    // Tool bar actions/button
+    connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::actionOpen);
+    connect(ui->widgetBox, &QAction::toggled, this, &MainWindow::widgetBox);
 
-    // default model cube
-    handleCube();
+    // start up
+    renderer->RemoveAllViewProps();
+    mapper = vtkSmartPointer<vtkDataSetMapper>::New();
+    actor->SetMapper(mapper);
+    actor->GetProperty()->EdgeVisibilityOff();
+
+  //  renderer->SetBackground( colors->GetColor3d("Silver").GetData() );
+    //renderer->SetBackground( colors->GetColor3d("Silver").GetData() );
+  //  renderWindow->Render();
+
+  //  handleCube();
 
     /////light intensity/////
 
@@ -284,8 +287,7 @@ void MainWindow::handlePyrmaid()
   ug->InsertNextCell(pyramid->GetCellType(),pyramid->GetPointIds());
 
   //Create an actor and mapper
-  vtkSmartPointer<vtkNamedColors> colors =
-                  vtkSmartPointer<vtkNamedColors>::New();
+  colors = vtkSmartPointer<vtkNamedColors>::New();
 
   //light intensity
   vtkSmartPointer<vtkLight> light =
@@ -299,14 +301,10 @@ void MainWindow::handlePyrmaid()
   //    vtkSmartPointer<vtkActor>::New();
   actor->SetMapper(mapper);
   actor->GetProperty()->EdgeVisibilityOff();
-  actor->GetProperty()->SetColor(colors->GetColor3d("Cyan").GetData());
 
   // clear old render and add new one
-
   renderer->RemoveAllViewProps();
-
   renderer->AddActor(actor);
-  renderer->SetBackground(colors->GetColor3d("Silver").GetData());
 
   // create a copy of the current source to be used with filters if necessary
   source = actor->GetMapper()->GetInputConnection(0, 0)->GetProducer();
@@ -315,6 +313,7 @@ void MainWindow::handlePyrmaid()
   camera = vtkSmartPointer<vtkCamera>::New();
   // 0,0,0 focal point is default when making new camera
   //camera->SetFocalPoint(0,0,0);
+  camera->SetFocalPoint(0,-10,0);
   renderer->SetActiveCamera(camera);
   renderer->ResetCamera(); // resets the zoom
   renderer->ResetCameraClippingRange(); // if the model is zoomed offscreen
@@ -341,29 +340,17 @@ void MainWindow::handleCube()
   mapper = vtkSmartPointer<vtkDataSetMapper>::New();
 
   mapper->SetInputConnection(cubeSource->GetOutputPort());
-
-  // Create an actor that is used to set the cube's properties for rendering
-  // and place it in the window
-//  vtkSmartPointer<vtkActor> actor =
-  //                vtkSmartPointer<vtkActor>::New();
-
   actor->SetMapper(mapper);
-  actor->GetProperty()->EdgeVisibilityOff();
 
-  // code for colours
-  vtkSmartPointer<vtkNamedColors> colors =
-                  vtkSmartPointer<vtkNamedColors>::New();
+  actor->GetProperty()->EdgeVisibilityOff();
 
   //light intensity
 
   vtkSmartPointer<vtkLight> light =
       vtkSmartPointer<vtkLight>::New();
-  // colour of the object
-  actor->GetProperty()->SetColor( colors->GetColor3d("Magenta").GetData() );
 
   // Add the actor to the scene
   renderer->AddActor(actor);
-  renderer->SetBackground( colors->GetColor3d("Silver").GetData() );
 
   // create a copy of the current source to be used with filters if necessary
   source = actor->GetMapper()->GetInputConnection(0, 0)->GetProducer();
@@ -391,7 +378,7 @@ void MainWindow::handleCube()
 }
 
 /**
-*
+*  Box Widget is a
 *
 **/
 void MainWindow::widgetBox()
@@ -420,19 +407,21 @@ void MainWindow::widgetBox()
 
 
     renderWindow->Render();
-    interactor->Start();
+    interactor->Enable();
 
 
   }
   else
   {
+    interactor->TerminateApp();
     boxWidget->Off();
     renderWindow->Render();
-    interactor->TerminateApp();
+
   }
 
 }
 // definitions of buttons
+
 
 void MainWindow::actionOpen()
 {
@@ -466,16 +455,13 @@ void MainWindow::actionOpen()
   //                vtkSmartPointer<vtkActor>::New();
   actor->SetMapper(mapper);
 
-  vtkSmartPointer<vtkNamedColors> colors =
-                  vtkSmartPointer<vtkNamedColors>::New();
+  colors = vtkSmartPointer<vtkNamedColors>::New();
 
   ///for light intensity//
   vtkSmartPointer<vtkLight> light =
       vtkSmartPointer<vtkLight>::New();
 
   renderer->AddActor(actor);
-  renderer->SetBackground( colors->GetColor3d("Silver").GetData()); // Background color green
-  actor->GetProperty()->SetColor( colors->GetColor3d("Magenta").GetData() );
 
   // create a copy of the current source to be used with filters if necessary
   source = actor->GetMapper()->GetInputConnection(0, 0)->GetProducer();

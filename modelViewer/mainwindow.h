@@ -68,7 +68,12 @@ private slots:
 
     // Advanced filter options
     void on_editFilters_clicked();
-    void updateFilterParams(int value);
+    //----------- Clip Filter--------------
+    void updateClipOriginX(int value); void updateClipNormalX(int value);
+    void updateClipOriginY(int value); void updateClipNormalY(int value);
+    void updateClipOriginZ(int value); void updateClipNormalZ(int value);
+    //-------------------------------------
+
 
 private:
     Ui::MainWindow* ui;
@@ -80,7 +85,7 @@ private:
     bool applyShrink;
 
     // filter parameters
-     float clipOriginX = 0.0;  float clipNormalX = 0.0;
+     float clipOriginX = 0.0;  float clipNormalX = 1.0;
      float clipOriginY = 0.0;  float clipNormalY = 0.0;
      float clipOriginZ = 0.0;  float clipNormalZ = 0.0;
 

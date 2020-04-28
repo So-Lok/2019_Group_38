@@ -72,9 +72,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+    // Initialise additional windows
     opFilterDialog = new optionsFilter(this);
-    
+
     // note that qvtkWidget is the object name of the QtVTKOpenGLWidget
     ui->qvtkWidget->SetRenderWindow( renderWindow );
     renderer = vtkSmartPointer<vtkRenderer>::New();
@@ -82,6 +82,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->qvtkWidget->GetRenderWindow()->AddRenderer(renderer);
     actor = vtkSmartPointer<vtkActor>::New();
     mapper = vtkSmartPointer<vtkDataSetMapper>::New();
+    //source = actor->GetMapper()->GetInputConnection(0, 0)->GetProducer();
 
     // initialisation for features
     light = vtkSmartPointer<vtkLight>::New();
@@ -106,10 +107,11 @@ MainWindow::MainWindow(QWidget *parent) :
     // Tool bar actions/button
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::actionOpen);
     connect(ui->widgetBox, &QAction::toggled, this, &MainWindow::widgetBox);
-    std::cout<<"hi";
-    // connect to signals from other windows
-    connect(opFilterDialog, SIGNAL(sendClipOriginX(int)), this, SLOT(updateFilterParams(int) ) );
-    std::cout<<"hello";
+
+
+    // SIGNAL(External window) connection to SLOTs(MainWindow)
+    connect(opFilterDialog, SIGNAL(sendClipOriginX(int)), this, SLOT(updateClipOriginX(int) ) );
+
     // start up
     renderer->RemoveAllViewProps();
 
@@ -142,9 +144,46 @@ void MainWindow::on_editFilters_clicked()
   opFilterDialog->show();
 }
 
-void MainWindow::updateFilterParams(int value)
+void MainWindow::updateClipOriginX(int value)
 {
-  cout << "signal received";
+  float newValue = value/10;
+  clipOriginX = newValue;
+  updateFilters();
+}
+
+void MainWindow::updateClipOriginY(int value)
+{
+  float newValue = value/10;
+  clipOriginY = newValue;
+  updateFilters();
+}
+
+void MainWindow::updateClipOriginZ(int value)
+{
+  float newValue = value/10;
+  clipOriginZ = newValue;
+  updateFilters();
+
+}
+
+void MainWindow::updateClipNormalX(int value)
+{
+  float newValue = value/10;
+  clipNormalX = newValue;
+  updateFilters();
+}
+
+void MainWindow::updateClipNormalY(int value)
+{
+  float newValue = value/10;
+  clipNormalY = newValue;
+  updateFilters();
+}
+void MainWindow::updateClipNormalZ(int value)
+{
+  float newValue = value/10;
+  clipNormalZ = newValue;
+  updateFilters();
 }
 
 
@@ -178,7 +217,7 @@ void MainWindow::updateFilters()
 
     renderer->RemoveAllViewProps();
     renderer->AddActor(actor);
-    renderWindow->Render();
+    //renderWindow->Render();
   }
 
 
@@ -187,8 +226,8 @@ void MainWindow::updateFilters()
   {
     // this will apply a clipping plane whose normal is the x-axis that crosses the x-axis at x=0
     vtkSmartPointer<vtkPlane> planeLeft = vtkSmartPointer<vtkPlane>::New();
-    planeLeft->SetOrigin(0.0, 0.1, 0.3);
-    planeLeft->SetNormal(-1, -1, 0.0);
+    planeLeft->SetOrigin(clipOriginX, clipOriginY, clipOriginZ);
+    planeLeft->SetNormal(clipNormalX, clipOriginY, clipNormalZ);
 
     vtkSmartPointer<vtkClipDataSet> vtkClipFilter
                         = vtkSmartPointer<vtkClipDataSet>::New();
@@ -376,6 +415,8 @@ void MainWindow::handleCube()
   renderer->ResetCameraClippingRange(); // if the model is zoomed offscreen
   //  renderer->GetActiveCamera()->Azimuth(30);
   //  renderer->GetActiveCamera()->Elevation(30);
+
+  renderWindow->Render();
 
   updateFilters();
 

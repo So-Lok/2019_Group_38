@@ -7,27 +7,55 @@ optionsFilter::optionsFilter(QWidget *parent) :
     ui(new Ui::optionsFilter)
 {
     ui->setupUi(this);
-
-    //connect(ui->clipOriginX, &QAbstractSlider::valueChanged, this, &optionsFilter::getSliderValue);
-
-
-
 }
 
 optionsFilter::~optionsFilter()
 {
     delete ui;
 }
-/*
-void  optionsFilter::getSliderValue()
-{
-  int value = ui->clipOriginX->value();
-  emit sendClipOriginX(value);
-}
-*/
+
+// --------------------Clip Filter -------------------------
+
 void optionsFilter::on_clipOriginX_valueChanged(int value)
 {
   ui->clipOriginX->setValue(value);
   int sendClip = value;
   emit sendClipOriginX(sendClip);
 }
+
+void optionsFilter::on_clipOriginY_valueChanged(int value)
+{
+  ui->clipOriginY->setValue(value);
+  int sendClip = value;
+  emit sendClipOriginY(sendClip);
+}
+
+void optionsFilter::on_clipOriginZ_valueChanged(int value)
+{
+  ui->clipOriginZ->setValue(value);
+  int sendClip = value;
+  emit sendClipOriginZ(sendClip);
+}
+
+void optionsFilter::on_clipNormalX_valueChanged(int value)
+{
+  ui->clipNormalX->setValue(value);
+  int sendClip = value;
+  emit sendClipNormalX(sendClip);
+}
+
+void optionsFilter::on_clipNormalY_valueChanged(int value)
+{
+  ui->clipNormalY->setValue(value);
+  int sendClip = value;
+  emit sendClipNormalY(sendClip);
+}
+
+void optionsFilter::on_clipNormalZ_valueChanged(int value)
+{
+  ui->clipNormalZ->setValue(value);
+  int sendClip = value;
+  emit sendClipNormalZ(sendClip);
+}
+
+// ----------------------------Clip Filter--------------------------------

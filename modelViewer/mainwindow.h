@@ -85,9 +85,9 @@ private:
     bool applyShrink;
 
     // filter parameters
-     float clipOriginX = 0.0;  float clipNormalX = 1.0;
-     float clipOriginY = 0.0;  float clipNormalY = 0.0;
-     float clipOriginZ = 0.0;  float clipNormalZ = 0.0;
+     double clipOriginX = 0.0;  double clipNormalX = -1.0;
+     double clipOriginY = 0.0;  double clipNormalY = 0.0;
+     double clipOriginZ = 0.0;  double clipNormalZ = 0.0;
 
     // vtkSmartPointer definitions
 
@@ -102,6 +102,7 @@ private:
     vtkSmartPointer<vtkCamera> camera;
     // to store a copy of the current sourrce
     vtkSmartPointer<vtkAlgorithm> source;
+    vtkSmartPointer<vtkAlgorithm> currentModel;
 
     //color
     vtkSmartPointer<vtkNamedColors> colors;

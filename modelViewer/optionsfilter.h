@@ -15,14 +15,23 @@ public:
     explicit optionsFilter(QWidget *parent = nullptr);
     ~optionsFilter();
 
-    //void getSliderValue();
+// SLOTs for interactions
 private slots:
-    void on_clipOriginX_valueChanged(int value);
+    // --------------Clip Filter------------------------
+    void on_clipOriginX_valueChanged(int value); void on_clipNormalX_valueChanged(int value);
+    void on_clipOriginY_valueChanged(int value); void on_clipNormalY_valueChanged(int value);
+    void on_clipOriginZ_valueChanged(int value); void on_clipNormalZ_valueChanged(int value);
+    // ------------------------------------------------
 
 
-// signals for mainWindow to receive
+// SIGNALS to the MainWindow
 signals:
-    void sendClipOriginX(int value);
+    // --------------Clip Filter---------------
+    void sendClipOriginX(int value); void sendClipNormalX(int value);
+    void sendClipOriginY(int value); void sendClipNormalY(int value);
+    void sendClipOriginZ(int value); void sendClipNormalZ(int value);
+    // -------------------------------------------
+
 
 private:
     Ui::optionsFilter *ui;

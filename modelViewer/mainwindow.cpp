@@ -110,8 +110,16 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     // SIGNAL(External window) connection to SLOTs(MainWindow)
-    connect(opFilterDialog, SIGNAL(sendClipOriginX(int)), this, SLOT(updateClipOriginX(int) ) );
 
+    // --------------------Clip Filter--------------------
+    connect(opFilterDialog, SIGNAL(sendClipOriginX(int)), this, SLOT(updateClipOriginX(int) ) );
+    connect(opFilterDialog, SIGNAL(sendClipOriginY(int)), this, SLOT(updateClipOriginY(int) ) );
+    connect(opFilterDialog, SIGNAL(sendClipOriginZ(int)), this, SLOT(updateClipOriginZ(int) ) );
+
+    connect(opFilterDialog, SIGNAL(sendClipNormalX(int)), this, SLOT(updateClipNormalX(int) ) );
+    connect(opFilterDialog, SIGNAL(sendClipNormalY(int)), this, SLOT(updateClipNormalY(int) ) );
+    connect(opFilterDialog, SIGNAL(sendClipNormalZ(int)), this, SLOT(updateClipNormalZ(int) ) );
+    //--------------------Clip Filter---------------------------------
     // start up
     renderer->RemoveAllViewProps();
 
@@ -146,21 +154,21 @@ void MainWindow::on_editFilters_clicked()
 
 void MainWindow::updateClipOriginX(int value)
 {
-  float newValue = value/10;
+  double newValue = value/10;
   clipOriginX = newValue;
   updateFilters();
 }
 
 void MainWindow::updateClipOriginY(int value)
 {
-  float newValue = value/10;
+  double newValue = value/10;
   clipOriginY = newValue;
   updateFilters();
 }
 
 void MainWindow::updateClipOriginZ(int value)
 {
-  float newValue = value/10;
+  double newValue = value/10;
   clipOriginZ = newValue;
   updateFilters();
 
@@ -168,21 +176,22 @@ void MainWindow::updateClipOriginZ(int value)
 
 void MainWindow::updateClipNormalX(int value)
 {
-  float newValue = value/10;
-  clipNormalX = newValue;
+  //double newValue = value/10;
+  clipNormalX = value;
+  std::cout<< clipNormalX<< endl;
   updateFilters();
 }
 
 void MainWindow::updateClipNormalY(int value)
 {
-  float newValue = value/10;
-  clipNormalY = newValue;
+  //double newValue = value/10;
+  clipNormalY = value;
   updateFilters();
 }
 void MainWindow::updateClipNormalZ(int value)
 {
-  float newValue = value/10;
-  clipNormalZ = newValue;
+  //double newValue = value/10;
+  clipNormalZ = value;
   updateFilters();
 }
 
@@ -227,7 +236,7 @@ void MainWindow::updateFilters()
     // this will apply a clipping plane whose normal is the x-axis that crosses the x-axis at x=0
     vtkSmartPointer<vtkPlane> planeLeft = vtkSmartPointer<vtkPlane>::New();
     planeLeft->SetOrigin(clipOriginX, clipOriginY, clipOriginZ);
-    planeLeft->SetNormal(clipNormalX, clipOriginY, clipNormalZ);
+    planeLeft->SetNormal(clipNormalX, clipNormalY, clipNormalZ);
 
     vtkSmartPointer<vtkClipDataSet> vtkClipFilter
                         = vtkSmartPointer<vtkClipDataSet>::New();
@@ -266,6 +275,8 @@ void MainWindow::updateFilters()
     renderer->AddActor(actor);
     renderWindow->Render();
   }
+
+  renderWindow->Render();
 
 }
 
@@ -508,7 +519,7 @@ void MainWindow::actionOpen()
   //                vtkSmartPointer<vtkActor>::New();
   actor->SetMapper(mapper);
 
-  colors = vtkSmartPointer<vtkNamedColors>::New();
+  //colors = vtkSmartPointer<vtkNamedColors>::New();
 
   ///for light intensity//
   vtkSmartPointer<vtkLight> light =
@@ -518,6 +529,7 @@ void MainWindow::actionOpen()
 
   // create a copy of the current source to be used with filters if necessary
   source = actor->GetMapper()->GetInputConnection(0, 0)->GetProducer();
+  currentModel = actor->GetMapper()->GetInputConnection(0, 0)->GetProducer();
 
   // Setup the renderers's camera
   renderer->ResetCamera();

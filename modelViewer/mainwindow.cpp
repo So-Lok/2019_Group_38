@@ -72,6 +72,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    opFilterDialog = new optionsFilter(this);
+    
     // note that qvtkWidget is the object name of the QtVTKOpenGLWidget
     ui->qvtkWidget->SetRenderWindow( renderWindow );
     renderer = vtkSmartPointer<vtkRenderer>::New();
@@ -103,7 +106,10 @@ MainWindow::MainWindow(QWidget *parent) :
     // Tool bar actions/button
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::actionOpen);
     connect(ui->widgetBox, &QAction::toggled, this, &MainWindow::widgetBox);
-
+    std::cout<<"hi";
+    // connect to signals from other windows
+    connect(opFilterDialog, SIGNAL(sendClipOriginX(int)), this, SLOT(updateFilterParams(int) ) );
+    std::cout<<"hello";
     // start up
     renderer->RemoveAllViewProps();
 
@@ -128,11 +134,17 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-
+/**
+* @function
+*/
 void MainWindow::on_editFilters_clicked()
 {
-  opFilterDialog = new optionsFilter(this);
   opFilterDialog->show();
+}
+
+void MainWindow::updateFilterParams(int value)
+{
+  cout << "signal received";
 }
 
 
@@ -175,8 +187,8 @@ void MainWindow::updateFilters()
   {
     // this will apply a clipping plane whose normal is the x-axis that crosses the x-axis at x=0
     vtkSmartPointer<vtkPlane> planeLeft = vtkSmartPointer<vtkPlane>::New();
-    planeLeft->SetOrigin(0.0, 0.0, 0.0);
-    planeLeft->SetNormal(-1.0, 0.0, 0.0);
+    planeLeft->SetOrigin(0.0, 0.1, 0.3);
+    planeLeft->SetNormal(-1, -1, 0.0);
 
     vtkSmartPointer<vtkClipDataSet> vtkClipFilter
                         = vtkSmartPointer<vtkClipDataSet>::New();
@@ -512,7 +524,8 @@ void MainWindow::handleBackgroundColor()
 */
 void MainWindow::closeEvent (QCloseEvent *event)
 {
-  interactor->TerminateApp();
+  if(ui->checkBox->isChecked())
+    interactor->TerminateApp();
 }
 
 

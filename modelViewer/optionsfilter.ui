@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>optionsFilter</class>
  <widget class="QDialog" name="optionsFilter">
@@ -5,13 +6,92 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>612</width>
+    <height>465</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <widget class="QSlider" name="clipOriginX">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>50</y>
+     <width>160</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="minimum">
+    <number>-5</number>
+   </property>
+   <property name="maximum">
+    <number>5</number>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QSlider" name="clipOriginY">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>100</y>
+     <width>160</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="minimum">
+    <number>-5</number>
+   </property>
+   <property name="maximum">
+    <number>5</number>
+   </property>
+   <property name="sliderPosition">
+    <number>0</number>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QSlider" name="clipOriginZ">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>150</y>
+     <width>160</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="minimum">
+    <number>-5</number>
+   </property>
+   <property name="maximum">
+    <number>5</number>
+   </property>
+   <property name="value">
+    <number>0</number>
+   </property>
+   <property name="sliderPosition">
+    <number>0</number>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QLabel" name="clipOrigin">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>20</y>
+     <width>51</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Clip Origin</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

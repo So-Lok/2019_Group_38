@@ -31,6 +31,7 @@
 
 
 
+
 namespace Ui {
 class MainWindow;
 }
@@ -67,6 +68,7 @@ private slots:
 
     // Advanced filter options
     void on_editFilters_clicked();
+    void updateFilterParams(int value);
 
 private:
     Ui::MainWindow* ui;
@@ -76,6 +78,11 @@ private:
     // filter boolean
     bool applyClip;
     bool applyShrink;
+
+    // filter parameters
+     float clipOriginX = 0.0;  float clipNormalX = 0.0;
+     float clipOriginY = 0.0;  float clipNormalY = 0.0;
+     float clipOriginZ = 0.0;  float clipNormalZ = 0.0;
 
     // vtkSmartPointer definitions
 

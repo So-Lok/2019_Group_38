@@ -15,6 +15,15 @@ public:
     explicit optionsFilter(QWidget *parent = nullptr);
     ~optionsFilter();
 
+    //void getSliderValue();
+private slots:
+    void on_clipOriginX_valueChanged(int value);
+
+
+// signals for mainWindow to receive
+signals:
+    void sendClipOriginX(int value);
+
 private:
     Ui::optionsFilter *ui;
 };

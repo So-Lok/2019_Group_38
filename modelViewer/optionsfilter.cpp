@@ -59,3 +59,9 @@ void optionsFilter::on_clipNormalZ_valueChanged(int value)
 }
 
 // ----------------------------Clip Filter--------------------------------
+
+void optionsFilter::on_shrinkFactor_valueChanged(int value)
+{
+    ui->shrinkFactor->setValue(value);
+    emit sendShrinkFactor(value);
+}

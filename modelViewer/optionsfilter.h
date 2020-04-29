@@ -23,6 +23,9 @@ private slots:
     void on_clipOriginZ_valueChanged(int value); void on_clipNormalZ_valueChanged(int value);
     // ------------------------------------------------
 
+    // -------shrink filter------
+    void on_shrinkFactor_valueChanged(int value);
+    //---------------------------
 
 // SIGNALS to the MainWindow
 signals:
@@ -31,7 +34,9 @@ signals:
     void sendClipOriginY(int value); void sendClipNormalY(int value);
     void sendClipOriginZ(int value); void sendClipNormalZ(int value);
     // -------------------------------------------
-
+    // ------------shrink filter ------
+    void sendShrinkFactor(int value);
+    //-------------------------
 
 private:
     Ui::optionsFilter *ui;

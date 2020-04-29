@@ -99,10 +99,12 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->cubeButton, &QPushButton::released, this, &MainWindow::handleCube);
     connect(ui->pyramidButton, &QPushButton::released, this, &MainWindow::handlePyrmaid);
     connect(ui->cameraReset, &QPushButton::released, this, &MainWindow::handleResetView);
-    connect(ui->clipFilter, &QCheckBox::released, this, &MainWindow::updateFilters);
-    connect(ui->shrinkFilter, &QCheckBox::released, this, &MainWindow::updateFilters);
     connect(ui->ObjectColor, &QPushButton::released, this, &MainWindow::handleObjectColor);
     connect(ui->BackgroundColor, &QPushButton::released, this, &MainWindow::handleBackgroundColor);
+
+    // --------- Filters--------------
+    connect(ui->clipFilter, &QCheckBox::released, this, &MainWindow::handleClip);
+    connect(ui->shrinkFilter, &QCheckBox::released, this, &MainWindow::handleShrink);
 
     // Tool bar actions/button
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::actionOpen);
@@ -120,6 +122,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(opFilterDialog, SIGNAL(sendClipNormalY(int)), this, SLOT(updateClipNormalY(int) ) );
     connect(opFilterDialog, SIGNAL(sendClipNormalZ(int)), this, SLOT(updateClipNormalZ(int) ) );
     //--------------------Clip Filter---------------------------------
+    // shrink filter
+    connect(opFilterDialog, SIGNAL(sendShrinkFactor(int)), this, SLOT(updateShrinkFactor(int) ) );
+
+
+
     // start up
     renderer->RemoveAllViewProps();
 
@@ -156,82 +163,56 @@ void MainWindow::updateClipOriginX(int value)
 {
   double newValue = value/10;
   clipOriginX = newValue;
-  updateFilters();
+  handleClip();
 }
 
 void MainWindow::updateClipOriginY(int value)
 {
   double newValue = value/10;
   clipOriginY = newValue;
-  updateFilters();
+  handleClip();
 }
 
 void MainWindow::updateClipOriginZ(int value)
 {
   double newValue = value/10;
   clipOriginZ = newValue;
-  updateFilters();
+  handleClip();
 
 }
 
 void MainWindow::updateClipNormalX(int value)
 {
-  //double newValue = value/10;
   clipNormalX = value;
-  std::cout<< clipNormalX<< endl;
-  updateFilters();
+  handleClip();
 }
 
 void MainWindow::updateClipNormalY(int value)
 {
-  //double newValue = value/10;
   clipNormalY = value;
-  updateFilters();
+  handleClip();
 }
 void MainWindow::updateClipNormalZ(int value)
 {
-  //double newValue = value/10;
   clipNormalZ = value;
-  updateFilters();
+  handleClip();
 }
 
-
-// function for updating render with filters
-/**
-* @function Updates the render with any filters selected.
-*
-* Removes all filters and reapplies then if they have been checked
-**/
-
-void MainWindow::updateFilters()
+void MainWindow::updateShrinkFactor(int value)
 {
+//  std::cout<<"in update"<<endl;
+  shrinkFactor = double(value);
+  shrinkFactor = shrinkFactor/100;
+  handleShrink();
+
+}
+
+void MainWindow::handleClip()
+{
+  // uncheck all other Filters
+  ui->shrinkFilter->setChecked(false);
+
   if(ui->clipFilter->isChecked()==true)
-      applyClip = true;
-  else if(ui->clipFilter->isChecked()==false)
-      applyClip = false;
-
-  if(ui->shrinkFilter->isChecked()==true)
-      applyShrink = true;
-  else if(ui->shrinkFilter->isChecked()==false)
-      applyShrink = false;
-
-  // reset everything if one of the the filters is unchecked
-  if(applyClip == false || applyShrink == false)
-  {
-    mapper->SetInputConnection(source->GetOutputPort() );
-
-    //actor = vtkSmartPointer<vtkActor>::New();
-
-    actor->SetMapper(mapper);
-
-    renderer->RemoveAllViewProps();
-    renderer->AddActor(actor);
-    //renderWindow->Render();
-  }
-
-
-  // Apply all filters which have been checked
-  if(applyClip == true)
   {
     // this will apply a clipping plane whose normal is the x-axis that crosses the x-axis at x=0
     vtkSmartPointer<vtkPlane> planeLeft = vtkSmartPointer<vtkPlane>::New();
@@ -242,53 +223,86 @@ void MainWindow::updateFilters()
                         = vtkSmartPointer<vtkClipDataSet>::New();
     // gets the output of the current using the vtkalgorithm created
     // in each model viewer function
-    vtkClipFilter->SetInputConnection(actor->GetMapper()->GetInputConnection(0, 0)->GetProducer()->GetOutputPort() );
+  //  vtkClipFilter->SetInputConnection(actor->GetMapper()->GetInputConnection(0, 0)->GetProducer()->GetOutputPort() );
+    vtkClipFilter->SetInputConnection(source->GetOutputPort() );
     // could change source to actor->GetMapper()->GetInputConnection(0, 0)->GetProducer()
     // however becuase it is the inital filter it isn't exactly necessary
 
     vtkClipFilter->SetClipFunction( planeLeft.Get() );
 
     mapper->SetInputConnection(vtkClipFilter->GetOutputPort() );
-
-    //actor = vtkSmartPointer<vtkActor>::New();
-
     actor->SetMapper(mapper);
 
     renderer->RemoveAllViewProps();
     renderer->AddActor(actor);
     renderWindow->Render();
   }
-
-  if(applyShrink == true)
+  else if(ui->clipFilter->isChecked()==false)
   {
-    vtkSmartPointer<vtkShrinkFilter> shrinkFilter
-                    = vtkSmartPointer<vtkShrinkFilter>::New();
-    shrinkFilter->SetInputConnection(actor->GetMapper()->GetInputConnection(0, 0)->GetProducer()->GetOutputPort() );
-    shrinkFilter->SetShrinkFactor(.8);
-    shrinkFilter->Update();
-
-    mapper->SetInputConnection(shrinkFilter->GetOutputPort() );
-
+    mapper->SetInputConnection(source->GetOutputPort() );
     actor->SetMapper(mapper);
 
     renderer->RemoveAllViewProps();
     renderer->AddActor(actor);
     renderWindow->Render();
+
   }
 
-  renderWindow->Render();
+
 
 }
 
+void MainWindow::handleShrink()
+{
+  // uncheck all other Filters
+  ui->clipFilter->setChecked(false);
 
+  if(ui->shrinkFilter->isChecked()==true)
+  {
+    vtkSmartPointer<vtkShrinkFilter> shrinkFilter
+                    = vtkSmartPointer<vtkShrinkFilter>::New();
+    shrinkFilter->SetInputConnection(source->GetOutputPort() );
+    shrinkFilter->SetShrinkFactor(shrinkFactor);
+    shrinkFilter->Update();
+
+    mapper->SetInputConnection(shrinkFilter->GetOutputPort() );
+    actor->SetMapper(mapper);
+
+    renderer->RemoveAllViewProps();
+    renderer->AddActor(actor);
+    renderWindow->Render();
+  }
+  else if(ui->shrinkFilter->isChecked()==false)
+  {
+    mapper->SetInputConnection(source->GetOutputPort() );
+    actor->SetMapper(mapper);
+
+    renderer->RemoveAllViewProps();
+    renderer->AddActor(actor);
+    renderWindow->Render();
+
+  }
+}
+
+void MainWindow::resetFilter()
+{
+  // uncheck all filters
+  ui->clipFilter->setChecked(false);
+  ui->shrinkFilter->setChecked(false);
+
+  mapper->SetInputConnection(source->GetOutputPort() );
+  actor->SetMapper(mapper);
+
+  renderer->RemoveAllViewProps();
+  renderer->AddActor(actor);
+  renderWindow->Render();
+}
 
 
 
 // Resets the of the model, both zoom and rotation of the model
 // to  a default which can be set
-/**
-* @function resets the camera of the render window so that the model is on screen
-**/
+
 void MainWindow::handleResetView()
 
 {
@@ -391,7 +405,7 @@ void MainWindow::handlePyrmaid()
   // render the pyramid as soon as button is pushed
   renderWindow->Render();
 
-  updateFilters();
+  //updateFilters();
 }
 
 void MainWindow::handleCube()
@@ -429,7 +443,7 @@ void MainWindow::handleCube()
 
   renderWindow->Render();
 
-  updateFilters();
+  //updateFilters();
 
 }
 
@@ -538,11 +552,9 @@ void MainWindow::actionOpen()
   renderer->ResetCameraClippingRange();
 
   // Render the new model straight away
-  renderWindow->Render();
+  //renderWindow->Render();
 
-
-
-  updateFilters();
+  resetFilter();
 }
 
 
@@ -577,6 +589,7 @@ void MainWindow::handleBackgroundColor()
 */
 void MainWindow::closeEvent (QCloseEvent *event)
 {
+  // checckBox is for box widget
   if(ui->checkBox->isChecked())
     interactor->TerminateApp();
 }

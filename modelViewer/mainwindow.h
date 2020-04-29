@@ -48,6 +48,7 @@ private slots:
     void handleResetView();
     // display/render function, for use of filters.
     void updateFilters();
+
     //object color////
     void handleObjectColor();
     //Background color //
@@ -76,14 +77,12 @@ private:
     vtkSmartPointer<vtkCamera> camera;
     // to store a copy of the current sourrce
     vtkSmartPointer<vtkAlgorithm> source;
+
     //color
     vtkSmartPointer<vtkNamedColors> colors;
     //light
     vtkSmartPointer<vtkLight> light;
 
-
-   
-};
 
 
 

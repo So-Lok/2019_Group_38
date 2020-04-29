@@ -62,6 +62,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include "model.h"
+
 
 /**
  *
@@ -498,63 +500,91 @@ void MainWindow::actionOpen()
 {
   // open file explorer
 
-  QString fileName = QFileDialog::getOpenFileName(this, tr("Open STL File"),
+  QString fileName = QFileDialog::getOpenFileName(this, tr("Open Model File"),
     "C:/",
-  tr("STL Files (*.stl)"));
-
-  // set file up with a reader
-  std::string inputFilename = fileName.toLocal8Bit().constData();
-  //std::string inputFilename = fileName;
-
-  if(ui->widgetBox->isChecked() )
+  tr("Model Files (*.stl *.mod)"));
+  // check if stl or if mod
+  if(fileName.endsWith(".stl", Qt::CaseSensitive) )
   {
-    ui->widgetBox->toggle();
-    boxWidget->Off();
-    interactor->TerminateApp();
+    // convert to cpp string
+    std::string inputFilename = fileName.toLocal8Bit().constData();
+
+    if(ui->widgetBox->isChecked() )
+    {
+      ui->widgetBox->toggle();
+      boxWidget->Off();
+      interactor->TerminateApp();
+    }
+
+    vtkSmartPointer<vtkSTLReader> reader =
+                    vtkSmartPointer<vtkSTLReader>::New();
+
+    reader->SetFileName(inputFilename.c_str());
+    reader->Update();
+
+    // clear props in old renderer
+
+    renderer->RemoveAllViewProps();
+
+    // visualise the stl
+    // private variable mapper for DataSetMappper
+    vtkSmartPointer<vtkPolyDataMapper> polyMapper
+                                = vtkSmartPointer<vtkPolyDataMapper>::New();
+    mapper->SetInputConnection(reader->GetOutputPort());
+    actor->SetMapper(mapper);
+
+    ///for light intensity//
+    //vtkSmartPointer<vtkLight> light =
+    //    vtkSmartPointer<vtkLight>::New();
+
+    renderer->AddActor(actor);
+
+    // create a copy of the current source to be used with filters if necessary
+    source = actor->GetMapper()->GetInputConnection(0, 0)->GetProducer();
+    //currentModel = actor->GetMapper()->GetInputConnection(0, 0)->GetProducer();
+    // Setup the renderers's camera
+    renderer->ResetCamera();
+    renderer->GetActiveCamera()->Azimuth(30);
+    renderer->GetActiveCamera()->Elevation(30);
+    renderer->ResetCameraClippingRange();
+
+    resetFilter();
   }
 
-  vtkSmartPointer<vtkSTLReader> reader =
-                  vtkSmartPointer<vtkSTLReader>::New();
+  if(fileName.endsWith(".mod", Qt::CaseSensitive) )
+  {
+  //  std::cout<<"yeet1";
+    // convert to cpp string
+    std::string inputFilename = fileName.toLocal8Bit().constData();
 
-  reader->SetFileName(inputFilename.c_str());
-  reader->Update();
+    if(ui->widgetBox->isChecked() )
+    {
+      ui->widgetBox->toggle();
+      boxWidget->Off();
+      interactor->TerminateApp();
+    }
 
-  // clear props in old renderer
+    // create a model file for reading
+    model readModFile;
+    // input file name to model
+    readModFile.readFile(inputFilename.c_str());
+  //  std::cout<<"yeet";
 
-  renderer->RemoveAllViewProps();
+    readModFile.dispNumberOfCellsAndType();
+    readModFile.dispVectorList();
+    readModFile.dispCells();
 
-  // visualise the stl
-  // private variable mapper for DataSetMappper
-  vtkSmartPointer<vtkPolyDataMapper> polyMapper
-                              = vtkSmartPointer<vtkPolyDataMapper>::New();
-  mapper->SetInputConnection(reader->GetOutputPort());
 
-//  vtkSmartPointer<vtkActor> actor =
-  //                vtkSmartPointer<vtkActor>::New();
-  actor->SetMapper(mapper);
 
-  //colors = vtkSmartPointer<vtkNamedColors>::New();
 
-  ///for light intensity//
-  vtkSmartPointer<vtkLight> light =
-      vtkSmartPointer<vtkLight>::New();
+  }
+  // set file up with a reader
+//  std::string inputFilename = fileName.toLocal8Bit().constData();
+  //std::string inputFilename = fileName;
 
-  renderer->AddActor(actor);
 
-  // create a copy of the current source to be used with filters if necessary
-  source = actor->GetMapper()->GetInputConnection(0, 0)->GetProducer();
-  currentModel = actor->GetMapper()->GetInputConnection(0, 0)->GetProducer();
 
-  // Setup the renderers's camera
-  renderer->ResetCamera();
-  renderer->GetActiveCamera()->Azimuth(30);
-  renderer->GetActiveCamera()->Elevation(30);
-  renderer->ResetCameraClippingRange();
 
-  // Render the new model straight away
-  //renderWindow->Render();
-
-  resetFilter();
 }
 
 

@@ -31,6 +31,14 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+
+   
+private slots:
+
+    void on_Slider_sliderMoved(int position);
+    void on_checkBox_clicked(bool checked);
+    void on_EdgeCheckBox_toggled(bool checked);
+
     //shape buttons
     void handleCube();
     void handlePyrmaid();
@@ -45,9 +53,7 @@ public:
     //Background color //
     void handleBackgroundColor();
   
-private slots:
-    void on_Slider_sliderMoved(int position);
-    void on_checkBox_clicked(bool checked);
+
  
 private:
     Ui::MainWindow* ui;

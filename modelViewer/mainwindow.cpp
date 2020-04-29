@@ -84,9 +84,10 @@ MainWindow::MainWindow(QWidget *parent) :
     //no need to tell widget to render and start the interaction, qt does this
 
     actor = vtkSmartPointer<vtkActor>::New();
+    actor->GetProperty()->EdgeVisibilityOn();
 
     //create a light 
-    light = vtkSmartPointer<vtkLight>::New();
+  
 
     // Define icon Files
     // file is determined by where you run the exe from
@@ -119,6 +120,8 @@ MainWindow::MainWindow(QWidget *parent) :
     light->SetSpecularColor(1, 1, 1);
     light->SetIntensity(0.5);
 
+    // Add the actor to the scene
+    renderer->AddLight(light);
 
 }
 
@@ -277,10 +280,6 @@ void MainWindow::handlePyrmaid()
   vtkSmartPointer<vtkNamedColors> colors =
                   vtkSmartPointer<vtkNamedColors>::New();
 
-  //light intensity
-  vtkSmartPointer<vtkLight> light =
-      vtkSmartPointer<vtkLight>::New();
-
   //vtkSmartPointer<vtkDataSetMapper>
   mapper = vtkSmartPointer<vtkDataSetMapper>::New();
   mapper->SetInputData(ug);
@@ -344,10 +343,7 @@ void MainWindow::handleCube()
   vtkSmartPointer<vtkNamedColors> colors =
                   vtkSmartPointer<vtkNamedColors>::New();
 
-  //light intensity 
 
-  vtkSmartPointer<vtkLight> light =
-      vtkSmartPointer<vtkLight>::New();
   // colour of the object
   actor->GetProperty()->SetColor( colors->GetColor3d("Magenta").GetData() );
 
@@ -418,9 +414,7 @@ void MainWindow::actionOpen()
   vtkSmartPointer<vtkNamedColors> colors =
                   vtkSmartPointer<vtkNamedColors>::New();
 
-  ///for light intensity//
-  vtkSmartPointer<vtkLight> light =
-      vtkSmartPointer<vtkLight>::New();
+
 
   renderer->AddActor(actor);
   renderer->SetBackground( colors->GetColor3d("Silver").GetData()); // Background color green
@@ -474,7 +468,7 @@ void MainWindow::on_Slider_sliderMoved(int position)
     else {
         light->SetIntensity(0.5);
     }
-    renderer->AddLight(light);
+    
     ui->qvtkWidget->GetRenderWindow()->Render();
     
 
@@ -490,8 +484,24 @@ void MainWindow::on_checkBox_clicked(bool checked)
         light->SetIntensity(0.5);
     }
 
-    renderer->AddLight(light);
+    
     ui->qvtkWidget->GetRenderWindow()->Render();
 }
+
+//function to see the edge of the object
+void MainWindow::on_EdgeCheckBox_toggled(bool checked)
+{
+
+    if (checked)
+    {
+        actor->GetProperty()->SetRepresentationToWireframe();
+    }
+    else
+    {
+        actor->GetProperty()->SetRepresentationToSurface();
+    }
+    ui->qvtkWidget->GetRenderWindow()->Render();
+}
+
 
 

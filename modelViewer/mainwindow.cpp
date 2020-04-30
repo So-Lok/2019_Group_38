@@ -51,7 +51,6 @@
 // Box widget
 #include <vtkInteractorStyleTrackballCamera.h>
 
-
 // QT headers for opening a file
 
 //#include <QMessageBox>
@@ -62,13 +61,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-//Distance widget
-#include <vtkRenderWindow.h>
-#include <vtkRenderer.h>
-#include <vtkRenderWindowInteractor.h>
-#include <vtkSmartPointer.h>
-#include <vtkDistanceWidget.h>
-#include <vtkDistanceRepresentation.h>
+#include "model.h"
 
 
 /**
@@ -80,6 +73,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    // Initialise additional windows
+    opFilterDialog = new optionsFilter(this);
+
     // note that qvtkWidget is the object name of the QtVTKOpenGLWidget
     ui->qvtkWidget->SetRenderWindow( renderWindow );
     renderer = vtkSmartPointer<vtkRenderer>::New();
@@ -87,6 +83,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->qvtkWidget->GetRenderWindow()->AddRenderer(renderer);
     actor = vtkSmartPointer<vtkActor>::New();
     mapper = vtkSmartPointer<vtkDataSetMapper>::New();
+    //source = actor->GetMapper()->GetInputConnection(0, 0)->GetProducer();
 
     // initialisation for features
     light = vtkSmartPointer<vtkLight>::New();
@@ -103,15 +100,36 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->cubeButton, &QPushButton::released, this, &MainWindow::handleCube);
     connect(ui->pyramidButton, &QPushButton::released, this, &MainWindow::handlePyrmaid);
     connect(ui->cameraReset, &QPushButton::released, this, &MainWindow::handleResetView);
-    connect(ui->clipFilter, &QCheckBox::released, this, &MainWindow::updateFilters);
-    connect(ui->shrinkFilter, &QCheckBox::released, this, &MainWindow::updateFilters);
     connect(ui->ObjectColor, &QPushButton::released, this, &MainWindow::handleObjectColor);
     connect(ui->BackgroundColor, &QPushButton::released, this, &MainWindow::handleBackgroundColor);
-    connect(ui->distWid, &QCheckBox::released, this, &MainWindow::updatedistWid);
+
+    // --------- Filters--------------
+    connect(ui->clipFilter, &QCheckBox::released, this, &MainWindow::handleClip);
+    connect(ui->shrinkFilter, &QCheckBox::released, this, &MainWindow::handleShrink);
 
     // Tool bar actions/button
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::actionOpen);
     connect(ui->widgetBox, &QAction::toggled, this, &MainWindow::widgetBox);
+
+    // Distance widget
+    connect(ui->distWid, &QCheckBox::released, this, &MainWindow::updatedistWid);
+
+
+    // SIGNAL(External window) connection to SLOTs(MainWindow)
+
+    // --------------------Clip Filter--------------------
+    connect(opFilterDialog, SIGNAL(sendClipOriginX(int)), this, SLOT(updateClipOriginX(int) ) );
+    connect(opFilterDialog, SIGNAL(sendClipOriginY(int)), this, SLOT(updateClipOriginY(int) ) );
+    connect(opFilterDialog, SIGNAL(sendClipOriginZ(int)), this, SLOT(updateClipOriginZ(int) ) );
+
+    connect(opFilterDialog, SIGNAL(sendClipNormalX(int)), this, SLOT(updateClipNormalX(int) ) );
+    connect(opFilterDialog, SIGNAL(sendClipNormalY(int)), this, SLOT(updateClipNormalY(int) ) );
+    connect(opFilterDialog, SIGNAL(sendClipNormalZ(int)), this, SLOT(updateClipNormalZ(int) ) );
+    //--------------------Clip Filter---------------------------------
+    // shrink filter
+    connect(opFilterDialog, SIGNAL(sendShrinkFactor(int)), this, SLOT(updateShrinkFactor(int) ) );
+
+
 
     // start up
     renderer->RemoveAllViewProps();
@@ -137,105 +155,158 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-
+/**
+* @function
+*/
 void MainWindow::on_editFilters_clicked()
 {
-  opFilterDialog = new optionsFilter(this);
   opFilterDialog->show();
 }
 
-
-// function for updating render with filters
-/**
-* @function Updates the render with any filters selected.
-*
-* Removes all filters and reapplies then if they have been checked
-**/
-
-void MainWindow::updateFilters()
+void MainWindow::updateClipOriginX(int value)
 {
+  double newValue = value/10;
+  clipOriginX = newValue;
+  handleClip();
+}
+
+void MainWindow::updateClipOriginY(int value)
+{
+  double newValue = value/10;
+  clipOriginY = newValue;
+  handleClip();
+}
+
+void MainWindow::updateClipOriginZ(int value)
+{
+  double newValue = value/10;
+  clipOriginZ = newValue;
+  handleClip();
+
+}
+
+void MainWindow::updateClipNormalX(int value)
+{
+  clipNormalX = value;
+  handleClip();
+}
+
+void MainWindow::updateClipNormalY(int value)
+{
+  clipNormalY = value;
+  handleClip();
+}
+void MainWindow::updateClipNormalZ(int value)
+{
+  clipNormalZ = value;
+  handleClip();
+}
+
+void MainWindow::updateShrinkFactor(int value)
+{
+//  std::cout<<"in update"<<endl;
+  shrinkFactor = double(value);
+  shrinkFactor = shrinkFactor/100;
+  handleShrink();
+
+}
+
+void MainWindow::handleClip()
+{
+  // uncheck all other Filters
+  ui->shrinkFilter->setChecked(false);
+
   if(ui->clipFilter->isChecked()==true)
-      applyClip = true;
-  else if(ui->clipFilter->isChecked()==false)
-      applyClip = false;
-
-  if(ui->shrinkFilter->isChecked()==true)
-      applyShrink = true;
-  else if(ui->shrinkFilter->isChecked()==false)
-      applyShrink = false;
-
-  // reset everything if one of the the filters is unchecked
-  if(applyClip == false || applyShrink == false)
-  {
-    mapper->SetInputConnection(source->GetOutputPort() );
-
-    //actor = vtkSmartPointer<vtkActor>::New();
-
-    actor->SetMapper(mapper);
-
-    renderer->RemoveAllViewProps();
-    renderer->AddActor(actor);
-    renderWindow->Render();
-  }
-
-
-  // Apply all filters which have been checked
-  if(applyClip == true)
   {
     // this will apply a clipping plane whose normal is the x-axis that crosses the x-axis at x=0
     vtkSmartPointer<vtkPlane> planeLeft = vtkSmartPointer<vtkPlane>::New();
-    planeLeft->SetOrigin(0.0, 0.0, 0.0);
-    planeLeft->SetNormal(-1.0, 0.0, 0.0);
+    planeLeft->SetOrigin(clipOriginX, clipOriginY, clipOriginZ);
+    planeLeft->SetNormal(clipNormalX, clipNormalY, clipNormalZ);
 
     vtkSmartPointer<vtkClipDataSet> vtkClipFilter
                         = vtkSmartPointer<vtkClipDataSet>::New();
     // gets the output of the current using the vtkalgorithm created
     // in each model viewer function
-    vtkClipFilter->SetInputConnection(actor->GetMapper()->GetInputConnection(0, 0)->GetProducer()->GetOutputPort() );
+  //  vtkClipFilter->SetInputConnection(actor->GetMapper()->GetInputConnection(0, 0)->GetProducer()->GetOutputPort() );
+    vtkClipFilter->SetInputConnection(source->GetOutputPort() );
     // could change source to actor->GetMapper()->GetInputConnection(0, 0)->GetProducer()
     // however becuase it is the inital filter it isn't exactly necessary
 
     vtkClipFilter->SetClipFunction( planeLeft.Get() );
 
     mapper->SetInputConnection(vtkClipFilter->GetOutputPort() );
-
-    //actor = vtkSmartPointer<vtkActor>::New();
-
     actor->SetMapper(mapper);
 
     renderer->RemoveAllViewProps();
     renderer->AddActor(actor);
     renderWindow->Render();
   }
-
-  if(applyShrink == true)
+  else if(ui->clipFilter->isChecked()==false)
   {
-    vtkSmartPointer<vtkShrinkFilter> shrinkFilter
-                    = vtkSmartPointer<vtkShrinkFilter>::New();
-    shrinkFilter->SetInputConnection(actor->GetMapper()->GetInputConnection(0, 0)->GetProducer()->GetOutputPort() );
-    shrinkFilter->SetShrinkFactor(.8);
-    shrinkFilter->Update();
-
-    mapper->SetInputConnection(shrinkFilter->GetOutputPort() );
-
+    mapper->SetInputConnection(source->GetOutputPort() );
     actor->SetMapper(mapper);
 
     renderer->RemoveAllViewProps();
     renderer->AddActor(actor);
     renderWindow->Render();
+
   }
+
+
 
 }
 
+void MainWindow::handleShrink()
+{
+  // uncheck all other Filters
+  ui->clipFilter->setChecked(false);
 
+  if(ui->shrinkFilter->isChecked()==true)
+  {
+    vtkSmartPointer<vtkShrinkFilter> shrinkFilter
+                    = vtkSmartPointer<vtkShrinkFilter>::New();
+    shrinkFilter->SetInputConnection(source->GetOutputPort() );
+    shrinkFilter->SetShrinkFactor(shrinkFactor);
+    shrinkFilter->Update();
+
+    mapper->SetInputConnection(shrinkFilter->GetOutputPort() );
+    actor->SetMapper(mapper);
+
+    renderer->RemoveAllViewProps();
+    renderer->AddActor(actor);
+    renderWindow->Render();
+  }
+  else if(ui->shrinkFilter->isChecked()==false)
+  {
+    mapper->SetInputConnection(source->GetOutputPort() );
+    actor->SetMapper(mapper);
+
+    renderer->RemoveAllViewProps();
+    renderer->AddActor(actor);
+    renderWindow->Render();
+
+  }
+}
+
+void MainWindow::resetFilter()
+{
+  // uncheck all filters
+  ui->clipFilter->setChecked(false);
+  ui->shrinkFilter->setChecked(false);
+
+  mapper->SetInputConnection(source->GetOutputPort() );
+  actor->SetMapper(mapper);
+
+  renderer->RemoveAllViewProps();
+  renderer->AddActor(actor);
+  renderWindow->Render();
+}
 
 
 
 // Resets the of the model, both zoom and rotation of the model
 // to  a default which can be set
-/**
-* @function resets the camera of the render window so that the model is on screen
-**/
+
 void MainWindow::handleResetView()
 
 {
@@ -338,7 +409,7 @@ void MainWindow::handlePyrmaid()
   // render the pyramid as soon as button is pushed
   renderWindow->Render();
 
-  updateFilters();
+  //updateFilters();
 }
 
 void MainWindow::handleCube()
@@ -374,7 +445,9 @@ void MainWindow::handleCube()
   //  renderer->GetActiveCamera()->Azimuth(30);
   //  renderer->GetActiveCamera()->Elevation(30);
 
-  updateFilters();
+  renderWindow->Render();
+
+  //updateFilters();
 
 }
 
@@ -429,64 +502,91 @@ void MainWindow::actionOpen()
 {
   // open file explorer
 
-  QString fileName = QFileDialog::getOpenFileName(this, tr("Open STL File"),
+  QString fileName = QFileDialog::getOpenFileName(this, tr("Open Model File"),
     "C:/",
-  tr("STL Files (*.stl)"));
-
-  // set file up with a reader
-  std::string inputFilename = fileName.toLocal8Bit().constData();
-  //std::string inputFilename = fileName;
-
-  if(ui->widgetBox->isChecked() )
+  tr("Model Files (*.stl *.mod)"));
+  // check if stl or if mod
+  if(fileName.endsWith(".stl", Qt::CaseSensitive) )
   {
-    ui->widgetBox->toggle();
-    boxWidget->Off();
-    interactor->TerminateApp();
+    // convert to cpp string
+    std::string inputFilename = fileName.toLocal8Bit().constData();
+
+    if(ui->widgetBox->isChecked() )
+    {
+      ui->widgetBox->toggle();
+      boxWidget->Off();
+      interactor->TerminateApp();
+    }
+
+    vtkSmartPointer<vtkSTLReader> reader =
+                    vtkSmartPointer<vtkSTLReader>::New();
+
+    reader->SetFileName(inputFilename.c_str());
+    reader->Update();
+
+    // clear props in old renderer
+
+    renderer->RemoveAllViewProps();
+
+    // visualise the stl
+    // private variable mapper for DataSetMappper
+    vtkSmartPointer<vtkPolyDataMapper> polyMapper
+                                = vtkSmartPointer<vtkPolyDataMapper>::New();
+    mapper->SetInputConnection(reader->GetOutputPort());
+    actor->SetMapper(mapper);
+
+    ///for light intensity//
+    //vtkSmartPointer<vtkLight> light =
+    //    vtkSmartPointer<vtkLight>::New();
+
+    renderer->AddActor(actor);
+
+    // create a copy of the current source to be used with filters if necessary
+    source = actor->GetMapper()->GetInputConnection(0, 0)->GetProducer();
+    //currentModel = actor->GetMapper()->GetInputConnection(0, 0)->GetProducer();
+    // Setup the renderers's camera
+    renderer->ResetCamera();
+    renderer->GetActiveCamera()->Azimuth(30);
+    renderer->GetActiveCamera()->Elevation(30);
+    renderer->ResetCameraClippingRange();
+
+    resetFilter();
   }
 
-  vtkSmartPointer<vtkSTLReader> reader =
-                  vtkSmartPointer<vtkSTLReader>::New();
+  if(fileName.endsWith(".mod", Qt::CaseSensitive) )
+  {
+  //  std::cout<<"yeet1";
+    // convert to cpp string
+    std::string inputFilename = fileName.toLocal8Bit().constData();
 
-  reader->SetFileName(inputFilename.c_str());
-  reader->Update();
+    if(ui->widgetBox->isChecked() )
+    {
+      ui->widgetBox->toggle();
+      boxWidget->Off();
+      interactor->TerminateApp();
+    }
 
-  // clear props in old renderer
+    // create a model file for reading
+    model readModFile;
+    // input file name to model
+    readModFile.readFile(inputFilename.c_str());
+  //  std::cout<<"yeet";
 
-  renderer->RemoveAllViewProps();
-
-  // visualise the stl
-  // private variable mapper for DataSetMappper
-  vtkSmartPointer<vtkPolyDataMapper> polyMapper
-                              = vtkSmartPointer<vtkPolyDataMapper>::New();
-  mapper->SetInputConnection(reader->GetOutputPort());
-
-//  vtkSmartPointer<vtkActor> actor =
-  //                vtkSmartPointer<vtkActor>::New();
-  actor->SetMapper(mapper);
-
-  colors = vtkSmartPointer<vtkNamedColors>::New();
-
-  ///for light intensity//
-  vtkSmartPointer<vtkLight> light =
-      vtkSmartPointer<vtkLight>::New();
-
-  renderer->AddActor(actor);
-
-  // create a copy of the current source to be used with filters if necessary
-  source = actor->GetMapper()->GetInputConnection(0, 0)->GetProducer();
-
-  // Setup the renderers's camera
-  renderer->ResetCamera();
-  renderer->GetActiveCamera()->Azimuth(30);
-  renderer->GetActiveCamera()->Elevation(30);
-  renderer->ResetCameraClippingRange();
-
-  // Render the new model straight away
-  renderWindow->Render();
+    readModFile.dispNumberOfCellsAndType();
+    readModFile.dispVectorList();
+    readModFile.dispCells();
 
 
 
-  updateFilters();
+
+  }
+  // set file up with a reader
+//  std::string inputFilename = fileName.toLocal8Bit().constData();
+  //std::string inputFilename = fileName;
+
+
+
+
 }
 
 
@@ -521,7 +621,9 @@ void MainWindow::handleBackgroundColor()
 */
 void MainWindow::closeEvent (QCloseEvent *event)
 {
-  interactor->TerminateApp();
+  // checckBox is for box widget
+  if(ui->checkBox->isChecked())
+    interactor->TerminateApp();
 }
 
 
@@ -541,7 +643,6 @@ void MainWindow::on_Slider_sliderMoved(int position)
 
 }
 
-//checked box before adjust the light intensity
 void MainWindow::on_checkBox_clicked(bool checked)
 {
     if (checked) {
@@ -555,41 +656,38 @@ void MainWindow::on_checkBox_clicked(bool checked)
     ui->qvtkWidget->GetRenderWindow()->Render();
 }
 
-void MainWindow::updatedistWid() 
+//Distance widget
+void MainWindow::updatedistWid()
 {
-    if (ui->distWid->isChecked() == true) 
+    //if  checkbox is checked
+    if (ui->distWid->isChecked() == true)
     {
         applydist = true;
     }
-    else if (ui->distWid->isChecked() == false) 
+    //if checkbox is not check
+    else if (ui->distWid->isChecked() == false)
     {
         applydist = false;
     }
-    if (applydist == false) 
+    //turnoff the measurement
+    if (applydist == false)
     {
-        
-       mapper->SetInputConnection(source->GetOutputPort());
-        
-       actor->SetMapper(mapper);
+
+        mapper->SetInputConnection(source->GetOutputPort());
+
+        actor->SetMapper(mapper);
 
         renderer->RemoveAllViewProps();
         renderer->AddActor(actor);
-        renderWindow->Render(); 
-       
-
-    }
-    
-    if (applydist == true) 
-    {
-        vtkSmartPointer<vtkRenderWindowInteractor> renderWindowInteractor = vtkSmartPointer<vtkRenderWindowInteractor>::New();
-        vtkSmartPointer<vtkDistanceWidget> distanceWidget = vtkSmartPointer<vtkDistanceWidget>::New();
-        renderWindowInteractor->SetRenderWindow(renderWindow);
-        distanceWidget->SetInteractor(renderWindowInteractor);
-        distanceWidget->CreateDefaultRepresentation();
-        static_cast<vtkDistanceRepresentation*>(distanceWidget->GetRepresentation())->SetLabelFormat("%-#6.3g mm");
-        renderWindowInteractor->Initialize();
         renderWindow->Render();
+    }
+    //turn on the mesurement
+    if (applydist == true)
+    {
+        distanceWidget = vtkSmartPointer<vtkDistanceWidget>::New();
+        distanceWidget->SetInteractor(ui->qvtkWidget->GetRenderWindow()->GetInteractor());
+        distanceWidget->CreateDefaultRepresentation();
         distanceWidget->On();
-        renderWindowInteractor->Start();
+        renderWindow->Render();
     }
 }

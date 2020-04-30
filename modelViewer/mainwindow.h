@@ -28,6 +28,22 @@
 // Additonal windows
 #include "optionsfilter.h"
 
+//Distance widget
+#include <vtkDistanceWidget.h>
+#include <vtkDistanceRepresentation.h>
+
+//Axis widget
+#include <vtkVersion.h>
+#include <vtkPolyDataMapper.h>
+#include <vtkActor.h>
+#include <vtkPolyData.h>
+#include <vtkSphereSource.h>
+#include <vtkOrientationMarkerWidget.h>
+#include <vtkAxesActor.h>
+#include <vtkPropAssembly.h>
+#include <vtkSmartPointer.h>
+
+
 
 
 
@@ -52,15 +68,25 @@ public:
     void widgetBox();
     void actionOpen();
     // model buttons
+
+    /**
+    * @function resets the camera of the render window so that the model is on screen
+    **/
     void handleResetView();
+
     // display/render function, for use of filters.
     void updateFilters();
+    void resetFilter();
+    // update filters will be changed as multiple filters cause problems
+    // will check which box is ticked and then call handle functions
+    void handleClip();
+    void handleShrink();
 
     //object color////
     void handleObjectColor();
     //Background color //
     void handleBackgroundColor();
-
+    
     //Distance widget
     void updatedistWid();
 
@@ -70,6 +96,16 @@ private slots:
 
     // Advanced filter options
     void on_editFilters_clicked();
+    //----------- Clip Filter--------------
+    void updateClipOriginX(int value); void updateClipNormalX(int value);
+    void updateClipOriginY(int value); void updateClipNormalY(int value);
+    void updateClipOriginZ(int value); void updateClipNormalZ(int value);
+    //-------------------------------------
+    //------------Shrink Filter--------
+    void updateShrinkFactor(int value);
+
+
+
 
 private:
     Ui::MainWindow* ui;
@@ -77,9 +113,18 @@ private:
     optionsFilter *opFilterDialog;
 
     // filter boolean
-    bool applyClip;
-    bool applyShrink;
-    bool applydist;
+  //  bool applyClip;
+  //  bool applyShrink;
+
+    // filter parameters
+    // ------------------Clip Filter------------
+     double clipOriginX = 0.0;  double clipNormalX = -1.0;
+     double clipOriginY = 0.0;  double clipNormalY = 0.0;
+     double clipOriginZ = 0.0;  double clipNormalZ = 0.0;
+     //----------------------
+     //-----------------Shrink Filter--------------
+     double shrinkFactor = 0.8;
+     //-----------------------------
 
     // vtkSmartPointer definitions
 
@@ -94,6 +139,7 @@ private:
     vtkSmartPointer<vtkCamera> camera;
     // to store a copy of the current sourrce
     vtkSmartPointer<vtkAlgorithm> source;
+    vtkSmartPointer<vtkAlgorithm> currentModel;
 
     //color
     vtkSmartPointer<vtkNamedColors> colors;
@@ -103,6 +149,16 @@ private:
     vtkSmartPointer<vtkBoxWidget> boxWidget;
     vtkSmartPointer<vtkRenderWindowInteractor> interactor;
 
+    //distance
+    vtkSmartPointer<vtkDistanceWidget> distanceWidget = vtkSmartPointer<vtkDistanceWidget>::New();
+
+    //Axis widget
+    vtkSmartPointer<vtkAxesActor> axes = vtkSmartPointer<vtkAxesActor>::New();
+    vtkSmartPointer<vtkOrientationMarkerWidget> orientationWidget = vtkSmartPointer<vtkOrientationMarkerWidget>::New();
+
+
+    //Distance bool
+    bool applydist;
 
 };
 

@@ -31,7 +31,7 @@
     <property name="geometry">
      <rect>
       <x>460</x>
-      <y>520</y>
+      <y>510</y>
       <width>111</width>
       <height>31</height>
      </rect>
@@ -185,10 +185,10 @@
    <widget class="QCheckBox" name="distWid">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>520</y>
+      <x>460</x>
+      <y>550</y>
       <width>111</width>
-      <height>21</height>
+      <height>20</height>
      </rect>
     </property>
     <property name="text">

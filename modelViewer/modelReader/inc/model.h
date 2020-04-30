@@ -48,6 +48,9 @@ public:
     void dispNumberOfVertices();
     int getNumberOfVertices();
 
+    // get functions
+    std::vector<vectorClass> getVectorList();
+    std::vector<cell> getCells();
 
 private:
 

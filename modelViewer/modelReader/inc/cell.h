@@ -45,6 +45,10 @@ public:
 
     int getCellId();
 
+    //sem2
+    std::vector<int> getThisCellVectorIdList();
+
+
     /* Set Functions */
 
     void setType(char newType);

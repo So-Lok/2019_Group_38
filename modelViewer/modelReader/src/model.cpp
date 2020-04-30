@@ -447,4 +447,14 @@ void model::calcOverallDimensions()
 
 }
 
+// sem2
+// get Functions
+std::vector<vectorClass> model::getVectorList()
+{
+  return vectorList;
+}
 
+std::vector<cell> model::getCells()
+{
+  return cells;
+}

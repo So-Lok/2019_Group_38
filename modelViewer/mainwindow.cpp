@@ -59,6 +59,9 @@
 #include <QFile>
 #include <QTextStream>
 
+// cpp headers
+#include <new>
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -211,11 +214,13 @@ void MainWindow::updateShrinkFactor(int value)
 
 void MainWindow::handleClip()
 {
-  // uncheck all other Filters
-  ui->shrinkFilter->setChecked(false);
+
 
   if(ui->clipFilter->isChecked()==true)
   {
+    // uncheck all other Filters
+    ui->shrinkFilter->setChecked(false);
+
     // this will apply a clipping plane whose normal is the x-axis that crosses the x-axis at x=0
     vtkSmartPointer<vtkPlane> planeLeft = vtkSmartPointer<vtkPlane>::New();
     planeLeft->SetOrigin(clipOriginX, clipOriginY, clipOriginZ);
@@ -256,11 +261,13 @@ void MainWindow::handleClip()
 
 void MainWindow::handleShrink()
 {
-  // uncheck all other Filters
-  ui->clipFilter->setChecked(false);
+
 
   if(ui->shrinkFilter->isChecked()==true)
   {
+    // uncheck all other Filters
+    ui->clipFilter->setChecked(false);
+
     vtkSmartPointer<vtkShrinkFilter> shrinkFilter
                     = vtkSmartPointer<vtkShrinkFilter>::New();
     shrinkFilter->SetInputConnection(source->GetOutputPort() );
@@ -568,16 +575,100 @@ void MainWindow::actionOpen()
     model readModFile;
     // input file name to model
     readModFile.readFile(inputFilename.c_str());
-  //  std::cout<<"yeet";
+    //  std::cout<<"yeet";
 
     readModFile.dispNumberOfCellsAndType();
     readModFile.dispVectorList();
     readModFile.dispCells();
 
+    vtkSmartPointer<vtkPoints> vertices =
+            vtkSmartPointer<vtkPoints>::New();
+    // inserting every vector in model to vtkpoints
+    for(int i = 0; i<readModFile.getVectorList().size(); i++) // get vectorlist.size works
+    {
+              //std::cout<<"hello";
+      //new double x[] = readModFile.getVectorList();
+      // readModFile.getVectorList.getxyz() works
+            //  std::cout<<readModFile.getVectorList()[i].getX();
+      vertices->InsertPoint(i, readModFile.getVectorList()[i].getX(),
+                               readModFile.getVectorList()[i].getY(),
+                               readModFile.getVectorList()[i].getZ() );
+    }
 
+    vtkSmartPointer<vtkUnstructuredGrid> ugrid =
+            vtkSmartPointer<vtkUnstructuredGrid>::New();
+    ugrid->Allocate(500);
+    // loop for every cell
+      // depending on cell type eg pyramid hex, tetra cube
+    for(int n = 0; n<readModFile.getCells().size(); n++)
+    {
+      // HEX
+      if(readModFile.getCells()[n].getType()=='h')
+      {
+        //int *vectorIds;
+        //vectorIds = new int[8];
+        static vtkIdType vectorIds[8];
+        // hexahedron has 8 points/vertices
+        // populate array with vector ids of the current cell
+        for(int j = 0; j<8; j++)
+        {
+          //float test = readModFile.getCells()[n].getThisCellVectorIdList()[j];
+          //std::cout<test;
 
+          vectorIds[j] = readModFile.getCells()[n].getThisCellVectorIdList()[j]; // success gets ids
+          std::cout<<vectorIds[j]<<"\n";
+        }
+        // inserts hex cells
+        ugrid->InsertNextCell(VTK_HEXAHEDRON, 8, vectorIds);
+
+      }
+      // TETRA
+      if(readModFile.getCells()[n].getType()=='t')
+      {
+        static vtkIdType vectorIds[4];
+        for(int j = 0; j<4; j++)
+        {
+          vectorIds[j] = readModFile.getCells()[n].getThisCellVectorIdList()[j];
+        }
+        ugrid->InsertNextCell(VTK_TETRA, 8, vectorIds);
+
+      }
+
+      // PYRAMID
+      if(readModFile.getCells()[n].getType()=='p')
+      {
+        static vtkIdType vectorIds[5];
+        for(int j = 0; j<5; j++)
+        {
+          vectorIds[j] = readModFile.getCells()[n].getThisCellVectorIdList()[j];
+        }
+        ugrid->InsertNextCell(VTK_PYRAMID, 5, vectorIds);
+
+      }
+
+    }
+
+    // map the model
+    ugrid->SetPoints(vertices);
+
+    mapper->SetInputData(ugrid);
+    actor->SetMapper(mapper);
+    renderer->AddActor(actor);
+
+    source = actor->GetMapper()->GetInputConnection(0, 0)->GetProducer();
+
+    renderer->ResetCamera();
+    renderer->GetActiveCamera()->Azimuth(30);
+    renderer->GetActiveCamera()->Elevation(30);
+    renderer->ResetCameraClippingRange();
+
+    resetFilter();
 
   }
+
+
+}
+
   // set file up with a reader
 //  std::string inputFilename = fileName.toLocal8Bit().constData();
   //std::string inputFilename = fileName;
@@ -585,7 +676,7 @@ void MainWindow::actionOpen()
 
 
 
-}
+
 
 
 //Change object color

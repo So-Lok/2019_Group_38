@@ -28,6 +28,9 @@
 // Additonal windows
 #include "optionsfilter.h"
 
+
+
+
 namespace Ui {
 class MainWindow;
 }
@@ -58,8 +61,8 @@ public:
     //Background color //
     void handleBackgroundColor();
 
-    //Distance Widget
-    void handledistWid();
+    //Distance widget
+    void updatedistWid();
 
 private slots:
     void on_Slider_sliderMoved(int position);
@@ -76,6 +79,7 @@ private:
     // filter boolean
     bool applyClip;
     bool applyShrink;
+    bool applydist;
 
     // vtkSmartPointer definitions
 
@@ -98,6 +102,8 @@ private:
 
     vtkSmartPointer<vtkBoxWidget> boxWidget;
     vtkSmartPointer<vtkRenderWindowInteractor> interactor;
+
+
 };
 
 // call back used for box widget

@@ -107,8 +107,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->shrinkFilter, &QCheckBox::released, this, &MainWindow::updateFilters);
     connect(ui->ObjectColor, &QPushButton::released, this, &MainWindow::handleObjectColor);
     connect(ui->BackgroundColor, &QPushButton::released, this, &MainWindow::handleBackgroundColor);
-    connect(ui->distWid, &QPushButton::released, this, &MainWindow::handledistWid);
-
+    connect(ui->distWid, &QCheckBox::released, this, &MainWindow::updatedistWid);
 
     // Tool bar actions/button
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::actionOpen);
@@ -555,35 +554,42 @@ void MainWindow::on_checkBox_clicked(bool checked)
     renderer->AddLight(light);
     ui->qvtkWidget->GetRenderWindow()->Render();
 }
-//Distance widget
-void MainWindow::handledistWid()
+
+void MainWindow::updatedistWid() 
 {
-    // A renderer and render window
-    vtkSmartPointer<vtkRenderer> renderer =
-        vtkSmartPointer<vtkRenderer>::New();
-    vtkSmartPointer<vtkRenderWindow> renderWindow =
-        vtkSmartPointer<vtkRenderWindow>::New();
-    renderWindow->AddRenderer(renderer);
+    if (ui->distWid->isChecked() == true) 
+    {
+        applydist = true;
+    }
+    else if (ui->distWid->isChecked() == false) 
+    {
+        applydist = false;
+    }
+    if (applydist == false) 
+    {
+        
+       mapper->SetInputConnection(source->GetOutputPort());
+        
+       actor->SetMapper(mapper);
 
-    // An interactor
-    vtkSmartPointer<vtkRenderWindowInteractor> renderWindowInteractor =
-        vtkSmartPointer<vtkRenderWindowInteractor>::New();
-    renderWindowInteractor->SetRenderWindow(renderWindow);
+        renderer->RemoveAllViewProps();
+        renderer->AddActor(actor);
+        renderWindow->Render(); 
+       
 
-    vtkSmartPointer<vtkDistanceWidget> distanceWidget =
-        vtkSmartPointer<vtkDistanceWidget>::New();
-    distanceWidget->SetInteractor(renderWindowInteractor);
-    distanceWidget->CreateDefaultRepresentation();
-    static_cast<vtkDistanceRepresentation*>(distanceWidget->GetRepresentation())
-        ->SetLabelFormat("%-#6.3g mm");
-
-    // Render an image (lights and cameras are created automatically)
-    renderWindow->Render();
-
-    renderWindowInteractor->Initialize();
-    renderWindow->Render();
-    distanceWidget->On();
-
-    // Begin mouse interaction
-    renderWindowInteractor->Start();
+    }
+    
+    if (applydist == true) 
+    {
+        vtkSmartPointer<vtkRenderWindowInteractor> renderWindowInteractor = vtkSmartPointer<vtkRenderWindowInteractor>::New();
+        vtkSmartPointer<vtkDistanceWidget> distanceWidget = vtkSmartPointer<vtkDistanceWidget>::New();
+        renderWindowInteractor->SetRenderWindow(renderWindow);
+        distanceWidget->SetInteractor(renderWindowInteractor);
+        distanceWidget->CreateDefaultRepresentation();
+        static_cast<vtkDistanceRepresentation*>(distanceWidget->GetRepresentation())->SetLabelFormat("%-#6.3g mm");
+        renderWindowInteractor->Initialize();
+        renderWindow->Render();
+        distanceWidget->On();
+        renderWindowInteractor->Start();
+    }
 }

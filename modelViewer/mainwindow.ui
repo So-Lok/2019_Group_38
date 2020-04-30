@@ -182,17 +182,17 @@
      <string>Edit Filters</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="distWid">
+   <widget class="QCheckBox" name="distWid">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>530</y>
-      <width>93</width>
-      <height>28</height>
+      <x>20</x>
+      <y>520</y>
+      <width>111</width>
+      <height>21</height>
      </rect>
     </property>
     <property name="text">
-     <string>Distance</string>
+     <string>Measurement</string>
     </property>
    </widget>
    <zorder>layoutWidget</zorder>

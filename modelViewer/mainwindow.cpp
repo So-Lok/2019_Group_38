@@ -101,8 +101,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //configuration for all QT interactions
     // Push buttons
-    connect(ui->cubeButton, &QPushButton::released, this, &MainWindow::handleCube);
-    connect(ui->pyramidButton, &QPushButton::released, this, &MainWindow::handlePyrmaid);
+  //  connect(ui->cubeButton, &QPushButton::released, this, &MainWindow::handleCube);
+//    connect(ui->pyramidButton, &QPushButton::released, this, &MainWindow::handlePyrmaid);
     connect(ui->cameraReset, &QPushButton::released, this, &MainWindow::handleResetView);
     connect(ui->ObjectColor, &QPushButton::released, this, &MainWindow::handleObjectColor);
     connect(ui->BackgroundColor, &QPushButton::released, this, &MainWindow::handleBackgroundColor);
@@ -331,131 +331,6 @@ void MainWindow::handleResetView()
   renderWindow->Render();
 }
 
-
-// for mod get rid of pyramid and cube buttons so that they are used by inserting points
-
-/**
-* @function generates a pyramid
-*/
-void MainWindow::handlePyrmaid()
-{
-  // create a array of points
-  vtkSmartPointer<vtkPoints> points =
-                  vtkSmartPointer<vtkPoints>::New();
-
-  // preset some coords
-  float p0[3] = {1.0, 1.0, 1.0};
-  float p1[3] = {-1.0, 1.0, 1.0};
-  float p2[3] = {-1.0, -1.0, 1.0};
-  float p3[3] = {1.0, -1.0, 1.0};
-  float p4[3] = {0.0, 0.0, 0.0};
-  // adds points to the smart pointer "points"
-  points->InsertNextPoint(p0);
-  points->InsertNextPoint(p1);
-  points->InsertNextPoint(p2);
-  points->InsertNextPoint(p3);
-  points->InsertNextPoint(p4);
-
-
-  vtkSmartPointer<vtkPyramid> pyramid =
-                  vtkSmartPointer<vtkPyramid>::New();
-  // get set pyramid point ids
-  pyramid->GetPointIds()->SetId(0,0);
-  pyramid->GetPointIds()->SetId(1,1);
-  pyramid->GetPointIds()->SetId(2,2);
-  pyramid->GetPointIds()->SetId(3,3);
-  pyramid->GetPointIds()->SetId(4,4);
-
-  vtkSmartPointer<vtkCellArray> cells =
-                  vtkSmartPointer<vtkCellArray>::New();
-  // 1 pyrmaid cell, group work should have multiple that are combined
-  cells->InsertNextCell (pyramid);
-
-  vtkSmartPointer<vtkUnstructuredGrid> ug =
-                  vtkSmartPointer<vtkUnstructuredGrid>::New();
-  // setup grid using points
-  ug->SetPoints(points);
-  // insert cell, pyramid
-  ug->InsertNextCell(pyramid->GetCellType(),pyramid->GetPointIds());
-
-  //Create an actor and mapper
-  colors = vtkSmartPointer<vtkNamedColors>::New();
-
-  //light intensity
-  vtkSmartPointer<vtkLight> light =
-      vtkSmartPointer<vtkLight>::New();
-
-  //vtkSmartPointer<vtkDataSetMapper>
-  mapper = vtkSmartPointer<vtkDataSetMapper>::New();
-  mapper->SetInputData(ug);
-
-//  vtkSmartPointer<vtkActor> actor =
-  //    vtkSmartPointer<vtkActor>::New();
-  actor->SetMapper(mapper);
-  actor->GetProperty()->EdgeVisibilityOff();
-
-  // clear old render and add new one
-  renderer->RemoveAllViewProps();
-  renderer->AddActor(actor);
-
-  // create a copy of the current source to be used with filters if necessary
-  source = actor->GetMapper()->GetInputConnection(0, 0)->GetProducer();
-
-  //---- reset the camera angle------
-  camera = vtkSmartPointer<vtkCamera>::New();
-  // 0,0,0 focal point is default when making new camera
-  //camera->SetFocalPoint(0,0,0);
-//  camera->SetFocalPoint(0,-10,0);
-//  renderer->SetActiveCamera(camera);
-  renderer->ResetCamera(); // resets the zoom
-  renderer->ResetCameraClippingRange(); // if the model is zoomed offscreen
-  // /reset camera angle----------------
-
-  // render the pyramid as soon as button is pushed
-  renderWindow->Render();
-
-  //updateFilters();
-}
-
-void MainWindow::handleCube()
-{
-  // Create a cube using a vtkCubeSource
-  vtkSmartPointer<vtkCubeSource> cubeSource =
-                  vtkSmartPointer<vtkCubeSource>::New();
-
-  renderer->RemoveAllViewProps();
-
-  // Create a mapper that will hold the cube's geometry in a format suitable for
-  // rendering
-  mapper = vtkSmartPointer<vtkDataSetMapper>::New();
-
-  mapper->SetInputConnection(cubeSource->GetOutputPort());
-  actor->SetMapper(mapper);
-
-  actor->GetProperty()->EdgeVisibilityOff();
-
-  //light intensity
-  vtkSmartPointer<vtkLight> light =
-      vtkSmartPointer<vtkLight>::New();
-
-  // Add the actor to the scene
-  renderer->AddActor(actor);
-
-  // create a copy of the current source to be used with filters if necessary
-  source = actor->GetMapper()->GetInputConnection(0, 0)->GetProducer();
-
-  // changes the zoom of the camera so that the model fits onto the screen
-  renderer->ResetCamera(); // resets the zoom and location of camera
-  renderer->ResetCameraClippingRange(); // if the model is zoomed offscreen
-  //  renderer->GetActiveCamera()->Azimuth(30);
-  //  renderer->GetActiveCamera()->Elevation(30);
-
-  renderWindow->Render();
-
-  //updateFilters();
-
-}
-
 /**
 *  @function
 *
@@ -577,9 +452,9 @@ void MainWindow::actionOpen()
     readModFile.readFile(inputFilename.c_str());
     //  std::cout<<"yeet";
 
-    readModFile.dispNumberOfCellsAndType();
-    readModFile.dispVectorList();
-    readModFile.dispCells();
+  //  readModFile.dispNumberOfCellsAndType();
+  //  readModFile.dispVectorList();
+  //  readModFile.dispCells();
 
     vtkSmartPointer<vtkPoints> vertices =
             vtkSmartPointer<vtkPoints>::New();
@@ -616,7 +491,7 @@ void MainWindow::actionOpen()
           //std::cout<test;
 
           vectorIds[j] = readModFile.getCells()[n].getThisCellVectorIdList()[j]; // success gets ids
-          std::cout<<vectorIds[j]<<"\n";
+      //    std::cout<<vectorIds[j]<<"\n";
         }
         // inserts hex cells
         ugrid->InsertNextCell(VTK_HEXAHEDRON, 8, vectorIds);
@@ -669,16 +544,6 @@ void MainWindow::actionOpen()
 
 }
 
-  // set file up with a reader
-//  std::string inputFilename = fileName.toLocal8Bit().constData();
-  //std::string inputFilename = fileName;
-
-
-
-
-
-
-
 //Change object color
 void MainWindow::handleObjectColor()
 {
@@ -703,11 +568,7 @@ void MainWindow::handleBackgroundColor()
     }
 }
 
-/**
-* @function override of CloseEvent
-*
-* Used to terminate interactor if box widget is running whilst closing
-*/
+
 void MainWindow::closeEvent (QCloseEvent *event)
 {
   // checckBox is for box widget

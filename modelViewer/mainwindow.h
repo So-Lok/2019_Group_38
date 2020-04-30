@@ -45,10 +45,13 @@ public:
     ~MainWindow();
 
     // closeEvent
+    /**
+    * @function override of CloseEvent
+    *
+    * Used to terminate interactor if box widget is running whilst closing
+    */
     void closeEvent(QCloseEvent *event);
-    //shape buttons
-    void handleCube();
-    void handlePyrmaid();
+
     // Tool bar functions
     void widgetBox();
     void actionOpen();

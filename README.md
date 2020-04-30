@@ -10,7 +10,7 @@ Furthermore, please make sure that you are up to date with the main repo before 
 
 In addition to this, could you try to solve any conflicts with the main repo code on your side as going through multiple files and solving conflicts can take a lot of time especially since some of you are in a different time zone.
 
-Therefore, if your code is not up to date, not commented or has a lot of conflicts I will NOT merge the pull so that the repo can be kept consistent and bug free.  
+Therefore, if your code is not up to date, not commented or has a lot of conflicts I will **NOT** merge the pull so that the repo can be kept consistent and bug free.  
 
 Thanks 
 

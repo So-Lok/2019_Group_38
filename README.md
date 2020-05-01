@@ -1,6 +1,24 @@
 ## H62PEP Computing Project
 
-# Group 38  
+# Group 38
+
+## GROUP MEMBERS PLEASE READ
+
+Please comment all of the features that you make using doxygen style in the .h file. As we are short on time I will not have any time to comment on your code in addition to the code in the main repo already. 
+
+Furthermore, please make sure that you are up to date with the main repo before applying for a pull request as I will not merge it if it is not.
+
+In addition to this, could you try to solve any conflicts with the main repo code on your side as going through multiple files and solving conflicts can take a lot of time especially since some of you are in a different time zone.
+
+Therefore, if your code is not up to date, not commented or has a lot of conflicts I will **NOT** merge the pull so that the repo can be kept consistent and bug free.  
+
+Thanks 
+
+So-Lok
+
+
+
+
 
 ## How to run Semester 1 program
 

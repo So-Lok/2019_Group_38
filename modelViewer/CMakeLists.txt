@@ -28,7 +28,8 @@ set( CMAKE_AUTOUIC ON )
 
 find_package( Qt5Widgets )
 
-set( UIS mainwindow.ui )
+# set UIs to be used
+set( UIS mainwindow.ui optionsfilter.ui)
 qt5_wrap_ui( UI_Srcs ${UIS} )
 
 # link icons
@@ -37,22 +38,31 @@ qt5_add_resources( QRC_Srcs ${ICONS} )
 
 
 # Also link to VTK
-
 find_package( VTK REQUIRED )
 include( ${VTK_USE_FILE} )
 
-# Define the executable output and its sources
+####################################
+# add all source files
 
+include_directories( modelReader/src )
+include_directories( modelReader/inc )
+
+# Define the executable output and its sources
 add_executable( modelViewer MACOSX_BUNDLE
-                main.cpp mainwindow.cpp
-                mainwindow.h
-                mainwindow.ui
+                main.cpp
+                mainwindow.cpp optionsfilter.cpp
+                mainwindow.h optionsfilter.h
+                mainwindow.ui optionsfilter.ui
+                modelReader/src/model.cpp modelReader/inc/model.h
+                modelReader/src/cell.cpp modelReader/inc/cell.h
+                modelReader/src/vectorClass.cpp modelReader/inc/vectorClass.h
+                modelReader/src/material.cpp modelReader/inc/material.h
                 ${UI_Srcs}
                 ${QRC_Srcs}
                 )
 
-# Tell CMake that the executable depends on the Qt::Widget libraries.
 
+# Tell CMake that the executable depends on the Qt::Widget libraries.
 target_link_libraries( modelViewer Qt5::Widgets )
 # Tell CMake that the executable depends on the VTK libraries
 

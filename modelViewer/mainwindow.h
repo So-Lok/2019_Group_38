@@ -63,7 +63,6 @@ public:
     void handleResetView();
 
     // display/render function, for use of filters.
-    void updateFilters();
     void resetFilter();
     // update filters will be changed as multiple filters cause problems
     // will check which box is ticked and then call handle functions
@@ -103,6 +102,8 @@ private:
   //  bool applyShrink;
 
     // filter parameters
+    //--------------Univessal-------------------
+    bool filterApplied;
     // ------------------Clip Filter------------
      double clipOriginX = 0.0;  double clipNormalX = -1.0;
      double clipOriginY = 0.0;  double clipNormalY = 0.0;

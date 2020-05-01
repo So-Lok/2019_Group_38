@@ -168,39 +168,45 @@ void MainWindow::updateClipOriginX(int value)
 {
   double newValue = value/10;
   clipOriginX = newValue;
-  handleClip();
+  if(ui->clipFilter->isChecked()==true)
+      handleClip();
 }
 
 void MainWindow::updateClipOriginY(int value)
 {
   double newValue = value/10;
   clipOriginY = newValue;
-  handleClip();
+  if(ui->clipFilter->isChecked()==true)
+      handleClip();
 }
 
 void MainWindow::updateClipOriginZ(int value)
 {
   double newValue = value/10;
   clipOriginZ = newValue;
-  handleClip();
+  if(ui->clipFilter->isChecked()==true)
+      handleClip();
 
 }
 
 void MainWindow::updateClipNormalX(int value)
 {
   clipNormalX = value;
-  handleClip();
+  if(ui->clipFilter->isChecked()==true)
+      handleClip();
 }
 
 void MainWindow::updateClipNormalY(int value)
 {
   clipNormalY = value;
-  handleClip();
+  if(ui->clipFilter->isChecked()==true)
+      handleClip();
 }
 void MainWindow::updateClipNormalZ(int value)
 {
   clipNormalZ = value;
-  handleClip();
+  if(ui->clipFilter->isChecked()==true)
+      handleClip();
 }
 
 void MainWindow::updateShrinkFactor(int value)
@@ -208,7 +214,8 @@ void MainWindow::updateShrinkFactor(int value)
 //  std::cout<<"in update"<<endl;
   shrinkFactor = double(value);
   shrinkFactor = shrinkFactor/100;
-  handleShrink();
+  if(ui->shrinkFilter->isChecked()==true)
+      handleShrink ();
 
 }
 
@@ -218,6 +225,7 @@ void MainWindow::handleClip()
 
   if(ui->clipFilter->isChecked()==true)
   {
+    filterApplied = true;
     // uncheck all other Filters
     ui->shrinkFilter->setChecked(false);
 
@@ -244,8 +252,9 @@ void MainWindow::handleClip()
     renderer->AddActor(actor);
     renderWindow->Render();
   }
-  else if(ui->clipFilter->isChecked()==false)
+  else if(ui->clipFilter->isChecked()==false && filterApplied == false)
   {
+
     mapper->SetInputConnection(source->GetOutputPort() );
     actor->SetMapper(mapper);
 
@@ -265,6 +274,7 @@ void MainWindow::handleShrink()
 
   if(ui->shrinkFilter->isChecked()==true)
   {
+    filterApplied = true;
     // uncheck all other Filters
     ui->clipFilter->setChecked(false);
 
@@ -290,11 +300,13 @@ void MainWindow::handleShrink()
     renderer->AddActor(actor);
     renderWindow->Render();
 
+
   }
 }
 
 void MainWindow::resetFilter()
 {
+  filterApplied = false;
   // uncheck all filters
   ui->clipFilter->setChecked(false);
   ui->shrinkFilter->setChecked(false);
@@ -414,10 +426,6 @@ void MainWindow::actionOpen()
                                 = vtkSmartPointer<vtkPolyDataMapper>::New();
     mapper->SetInputConnection(reader->GetOutputPort());
     actor->SetMapper(mapper);
-
-    ///for light intensity//
-    //vtkSmartPointer<vtkLight> light =
-    //    vtkSmartPointer<vtkLight>::New();
 
     renderer->AddActor(actor);
 

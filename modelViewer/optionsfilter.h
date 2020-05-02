@@ -1,6 +1,6 @@
 /**
 * @file optionsfilter.h
-  @brief This file contains all of the function declarations for the edit filters window
+*  @brief This file contains all of the function declarations for the edit filters window
 *
 */
 

@@ -1,5 +1,5 @@
 /**
-* @file MainWindow.cpp
+* @file mainwindow.cpp
 * Contains function definitions for features within the mainwindow
 *
 */

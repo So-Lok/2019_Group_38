@@ -1,5 +1,5 @@
 /**
-* @file MainWindow.h
+* @file mainwindow.h
 * Contains function declarations of the main window
 */
 
@@ -176,17 +176,17 @@ private:
 
     vtkSmartPointer<vtkNamedColors> colors;
     vtkSmartPointer<vtkLight> light;
-    
+
     /**
     *vtkDistanceWidget is used to measure the distance between two points.
     */
     vtkSmartPointer<vtkDistanceWidget> distanceWidget = vtkSmartPointer<vtkDistanceWidget>::New();
-    
+
     /**
     *vtkAxesActor is a 2d/3d actor representing 3 dimension axes on the screen.
     */
     vtkSmartPointer<vtkAxesActor> axes = vtkSmartPointer<vtkAxesActor>::New();
-    
+
     /**
     *vtkOrientationMarkerWidget is for manipulating the position,size,orientaion of a prop that represent the orientaion marker.
     */

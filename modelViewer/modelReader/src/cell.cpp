@@ -325,12 +325,8 @@ float cell::calcWeight(int density)
 
 }
 
-<<<<<<< HEAD
-
-=======
 // sem2
 std::vector<int> cell::getThisCellVectorIdList()
 {
   return vectorIdList;
 }
->>>>>>> 74c33e5b6c43f8868dc8b9c3f0a4f62ef1eeae9d

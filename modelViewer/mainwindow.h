@@ -1,4 +1,3 @@
-
 /**
 * @file MainWindow.h
 * Contains function declarations of the main window
@@ -35,7 +34,6 @@
 // Additonal windows
 #include "optionsfilter.h"
 
-
 //Distance widget
 #include <vtkDistanceWidget.h>
 #include <vtkDistanceRepresentation.h>
@@ -52,15 +50,9 @@
 #include <vtkSmartPointer.h>
 
 
-
-
-
-
 namespace Ui {
 class MainWindow;
 }
-
-
 /**
  * Sets up the maindwindow ui. Connects all mainwindow buttons to functions
  * sets up additional window(s) and initalises vtk variables
@@ -74,12 +66,6 @@ public:
     ~MainWindow();
 
     // closeEvent
-    void closeEvent(QCloseEvent *event);
-    //shape buttons
-    void handleCube();
-    void handlePyrmaid();
-    // Tool bar functions
-    void widgetBox();
     /**
     *  Override of CloseEvent
     *  Used to terminate interactor if box widget is running whilst closing the program
@@ -96,26 +82,6 @@ public:
     // model buttons
 
     /**
-
-    * @function resets the camera of the render window so that the model is on screen
-    **/
-    void handleResetView();
-
-    // display/render function, for use of filters.
-    void updateFilters();
-    void resetFilter();
-    // update filters will be changed as multiple filters cause problems
-    // will check which box is ticked and then call handle functions
-    void handleClip();
-    void handleShrink();
-
-    //object color////
-    void handleObjectColor();
-    //Background color //
-    void handleBackgroundColor();
-    
-    //Distance widget
-    void updatedistWid();
     *  Resets the camera of the render window to a preset position
     */
     void handleResetView();
@@ -149,6 +115,18 @@ public:
     */
     void handleBackgroundColor();
 
+    //Distance widget //
+       /**
+       * Handles the measuring of the distance
+       */
+    void handledistWid();
+
+    //Axis label //
+   /**
+   * Handles the identifying of the axis
+   */
+    void handleaxisLabel();
+
 private slots:
     void on_Slider_sliderMoved(int position);
     void on_checkBox_clicked(bool checked);
@@ -164,20 +142,15 @@ private slots:
     void updateShrinkFactor(int value);
 
 
+
 private:
     Ui::MainWindow* ui;
 
     optionsFilter *opFilterDialog;
-
-    // filter boolean
-  //  bool applyClip;
-  //  bool applyShrink;
-
-    // filter parameters
-
     // filter parameters
     //--------------Univessal-------------------
     bool filterApplied;
+    bool applydist;
     // ------------------Clip Filter------------
      double clipOriginX = 0.0;  double clipNormalX = -1.0;
      double clipOriginY = 0.0;  double clipNormalY = 0.0;
@@ -186,26 +159,6 @@ private:
      //-----------------Shrink Filter--------------
      double shrinkFactor = 0.8;
      //-----------------------------
-
-    // vtkSmartPointer definitions
-
-    vtkSmartPointer<vtkRenderer> renderer;
-    vtkNew<vtkGenericOpenGLRenderWindow> renderWindow;
-    vtkSmartPointer<vtkDataSetMapper> mapper;
-    // actionOpen uses vtkPolyDataMapper,
-
-    // to retain default propertie e.g colour
-    vtkSmartPointer<vtkActor> actor;
-    // for default camera
-    vtkSmartPointer<vtkCamera> camera;
-    // to store a copy of the current sourrce
-    vtkSmartPointer<vtkAlgorithm> source;
-    vtkSmartPointer<vtkAlgorithm> currentModel;
-
-    //color
-    vtkSmartPointer<vtkNamedColors> colors;
-    //light
-    vtkSmartPointer<vtkLight> light;
     vtkSmartPointer<vtkRenderer> renderer;
     vtkNew<vtkGenericOpenGLRenderWindow> renderWindow;
 
@@ -218,19 +171,14 @@ private:
     vtkSmartPointer<vtkBoxWidget> boxWidget;
     vtkSmartPointer<vtkRenderWindowInteractor> interactor;
 
-    //distance
+    vtkSmartPointer<vtkNamedColors> colors;
+    vtkSmartPointer<vtkLight> light;
+
     vtkSmartPointer<vtkDistanceWidget> distanceWidget = vtkSmartPointer<vtkDistanceWidget>::New();
 
-    //Axis widget
     vtkSmartPointer<vtkAxesActor> axes = vtkSmartPointer<vtkAxesActor>::New();
     vtkSmartPointer<vtkOrientationMarkerWidget> orientationWidget = vtkSmartPointer<vtkOrientationMarkerWidget>::New();
 
-
-    //Distance bool
-    bool applydist;
-
-    vtkSmartPointer<vtkNamedColors> colors;
-    vtkSmartPointer<vtkLight> light;
 
 
 
@@ -239,13 +187,6 @@ private:
 // call back used for box widget
 
 /**
-
- *  A callback class used to synchronise the box widget with the object
- *  so that it can be transformed
- *
- */
-
-
  *  Used to synchronise the box widget with the model
  *  so that it can be transformed
  */

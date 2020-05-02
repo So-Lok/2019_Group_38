@@ -23,11 +23,6 @@ set( CMAKE_INCLUDE_CURRENT_DIR ON )
 set( CMAKE_AUTOMOC ON )
 set( CMAKE_AUTOUIC ON )
 
-<<<<<<< HEAD
-# Find the Qt widgets package. This locates the relevant include and
-# lib directories, and the necessary static libraries for linking.
-
-=======
 # cpack config
 #include(InstallRequiredSystemLibraries)
 
@@ -40,7 +35,6 @@ include(CPack)
 
 # Find the Qt widgets package. This locates the relevant include and
 # lib directories, and the necessary static libraries for linking.
->>>>>>> 74c33e5b6c43f8868dc8b9c3f0a4f62ef1eeae9d
 find_package( Qt5Widgets )
 
 # set UIs to be used
@@ -65,13 +59,8 @@ include_directories( modelReader/inc )
 # Define the executable output and its sources
 add_executable( modelViewer MACOSX_BUNDLE
                 main.cpp
-<<<<<<< HEAD
-                mainwindow.cpp optionsfilter.cpp
-                mainwindow.h optionsfilter.h
-=======
                 mainwindow.cpp mainwindow.h
                 optionsfilter.cpp optionsfilter.h
->>>>>>> 74c33e5b6c43f8868dc8b9c3f0a4f62ef1eeae9d
                 mainwindow.ui optionsfilter.ui
                 modelReader/src/model.cpp modelReader/inc/model.h
                 modelReader/src/cell.cpp modelReader/inc/cell.h
@@ -87,8 +76,6 @@ target_link_libraries( modelViewer Qt5::Widgets )
 # Tell CMake that the executable depends on the VTK libraries
 
 target_link_libraries( modelViewer ${VTK_LIBRARIES} )
-<<<<<<< HEAD
-=======
 
 #########################################################
 # Installation
@@ -124,4 +111,3 @@ install(FILES  $<TARGET_FILE:Qt5::QWindowsIntegrationPlugin>
 # install the models files both .stl and .mod
 install(DIRECTORY models 
 		DESTINATION bin)
->>>>>>> 74c33e5b6c43f8868dc8b9c3f0a4f62ef1eeae9d

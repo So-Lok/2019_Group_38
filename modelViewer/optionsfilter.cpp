@@ -1,3 +1,11 @@
+/**
+* @file optionsfilter.cpp
+*  This file contains all function definitions the edit filters window
+*
+*
+*/
+
+
 #include "optionsfilter.h"
 #include "ui_optionsfilter.h"
 #include <QAbstractSlider>

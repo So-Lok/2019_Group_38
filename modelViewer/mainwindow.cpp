@@ -1,11 +1,8 @@
-/********************************************************************************
-* @file mainwwindow.cpp
-* @brief Contains function definitions for features within the mainwindow
+/**
+* @file MainWindow.cpp
+* Contains function definitions for features within the mainwindow
 *
-* Type of features
-* - Filters
-*
-**********************************************************************************/
+*/
 
 
 
@@ -67,11 +64,6 @@
 
 #include "model.h"
 
-
-/**
- *
- */
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -79,7 +71,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     // Initialise additional windows
     opFilterDialog = new optionsFilter(this);
-
     // note that qvtkWidget is the object name of the QtVTKOpenGLWidget
     ui->qvtkWidget->SetRenderWindow( renderWindow );
     renderer = vtkSmartPointer<vtkRenderer>::New();
@@ -87,7 +78,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->qvtkWidget->GetRenderWindow()->AddRenderer(renderer);
     actor = vtkSmartPointer<vtkActor>::New();
     mapper = vtkSmartPointer<vtkDataSetMapper>::New();
-    //source = actor->GetMapper()->GetInputConnection(0, 0)->GetProducer();
 
     // initialisation for features
     light = vtkSmartPointer<vtkLight>::New();
@@ -101,8 +91,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //configuration for all QT interactions
     // Push buttons
-  //  connect(ui->cubeButton, &QPushButton::released, this, &MainWindow::handleCube);
-//    connect(ui->pyramidButton, &QPushButton::released, this, &MainWindow::handlePyrmaid);
     connect(ui->cameraReset, &QPushButton::released, this, &MainWindow::handleResetView);
     connect(ui->ObjectColor, &QPushButton::released, this, &MainWindow::handleObjectColor);
     connect(ui->BackgroundColor, &QPushButton::released, this, &MainWindow::handleBackgroundColor);
@@ -130,9 +118,6 @@ MainWindow::MainWindow(QWidget *parent) :
     // shrink filter
     connect(opFilterDialog, SIGNAL(sendShrinkFactor(int)), this, SLOT(updateShrinkFactor(int) ) );
 
-
-
-    // start up
     renderer->RemoveAllViewProps();
 
     /////light intensity/////
@@ -150,14 +135,14 @@ MainWindow::MainWindow(QWidget *parent) :
 }
 
 /**
-* @function mainwindow destructor
+*  Delets the ui
 **/
 MainWindow::~MainWindow()
 {
     delete ui;
 }
 /**
-* @function
+*
 */
 void MainWindow::on_editFilters_clicked()
 {
@@ -343,10 +328,7 @@ void MainWindow::handleResetView()
   renderWindow->Render();
 }
 
-/**
-*  @function
-*
-**/
+
 void MainWindow::widgetBox()
 {
   if(ui->widgetBox->isChecked() )
@@ -387,9 +369,7 @@ void MainWindow::widgetBox()
 }
 
 
-/**
-* @function Allows the user to import a STL file into the renderer
-*/
+
 void MainWindow::actionOpen()
 {
   // open file explorer
@@ -431,7 +411,6 @@ void MainWindow::actionOpen()
 
     // create a copy of the current source to be used with filters if necessary
     source = actor->GetMapper()->GetInputConnection(0, 0)->GetProducer();
-    //currentModel = actor->GetMapper()->GetInputConnection(0, 0)->GetProducer();
     // Setup the renderers's camera
     renderer->ResetCamera();
     renderer->GetActiveCamera()->Azimuth(30);

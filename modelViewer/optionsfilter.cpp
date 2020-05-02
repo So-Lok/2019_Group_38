@@ -1,3 +1,14 @@
+<<<<<<< HEAD
+=======
+/**
+* @file optionsfilter.cpp
+*  This file contains all function definitions the edit filters window
+*
+*
+*/
+
+
+>>>>>>> 74c33e5b6c43f8868dc8b9c3f0a4f62ef1eeae9d
 #include "optionsfilter.h"
 #include "ui_optionsfilter.h"
 #include <QAbstractSlider>

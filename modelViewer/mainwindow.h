@@ -1,3 +1,10 @@
+
+/**
+* @file MainWindow.h
+* Contains function declarations of the main window
+*/
+
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
@@ -28,6 +35,7 @@
 // Additonal windows
 #include "optionsfilter.h"
 
+
 //Distance widget
 #include <vtkDistanceWidget.h>
 #include <vtkDistanceRepresentation.h>
@@ -47,10 +55,16 @@
 
 
 
+
 namespace Ui {
 class MainWindow;
 }
 
+
+/**
+ * Sets up the maindwindow ui. Connects all mainwindow buttons to functions
+ * sets up additional window(s) and initalises vtk variables
+ */
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -66,10 +80,23 @@ public:
     void handlePyrmaid();
     // Tool bar functions
     void widgetBox();
+    /**
+    *  Override of CloseEvent
+    *  Used to terminate interactor if box widget is running whilst closing the program
+    */
+    void closeEvent(QCloseEvent *event);
+    /**
+    * Controls the box Wiget feature, allows user to alter size of model
+    */
+    void widgetBox();
+    /**
+    *  Allows the user to import a STL file into the renderer
+    */
     void actionOpen();
     // model buttons
 
     /**
+
     * @function resets the camera of the render window so that the model is on screen
     **/
     void handleResetView();
@@ -89,6 +116,38 @@ public:
     
     //Distance widget
     void updatedistWid();
+    *  Resets the camera of the render window to a preset position
+    */
+    void handleResetView();
+
+    // display/render function, for use of filters.
+
+    /**
+    * Removes all active filters and reloads the current model to its' initial state
+    */
+    void resetFilter();
+    /**
+    * Handles the application of the clip filter
+    * Clips a part of the model using preset values
+    */
+    void handleClip();
+    /**
+    * Handles the application of the shrink filter
+    * Shrinks the model by a scaling factor
+    */
+    void handleShrink();
+
+
+
+    /**
+    * Handles the changing of the model's colour
+    */
+    void handleObjectColor();
+    //Background color //
+    /**
+    * Handles the changing of the background's colour
+    */
+    void handleBackgroundColor();
 
 private slots:
     void on_Slider_sliderMoved(int position);
@@ -105,8 +164,6 @@ private slots:
     void updateShrinkFactor(int value);
 
 
-
-
 private:
     Ui::MainWindow* ui;
 
@@ -117,6 +174,10 @@ private:
   //  bool applyShrink;
 
     // filter parameters
+
+    // filter parameters
+    //--------------Univessal-------------------
+    bool filterApplied;
     // ------------------Clip Filter------------
      double clipOriginX = 0.0;  double clipNormalX = -1.0;
      double clipOriginY = 0.0;  double clipNormalY = 0.0;
@@ -145,6 +206,14 @@ private:
     vtkSmartPointer<vtkNamedColors> colors;
     //light
     vtkSmartPointer<vtkLight> light;
+    vtkSmartPointer<vtkRenderer> renderer;
+    vtkNew<vtkGenericOpenGLRenderWindow> renderWindow;
+
+    vtkSmartPointer<vtkDataSetMapper> mapper;
+    vtkSmartPointer<vtkActor> actor;
+    vtkSmartPointer<vtkAlgorithm> source;
+
+    vtkSmartPointer<vtkCamera> camera;
 
     vtkSmartPointer<vtkBoxWidget> boxWidget;
     vtkSmartPointer<vtkRenderWindowInteractor> interactor;
@@ -160,16 +229,26 @@ private:
     //Distance bool
     bool applydist;
 
+    vtkSmartPointer<vtkNamedColors> colors;
+    vtkSmartPointer<vtkLight> light;
+
+
+
 };
 
 // call back used for box widget
 
 /**
+
  *  A callback class used to synchronise the box widget with the object
  *  so that it can be transformed
  *
  */
 
+
+ *  Used to synchronise the box widget with the model
+ *  so that it can be transformed
+ */
 class vtkMyCallback : public vtkCommand
 {
 public:
@@ -177,6 +256,9 @@ public:
   {
     return new vtkMyCallback;
   }
+  /**
+  * Transforms the model
+  */
   virtual void Execute(vtkObject *caller, unsigned long, void*)
   {
     vtkSmartPointer<vtkTransform> t =

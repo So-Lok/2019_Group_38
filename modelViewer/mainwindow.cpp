@@ -1,3 +1,4 @@
+
 /********************************************************************************
 * @file mainwwindow.cpp
 * @brief Contains function definitions for features within the mainwindow
@@ -6,6 +7,12 @@
 * - Filters
 *
 **********************************************************************************/
+
+/**
+* @file MainWindow.cpp
+* Contains function definitions for features within the mainwindow
+*
+*/
 
 
 
@@ -58,15 +65,21 @@
 #include <QFile>
 #include <QTextStream>
 
+
+// cpp headers
+#include <new>
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
 #include "model.h"
 
 
+
 /**
  *
  */
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -83,6 +96,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->qvtkWidget->GetRenderWindow()->AddRenderer(renderer);
     actor = vtkSmartPointer<vtkActor>::New();
     mapper = vtkSmartPointer<vtkDataSetMapper>::New();
+
     //source = actor->GetMapper()->GetInputConnection(0, 0)->GetProducer();
 
     // initialisation for features
@@ -97,8 +111,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //configuration for all QT interactions
     // Push buttons
+
     connect(ui->cubeButton, &QPushButton::released, this, &MainWindow::handleCube);
     connect(ui->pyramidButton, &QPushButton::released, this, &MainWindow::handlePyrmaid);
+
     connect(ui->cameraReset, &QPushButton::released, this, &MainWindow::handleResetView);
     connect(ui->ObjectColor, &QPushButton::released, this, &MainWindow::handleObjectColor);
     connect(ui->BackgroundColor, &QPushButton::released, this, &MainWindow::handleBackgroundColor);
@@ -111,8 +127,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::actionOpen);
     connect(ui->widgetBox, &QAction::toggled, this, &MainWindow::widgetBox);
 
+
     // Distance widget
     connect(ui->distWid, &QCheckBox::released, this, &MainWindow::updatedistWid);
+
 
 
     // SIGNAL(External window) connection to SLOTs(MainWindow)
@@ -131,7 +149,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 
+
     // start up
+
     renderer->RemoveAllViewProps();
 
     /////light intensity/////
@@ -149,7 +169,10 @@ MainWindow::MainWindow(QWidget *parent) :
 }
 
 /**
+
 * @function mainwindow destructor
+*  Delets the ui
+
 **/
 MainWindow::~MainWindow()
 {
@@ -157,6 +180,8 @@ MainWindow::~MainWindow()
 }
 /**
 * @function
+
+*
 */
 void MainWindow::on_editFilters_clicked()
 {
@@ -168,6 +193,8 @@ void MainWindow::updateClipOriginX(int value)
   double newValue = value/10;
   clipOriginX = newValue;
   handleClip();
+  if(ui->clipFilter->isChecked()==true)
+      handleClip();
 }
 
 void MainWindow::updateClipOriginY(int value)
@@ -175,6 +202,8 @@ void MainWindow::updateClipOriginY(int value)
   double newValue = value/10;
   clipOriginY = newValue;
   handleClip();
+  if(ui->clipFilter->isChecked()==true)
+      handleClip();
 }
 
 void MainWindow::updateClipOriginZ(int value)
@@ -182,6 +211,8 @@ void MainWindow::updateClipOriginZ(int value)
   double newValue = value/10;
   clipOriginZ = newValue;
   handleClip();
+  if(ui->clipFilter->isChecked()==true)
+      handleClip();
 
 }
 
@@ -189,17 +220,23 @@ void MainWindow::updateClipNormalX(int value)
 {
   clipNormalX = value;
   handleClip();
+  if(ui->clipFilter->isChecked()==true)
+      handleClip();
 }
 
 void MainWindow::updateClipNormalY(int value)
 {
   clipNormalY = value;
   handleClip();
+  if(ui->clipFilter->isChecked()==true)
+      handleClip();
 }
 void MainWindow::updateClipNormalZ(int value)
 {
   clipNormalZ = value;
   handleClip();
+  if(ui->clipFilter->isChecked()==true)
+      handleClip();
 }
 
 void MainWindow::updateShrinkFactor(int value)
@@ -208,16 +245,24 @@ void MainWindow::updateShrinkFactor(int value)
   shrinkFactor = double(value);
   shrinkFactor = shrinkFactor/100;
   handleShrink();
-
+  if(ui->shrinkFilter->isChecked()==true)
+      handleShrink ();
 }
 
 void MainWindow::handleClip()
 {
+
   // uncheck all other Filters
   ui->shrinkFilter->setChecked(false);
 
   if(ui->clipFilter->isChecked()==true)
   {
+  if(ui->clipFilter->isChecked()==true)
+  {
+    filterApplied = true;
+    // uncheck all other Filters
+    ui->shrinkFilter->setChecked(false);
+
     // this will apply a clipping plane whose normal is the x-axis that crosses the x-axis at x=0
     vtkSmartPointer<vtkPlane> planeLeft = vtkSmartPointer<vtkPlane>::New();
     planeLeft->SetOrigin(clipOriginX, clipOriginY, clipOriginZ);
@@ -243,6 +288,9 @@ void MainWindow::handleClip()
   }
   else if(ui->clipFilter->isChecked()==false)
   {
+
+  else if(ui->clipFilter->isChecked()==false && filterApplied == false)
+  {
     mapper->SetInputConnection(source->GetOutputPort() );
     actor->SetMapper(mapper);
 
@@ -258,11 +306,21 @@ void MainWindow::handleClip()
 
 void MainWindow::handleShrink()
 {
+
   // uncheck all other Filters
   ui->clipFilter->setChecked(false);
 
   if(ui->shrinkFilter->isChecked()==true)
   {
+
+
+
+  if(ui->shrinkFilter->isChecked()==true)
+  {
+    filterApplied = true;
+    // uncheck all other Filters
+    ui->clipFilter->setChecked(false);
+
     vtkSmartPointer<vtkShrinkFilter> shrinkFilter
                     = vtkSmartPointer<vtkShrinkFilter>::New();
     shrinkFilter->SetInputConnection(source->GetOutputPort() );
@@ -284,12 +342,14 @@ void MainWindow::handleShrink()
     renderer->RemoveAllViewProps();
     renderer->AddActor(actor);
     renderWindow->Render();
-
   }
 }
 
 void MainWindow::resetFilter()
 {
+
+
+  filterApplied = false;
   // uncheck all filters
   ui->clipFilter->setChecked(false);
   ui->shrinkFilter->setChecked(false);
@@ -325,6 +385,7 @@ void MainWindow::handleResetView()
   // updates the render window
   renderWindow->Render();
 }
+
 
 
 // for mod get rid of pyramid and cube buttons so that they are used by inserting points
@@ -495,9 +556,12 @@ void MainWindow::widgetBox()
 }
 
 
+
 /**
 * @function Allows the user to import a STL file into the renderer
 */
+
+
 void MainWindow::actionOpen()
 {
   // open file explorer
@@ -535,15 +599,19 @@ void MainWindow::actionOpen()
     mapper->SetInputConnection(reader->GetOutputPort());
     actor->SetMapper(mapper);
 
+
     ///for light intensity//
     //vtkSmartPointer<vtkLight> light =
     //    vtkSmartPointer<vtkLight>::New();
+
 
     renderer->AddActor(actor);
 
     // create a copy of the current source to be used with filters if necessary
     source = actor->GetMapper()->GetInputConnection(0, 0)->GetProducer();
+
     //currentModel = actor->GetMapper()->GetInputConnection(0, 0)->GetProducer();
+
     // Setup the renderers's camera
     renderer->ResetCamera();
     renderer->GetActiveCamera()->Azimuth(30);
@@ -570,6 +638,7 @@ void MainWindow::actionOpen()
     model readModFile;
     // input file name to model
     readModFile.readFile(inputFilename.c_str());
+
   //  std::cout<<"yeet";
 
     readModFile.dispNumberOfCellsAndType();
@@ -589,6 +658,100 @@ void MainWindow::actionOpen()
 
 }
 
+
+    //  std::cout<<"yeet";
+
+  //  readModFile.dispNumberOfCellsAndType();
+  //  readModFile.dispVectorList();
+  //  readModFile.dispCells();
+
+    vtkSmartPointer<vtkPoints> vertices =
+            vtkSmartPointer<vtkPoints>::New();
+    // inserting every vector in model to vtkpoints
+    for(int i = 0; i<readModFile.getVectorList().size(); i++) // get vectorlist.size works
+    {
+              //std::cout<<"hello";
+      //new double x[] = readModFile.getVectorList();
+      // readModFile.getVectorList.getxyz() works
+            //  std::cout<<readModFile.getVectorList()[i].getX();
+      vertices->InsertPoint(i, readModFile.getVectorList()[i].getX(),
+                               readModFile.getVectorList()[i].getY(),
+                               readModFile.getVectorList()[i].getZ() );
+    }
+
+    vtkSmartPointer<vtkUnstructuredGrid> ugrid =
+            vtkSmartPointer<vtkUnstructuredGrid>::New();
+    ugrid->Allocate(500);
+    // loop for every cell
+      // depending on cell type eg pyramid hex, tetra cube
+    for(int n = 0; n<readModFile.getCells().size(); n++)
+    {
+      // HEX
+      if(readModFile.getCells()[n].getType()=='h')
+      {
+        //int *vectorIds;
+        //vectorIds = new int[8];
+        static vtkIdType vectorIds[8];
+        // hexahedron has 8 points/vertices
+        // populate array with vector ids of the current cell
+        for(int j = 0; j<8; j++)
+        {
+          //float test = readModFile.getCells()[n].getThisCellVectorIdList()[j];
+          //std::cout<test;
+
+          vectorIds[j] = readModFile.getCells()[n].getThisCellVectorIdList()[j]; // success gets ids
+      //    std::cout<<vectorIds[j]<<"\n";
+        }
+        // inserts hex cells
+        ugrid->InsertNextCell(VTK_HEXAHEDRON, 8, vectorIds);
+
+      }
+      // TETRA
+      if(readModFile.getCells()[n].getType()=='t')
+      {
+        static vtkIdType vectorIds[4];
+        for(int j = 0; j<4; j++)
+        {
+          vectorIds[j] = readModFile.getCells()[n].getThisCellVectorIdList()[j];
+        }
+        ugrid->InsertNextCell(VTK_TETRA, 8, vectorIds);
+
+      }
+
+      // PYRAMID
+      if(readModFile.getCells()[n].getType()=='p')
+      {
+        static vtkIdType vectorIds[5];
+        for(int j = 0; j<5; j++)
+        {
+          vectorIds[j] = readModFile.getCells()[n].getThisCellVectorIdList()[j];
+        }
+        ugrid->InsertNextCell(VTK_PYRAMID, 5, vectorIds);
+
+      }
+
+    }
+
+    // map the model
+    ugrid->SetPoints(vertices);
+
+    mapper->SetInputData(ugrid);
+    actor->SetMapper(mapper);
+    renderer->AddActor(actor);
+
+    source = actor->GetMapper()->GetInputConnection(0, 0)->GetProducer();
+
+    renderer->ResetCamera();
+    renderer->GetActiveCamera()->Azimuth(30);
+    renderer->GetActiveCamera()->Elevation(30);
+    renderer->ResetCameraClippingRange();
+
+    resetFilter();
+
+  }
+
+
+}
 
 //Change object color
 void MainWindow::handleObjectColor()
@@ -614,11 +777,14 @@ void MainWindow::handleBackgroundColor()
     }
 }
 
+
 /**
 * @function override of CloseEvent
 *
 * Used to terminate interactor if box widget is running whilst closing
 */
+
+
 void MainWindow::closeEvent (QCloseEvent *event)
 {
   // checckBox is for box widget
@@ -643,6 +809,9 @@ void MainWindow::on_Slider_sliderMoved(int position)
 
 }
 
+
+
+//checked box before adjust the light intensity
 void MainWindow::on_checkBox_clicked(bool checked)
 {
     if (checked) {
@@ -655,6 +824,7 @@ void MainWindow::on_checkBox_clicked(bool checked)
     renderer->AddLight(light);
     ui->qvtkWidget->GetRenderWindow()->Render();
 }
+
 
 //Distance widget
 void MainWindow::updatedistWid()

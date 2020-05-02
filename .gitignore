@@ -5,4 +5,11 @@
 *.exe
 *.o
 *.so
+*.obj
+*.lib
+*.a
+*.exp
+*.ui.autosave
+
+html/
 build/

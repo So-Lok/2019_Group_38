@@ -4,8 +4,8 @@ var indexSectionsWithContent =
   1: "cmov",
   2: "u",
   3: "mo",
-  4: "acdeghmorsw~",
-  5: "acdmov"
+  4: "acdeghmorsuw~",
+  5: "acdmosv"
 };
 
 var indexSectionNames =

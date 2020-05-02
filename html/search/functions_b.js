@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['_7emainwindow',['~MainWindow',['../class_main_window.html#ae98d00a93bc118200eeef9f9bba1dba7',1,'MainWindow']]],
-  ['_7emodel',['~model',['../classmodel.html#a23a7dbff52aedc7c5fbd1c81d419688f',1,'model']]]
+  ['widgetbox',['widgetBox',['../class_main_window.html#ae4af5b388fdbba0f93d8b0ca76a4ea08',1,'MainWindow']]]
 ];

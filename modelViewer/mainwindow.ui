@@ -156,24 +156,11 @@
      </item>
     </layout>
    </widget>
-   <widget class="QPushButton" name="axisLabel">
-    <property name="geometry">
-     <rect>
-      <x>600</x>
-      <y>440</y>
-      <width>93</width>
-      <height>28</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Axis</string>
-    </property>
-   </widget>
    <widget class="QCheckBox" name="distWid">
     <property name="geometry">
      <rect>
-      <x>600</x>
-      <y>480</y>
+      <x>570</x>
+      <y>440</y>
       <width>111</width>
       <height>21</height>
      </rect>
@@ -189,7 +176,6 @@
    <zorder>checkBox</zorder>
    <zorder>label</zorder>
    <zorder>qvtkWidget</zorder>
-   <zorder>axisLabel</zorder>
    <zorder>distWid</zorder>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -213,6 +199,7 @@
      <string>Widgets</string>
     </property>
     <addaction name="widgetBox"/>
+    <addaction name="axisLabel"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuWidgets"/>
@@ -254,6 +241,14 @@
    </property>
    <property name="toolTip">
     <string>A box frame is placed around the model, it allows for adjustment of the model using the track balls</string>
+   </property>
+  </action>
+  <action name="axisLabel">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Axis Widget</string>
    </property>
   </action>
  </widget>

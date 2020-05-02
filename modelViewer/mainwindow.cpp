@@ -102,6 +102,12 @@ MainWindow::MainWindow(QWidget *parent) :
     // Tool bar actions/button
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::actionOpen);
     connect(ui->widgetBox, &QAction::toggled, this, &MainWindow::widgetBox);
+    
+    //Distance widget
+    connect(ui->distWid, &QCheckBox::released, this, &MainWindow::handledistWid);
+    
+    //Axis widget
+    connect(ui->axisLabel, &QPushButton::released, this, &MainWindow::handleaxisLabel);
 
 
     // SIGNAL(External window) connection to SLOTs(MainWindow)
@@ -598,4 +604,47 @@ void MainWindow::on_checkBox_clicked(bool checked)
 
     renderer->AddLight(light);
     ui->qvtkWidget->GetRenderWindow()->Render();
+}
+//Distance widget
+void MainWindow::handledistWid()
+{
+    //if the checkbox is checked
+    if (ui->distWid->isChecked() == true)
+    {
+        applydist = true;
+    }
+    //if the checkbox is not check
+    else if (ui->distWid->isChecked() == false)
+    {
+        applydist = false;
+    }
+    //turn off the measurement
+    if (applydist == false)
+    {
+        mapper->SetInputConnection(source->GetOutputPort());
+
+        actor->SetMapper(mapper);
+
+        renderer->RemoveAllViewProps();
+        renderer->AddActor(actor);
+        renderWindow->Render();
+    }
+    //turn on the measurement
+    if (applydist == true)
+    {
+        distanceWidget = vtkSmartPointer<vtkDistanceWidget>::New();
+        distanceWidget->SetInteractor(ui->qvtkWidget->GetRenderWindow()->GetInteractor());
+        distanceWidget->CreateDefaultRepresentation();
+        distanceWidget->On();
+        renderWindow->Render();
+    }
+}
+//Axis label
+void MainWindow::handleaxisLabel()
+{
+    //Turn on the axis
+    orientationWidget->SetOrientationMarker(axes);
+    orientationWidget->SetInteractor(ui->qvtkWidget->GetRenderWindow()->GetInteractor());
+    orientationWidget->SetEnabled(1);
+    orientationWidget->InteractiveOff();
 }

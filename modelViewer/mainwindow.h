@@ -128,17 +128,56 @@ public:
     void handleaxisLabel();
 
 private slots:
+    /**
+    * 
+    */
     void on_Slider_sliderMoved(int position);
     void on_checkBox_clicked(bool checked);
 
     // Advanced filter options
+
+    /**
+    * This function displays the edit filters dialog
+    */
     void on_editFilters_clicked();
     //----------- Clip Filter--------------
-    void updateClipOriginX(int value); void updateClipNormalX(int value);
-    void updateClipOriginY(int value); void updateClipNormalY(int value);
-    void updateClipOriginZ(int value); void updateClipNormalZ(int value);
+    /**
+    * This handles the value received from the signal emitted from the edit filters window for clipOriginX
+    * @param value equals to the slider value changed in the edit filters window
+    */
+    void updateClipOriginX(int value);
+    /**
+    * This handles the value received from the signal emitted from the edit filters window for clipNormalX
+    * @param value equals to the slider value changed in the edit filters window
+    */
+    void updateClipNormalX(int value);
+    /**
+    * This handles the value received from the signal emitted from the edit filters window for clipOriginY
+    * @param value equals to the slider value changed in the edit filters window
+    */
+    void updateClipOriginY(int value);
+    /**
+    * This handles the value received from the signal emitted from the edit filters window for clipNormalY
+    * @param value equals to the slider value changed in the edit filters window
+    */
+    void updateClipNormalY(int value);
+    /**
+    * This handles the value received from the signal emitted from the edit filters window for clipOriginZ
+    * @param value equals to the slider value changed in the edit filters window
+    */
+    void updateClipOriginZ(int value);
+    /**
+    * This handles the value received from the signal emitted from the edit filters window for clipNormalZ
+    * @param value equals to the slider value changed in the edit filters window
+    */
+    void updateClipNormalZ(int value);
     //-------------------------------------
+
     //------------Shrink Filter--------
+    /**
+    * This handles the value received from the signal emitted from the edit filters window for shrinkFactor
+    * @param value equals to the slider value changed in the edit filters window
+    */
     void updateShrinkFactor(int value);
 
 
@@ -146,22 +185,21 @@ private slots:
 private:
     Ui::MainWindow* ui;
 
-    optionsFilter *opFilterDialog;
-    // filter parameters
-    //--------------Univessal-------------------
-    bool filterApplied;
-   /**
-   *This parameter is for checking whether the distance widget checkbox has been check
-   */
-    bool applydist;
+
+    optionsFilter *opFilterDialog; ///< dialog class pointer for creation of the edit filters window
+
+    bool applydist; ///< This parameter is for checking whether the distance widget checkbox has been check
     // ------------------Clip Filter------------
-     double clipOriginX = 0.0;  double clipNormalX = -1.0;
-     double clipOriginY = 0.0;  double clipNormalY = 0.0;
-     double clipOriginZ = 0.0;  double clipNormalZ = 0.0;
-     //----------------------
-     //-----------------Shrink Filter--------------
-     double shrinkFactor = 0.8;
-     //-----------------------------
+    double clipOriginX = 0.0; ///< X value of the origin for the clip filter, 0.0 is initial value
+    double clipNormalX = -1.0; ///< X value of the normal for the clip filter, -1.0 is initial value
+    double clipOriginY = 0.0; ///< Y value of the origin for the clip filter, 0.0 is initial value
+    double clipNormalY = 0.0; ///< Y value of the normal for the clip filter, 0.0 is initial value
+    double clipOriginZ = 0.0; ///< Z value of the origin for the clip filter, 0.0 is initial value
+    double clipNormalZ = 0.0; ///< Z value of the normal for the clip filter, 0.0 is initial value
+    //----------------------
+    //-----------------Shrink Filter--------------
+    double shrinkFactor = 0.8; ///< scale factor to shrink the model by for the shrink filter, 0.8 is the initial value
+    //-----------------------------
     vtkSmartPointer<vtkRenderer> renderer;
     vtkNew<vtkGenericOpenGLRenderWindow> renderWindow;
 

@@ -229,11 +229,7 @@ void MainWindow::handleClip()
                         = vtkSmartPointer<vtkClipDataSet>::New();
     // gets the output of the current using the vtkalgorithm created
     // in each model viewer function
-  //  vtkClipFilter->SetInputConnection(actor->GetMapper()->GetInputConnection(0, 0)->GetProducer()->GetOutputPort() );
     vtkClipFilter->SetInputConnection(source->GetOutputPort() );
-    // could change source to actor->GetMapper()->GetInputConnection(0, 0)->GetProducer()
-    // however becuase it is the inital filter it isn't exactly necessary
-
     vtkClipFilter->SetClipFunction( planeLeft.Get() );
 
     mapper->SetInputConnection(vtkClipFilter->GetOutputPort() );

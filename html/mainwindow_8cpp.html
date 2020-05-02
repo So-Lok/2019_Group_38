@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>My Project: /home/travis/build/So-Lok/2019_Group_38/modelViewer Directory Reference</title>
+<title>My Project: /home/travis/build/So-Lok/2019_Group_38/modelViewer/mainwindow.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,7 +61,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
-      <li class="current"><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="files.html"><span>File&#160;List</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -85,26 +85,43 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">modelViewer Directory Reference</div>  </div>
+<div class="title">mainwindow.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="subdirs"></a>
-Directories</h2></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="files"></a>
-Files</h2></td></tr>
-<tr class="memitem:mainwindow_8cpp"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mainwindow_8cpp.html">mainwindow.cpp</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:mainwindow_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mainwindow_8h.html">mainwindow.h</a> <a href="mainwindow_8h_source.html">[code]</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:optionsfilter_8cpp"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="optionsfilter_8cpp.html">optionsfilter.cpp</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:optionsfilter_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="optionsfilter_8h.html">optionsfilter.h</a> <a href="optionsfilter_8h_source.html">[code]</a></td></tr>
-<tr class="memdesc:optionsfilter_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">This file contains all of the function declarations for the edit filters window. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-</div><!-- contents -->
+<div class="textblock"><code>#include &lt;vtkSmartPointer.h&gt;</code><br />
+<code>#include &lt;vtkActor.h&gt;</code><br />
+<code>#include &lt;vtkProperty.h&gt;</code><br />
+<code>#include &lt;vtkCamera.h&gt;</code><br />
+<code>#include &lt;vtkPolyData.h&gt;</code><br />
+<code>#include &lt;vtkDataSetMapper.h&gt;</code><br />
+<code>#include &lt;vtkRenderWindow.h&gt;</code><br />
+<code>#include &lt;vtkRenderWindowInteractor.h&gt;</code><br />
+<code>#include &lt;vtkRenderer.h&gt;</code><br />
+<code>#include &lt;vtkNamedColors.h&gt;</code><br />
+<code>#include &lt;vtkNew.h&gt;</code><br />
+<code>#include &lt;vtkGenericOpenGLRenderWindow.h&gt;</code><br />
+<code>#include &lt;vtkCubeSource.h&gt;</code><br />
+<code>#include &lt;vtkSTLReader.h&gt;</code><br />
+<code>#include &lt;vtkPolyDataMapper.h&gt;</code><br />
+<code>#include &lt;vtkPoints.h&gt;</code><br />
+<code>#include &lt;vtkUnstructuredGrid.h&gt;</code><br />
+<code>#include &lt;vtkPyramid.h&gt;</code><br />
+<code>#include &lt;vtkCellArray.h&gt;</code><br />
+<code>#include &lt;vtkPlane.h&gt;</code><br />
+<code>#include &lt;vtkClipDataSet.h&gt;</code><br />
+<code>#include &lt;vtkShrinkFilter.h&gt;</code><br />
+<code>#include &lt;vtkLight.h&gt;</code><br />
+<code>#include &lt;vtkInteractorStyleTrackballCamera.h&gt;</code><br />
+<code>#include &lt;QFileDialog&gt;</code><br />
+<code>#include &lt;QFile&gt;</code><br />
+<code>#include &lt;QTextStream&gt;</code><br />
+<code>#include &lt;new&gt;</code><br />
+<code>#include &quot;<a class="el" href="mainwindow_8h_source.html">mainwindow.h</a>&quot;</code><br />
+<code>#include &quot;ui_mainwindow.h&quot;</code><br />
+<code>#include &quot;model.h&quot;</code><br />
+</div><a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Contains function definitions for features within the mainwindow </p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

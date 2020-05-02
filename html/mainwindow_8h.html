@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>My Project: /home/travis/build/So-Lok/2019_Group_38/modelViewer Directory Reference</title>
+<title>My Project: /home/travis/build/So-Lok/2019_Group_38/modelViewer/mainwindow.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,7 +61,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
-      <li class="current"><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="files.html"><span>File&#160;List</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -84,27 +84,58 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
-<div class="title">modelViewer Directory Reference</div>  </div>
+<div class="title">mainwindow.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><code>#include &lt;QMainWindow&gt;</code><br />
+<code>#include &lt;vtkSmartPointer.h&gt;</code><br />
+<code>#include &lt;vtkRenderer.h&gt;</code><br />
+<code>#include &lt;vtkGenericOpenGLRenderWindow.h&gt;</code><br />
+<code>#include &lt;vtkDataSetMapper.h&gt;</code><br />
+<code>#include &lt;vtkAlgorithmOutput.h&gt;</code><br />
+<code>#include &lt;QColorDialog&gt;</code><br />
+<code>#include &lt;QColor&gt;</code><br />
+<code>#include &lt;vtkNamedColors.h&gt;</code><br />
+<code>#include &lt;vtkLight.h&gt;</code><br />
+<code>#include &lt;vtkBoxWidget.h&gt;</code><br />
+<code>#include &lt;vtkCommand.h&gt;</code><br />
+<code>#include &lt;vtkTransform.h&gt;</code><br />
+<code>#include &lt;QCloseEvent&gt;</code><br />
+<code>#include &lt;QMessageBox&gt;</code><br />
+<code>#include &quot;<a class="el" href="optionsfilter_8h_source.html">optionsfilter.h</a>&quot;</code><br />
+<code>#include &lt;vtkDistanceWidget.h&gt;</code><br />
+<code>#include &lt;vtkDistanceRepresentation.h&gt;</code><br />
+<code>#include &lt;vtkVersion.h&gt;</code><br />
+<code>#include &lt;vtkPolyDataMapper.h&gt;</code><br />
+<code>#include &lt;vtkActor.h&gt;</code><br />
+<code>#include &lt;vtkPolyData.h&gt;</code><br />
+<code>#include &lt;vtkSphereSource.h&gt;</code><br />
+<code>#include &lt;vtkOrientationMarkerWidget.h&gt;</code><br />
+<code>#include &lt;vtkAxesActor.h&gt;</code><br />
+<code>#include &lt;vtkPropAssembly.h&gt;</code><br />
+</div>
+<p><a href="mainwindow_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="subdirs"></a>
-Directories</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_main_window.html">MainWindow</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvtk_my_callback.html">vtkMyCallback</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="files"></a>
-Files</h2></td></tr>
-<tr class="memitem:mainwindow_8cpp"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mainwindow_8cpp.html">mainwindow.cpp</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:mainwindow_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mainwindow_8h.html">mainwindow.h</a> <a href="mainwindow_8h_source.html">[code]</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:optionsfilter_8cpp"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="optionsfilter_8cpp.html">optionsfilter.cpp</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:optionsfilter_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="optionsfilter_8h.html">optionsfilter.h</a> <a href="optionsfilter_8h_source.html">[code]</a></td></tr>
-<tr class="memdesc:optionsfilter_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">This file contains all of the function declarations for the edit filters window. <br /></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespace_ui"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_ui.html">Ui</a></td></tr>
+<tr class="memdesc:namespace_ui"><td class="mdescLeft">&#160;</td><td class="mdescRight">color// <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-</div><!-- contents -->
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Contains function declarations of the main window </p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

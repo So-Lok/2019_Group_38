@@ -10,7 +10,7 @@ env:
     - GH_REPO_NAME: 2019_Group_38
     - DOXYFILE: $TRAVIS_BUILD_DIR/Doxyfile
     - GH_REPO_REF: github.com/so-lok/2019_Group_38.git
- travis virtual machine needs to be told to install doxygen
+# travis virtual machine needs to be told to install doxygen
 
 addons:
   apt:

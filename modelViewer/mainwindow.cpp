@@ -216,7 +216,7 @@ void MainWindow::handleClip()
 
   if(ui->clipFilter->isChecked()==true)
   {
-    filterApplied = true;
+
     // uncheck all other Filters
     ui->shrinkFilter->setChecked(false);
 
@@ -243,7 +243,7 @@ void MainWindow::handleClip()
     renderer->AddActor(actor);
     renderWindow->Render();
   }
-  else if(ui->clipFilter->isChecked()==false && filterApplied == false)
+  else if(ui->clipFilter->isChecked()==false)
   {
 
     mapper->SetInputConnection(source->GetOutputPort() );
@@ -265,7 +265,6 @@ void MainWindow::handleShrink()
 
   if(ui->shrinkFilter->isChecked()==true)
   {
-    filterApplied = true;
     // uncheck all other Filters
     ui->clipFilter->setChecked(false);
 
@@ -297,7 +296,7 @@ void MainWindow::handleShrink()
 
 void MainWindow::resetFilter()
 {
-  filterApplied = false;
+
   // uncheck all filters
   ui->clipFilter->setChecked(false);
   ui->shrinkFilter->setChecked(false);
@@ -443,7 +442,14 @@ void MainWindow::actionOpen()
     model readModFile;
     // input file name to model
     readModFile.readFile(inputFilename.c_str());
-    //  std::cout<<"yeet";
+
+    std::cout<<readModFile.calcModelVolume()<<"\n";
+    std::cout<<readModFile.calcModelWeight()<<"\n";
+    std::cout<<readModFile.getNumberOfVertices()<<"\n";
+
+    if(readModFile.calcModelVolume()>1.08332 && readModFile.calcModelVolume()<1.08334)
+      std::cout<<"yeet1";
+
 
   //  readModFile.dispNumberOfCellsAndType();
   //  readModFile.dispVectorList();

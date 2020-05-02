@@ -56,20 +56,25 @@ include( ${VTK_USE_FILE} )
 include_directories( modelReader/src )
 include_directories( modelReader/inc )
 
+add_library(modelLib
+            modelReader/src/model.cpp modelReader/inc/model.h
+            modelReader/src/cell.cpp modelReader/inc/cell.h
+            modelReader/src/vectorClass.cpp modelReader/inc/vectorClass.h
+            modelReader/src/material.cpp modelReader/inc/material.h
+            )
+
 # Define the executable output and its sources
 add_executable( modelViewer MACOSX_BUNDLE
                 main.cpp
                 mainwindow.cpp mainwindow.h
                 optionsfilter.cpp optionsfilter.h
                 mainwindow.ui optionsfilter.ui
-                modelReader/src/model.cpp modelReader/inc/model.h
-                modelReader/src/cell.cpp modelReader/inc/cell.h
-                modelReader/src/vectorClass.cpp modelReader/inc/vectorClass.h
-                modelReader/src/material.cpp modelReader/inc/material.h
+
                 ${UI_Srcs}
                 ${QRC_Srcs}
                 )
 
+target_link_libraries(modelViewer modelLib)
 
 # Tell CMake that the executable depends on the Qt::Widget libraries.
 target_link_libraries( modelViewer Qt5::Widgets )
@@ -106,8 +111,8 @@ DESTINATION .
 COMPONENT RUNTIME
 )
 # install qt5 plugins , is required to run
-install(FILES  $<TARGET_FILE:Qt5::QWindowsIntegrationPlugin> 
+install(FILES  $<TARGET_FILE:Qt5::QWindowsIntegrationPlugin>
 		DESTINATION bin/platforms)
 # install the models files both .stl and .mod
-install(DIRECTORY models 
+install(DIRECTORY models
 		DESTINATION bin)

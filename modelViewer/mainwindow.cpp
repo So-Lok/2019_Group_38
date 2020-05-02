@@ -102,10 +102,10 @@ MainWindow::MainWindow(QWidget *parent) :
     // Tool bar actions/button
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::actionOpen);
     connect(ui->widgetBox, &QAction::toggled, this, &MainWindow::widgetBox);
-    
+
     //Distance widget
     connect(ui->distWid, &QCheckBox::released, this, &MainWindow::handledistWid);
-    
+
     //Axis widget
     connect(ui->axisLabel, &QPushButton::released, this, &MainWindow::handleaxisLabel);
 
@@ -443,18 +443,6 @@ void MainWindow::actionOpen()
     // input file name to model
     readModFile.readFile(inputFilename.c_str());
 
-    std::cout<<readModFile.calcModelVolume()<<"\n";
-    std::cout<<readModFile.calcModelWeight()<<"\n";
-    std::cout<<readModFile.getNumberOfVertices()<<"\n";
-
-    if(readModFile.calcModelVolume()>1.08332 && readModFile.calcModelVolume()<1.08334)
-      std::cout<<"yeet1";
-
-
-  //  readModFile.dispNumberOfCellsAndType();
-  //  readModFile.dispVectorList();
-  //  readModFile.dispCells();
-
     vtkSmartPointer<vtkPoints> vertices =
             vtkSmartPointer<vtkPoints>::New();
     // inserting every vector in model to vtkpoints
@@ -551,7 +539,8 @@ void MainWindow::handleObjectColor()
     {
         actor->GetProperty()->SetColor(QTcolor.redF(), QTcolor.greenF(), QTcolor.blueF());
         //ui->qvtkWidget->GetRenderWindow()->AddRenderer( renderer );
-        ui->qvtkWidget->GetRenderWindow()->Render();
+        //ui->qvtkWidget->GetRenderWindow()->Render();
+        renderWindow->Render();
     }
 }
 
@@ -562,7 +551,8 @@ void MainWindow::handleBackgroundColor()
     if (QTcolor.isValid())
     {
         renderer->SetBackground(QTcolor.redF(), QTcolor.greenF(), QTcolor.blueF());
-        ui->qvtkWidget->GetRenderWindow()->Render();
+      //  ui->qvtkWidget->GetRenderWindow()->Render();
+      renderWindow->Render();
 
     }
 }
@@ -627,6 +617,7 @@ void MainWindow::handledistWid()
 
         renderer->RemoveAllViewProps();
         renderer->AddActor(actor);
+        distanceWidget->Off();
         renderWindow->Render();
     }
     //turn on the measurement

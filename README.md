@@ -79,6 +79,14 @@ Debug\modelViewer.exe
 
 ```
 
+# Building the installer/package 
+
+build the code like above.
+
+If you are using Visual studio, you can open the modelViewer.sln and build the PACKAGE on the right. make sure you are in Debug mode, though this should be default. 
+
+This will create an installer in the build folder.
+
 
 
 

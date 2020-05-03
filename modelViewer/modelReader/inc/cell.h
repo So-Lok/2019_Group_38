@@ -110,13 +110,26 @@ public:
     /* Calculation Functions */
 
     // vectorlist passed from model
-    
+    /**
+    * Calculates the volume of the cell depending on its type
+    * only works for tetrahedron, hexahedron and pyramid
+    */
     float calcVolume();
 
+    /**
+    * Calculates an estimate of the centre of gravity of the cell by averaging the vertices
+    */
     vectorClass centreOfGravity();
 
+    /**
+    * Calculates the weight of the cell
+    * @param density denisty of the cell material
+    */
     float calcWeight(int density);
 
+    /**
+    * Displays the cell's vectors to the command line
+    */
     void dispCellVectors();
 
     // for the model to use vector Id list
@@ -124,13 +137,14 @@ public:
 
 private:
     /* Base Cell variables */
-    int cellId;
-    char type;
-    int matId;
+    int cellId; ///< Cell's ID
+    char type; ///< Cell's type
+    int matId; ///< the material ID of the cell
 
     // stores the IDs of the vectors in the cell
-    std::vector<int> vectorIdList;
-    std::vector<vectorClass> vectorList;
+    std::vector<int> vectorIdList; ///< vector array of vector IDs
+    std::vector<vectorClass> vectorList; ///< vector array of vectors within the cell
+
     // address to the models vector list, to be set during the reading of the model file
     //std::vector<vectorClass> vectorListAddress;
 

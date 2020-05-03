@@ -45,6 +45,7 @@
 //light
 #include <vtkLight.h>
 
+
 // Box widget
 #include <vtkInteractorStyleTrackballCamera.h>
 
@@ -77,10 +78,17 @@ MainWindow::MainWindow(QWidget *parent) :
     // render window made in qt and therefore assign the renderer to the qt window
     ui->qvtkWidget->GetRenderWindow()->AddRenderer(renderer);
     actor = vtkSmartPointer<vtkActor>::New();
+
+ 
+
+    //create a light 
+  
+
     mapper = vtkSmartPointer<vtkDataSetMapper>::New();
 
     // initialisation for features
     light = vtkSmartPointer<vtkLight>::New();
+
 
     boxWidget = vtkSmartPointer<vtkBoxWidget>::New();
 
@@ -108,6 +116,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Axis widget
     connect(ui->axisLabel, &QAction::toggled, this, &MainWindow::AxisLabel);
+
+ 
 
 
     // SIGNAL(External window) connection to SLOTs(MainWindow)
@@ -138,6 +148,13 @@ MainWindow::MainWindow(QWidget *parent) :
     light->SetAmbientColor(1, 1, 1);
     light->SetSpecularColor(1, 1, 1);
     light->SetIntensity(0.5);
+
+
+    
+    // Add the actor to the scene
+    renderer->AddLight(light);
+
+
 }
 
 /**
@@ -330,6 +347,7 @@ void MainWindow::handleResetView()
 }
 
 
+
 void MainWindow::widgetBox()
 {
   if(ui->widgetBox->isChecked() )
@@ -408,6 +426,8 @@ void MainWindow::actionOpen()
 
     renderer->AddActor(actor);
 
+
+
     // create a copy of the current source to be used with filters if necessary
     source = actor->GetMapper()->GetInputConnection(0, 0)->GetProducer();
     // Setup the renderers's camera
@@ -415,6 +435,7 @@ void MainWindow::actionOpen()
     renderer->GetActiveCamera()->Azimuth(30);
     renderer->GetActiveCamera()->Elevation(30);
     renderer->ResetCameraClippingRange();
+
 
     resetFilter();
   }
@@ -570,7 +591,7 @@ void MainWindow::on_Slider_sliderMoved(int position)
     else {
         light->SetIntensity(0.5);
     }
-    renderer->AddLight(light);
+    
     ui->qvtkWidget->GetRenderWindow()->Render();
 
 
@@ -586,9 +607,27 @@ void MainWindow::on_checkBox_clicked(bool checked)
         light->SetIntensity(0.5);
     }
 
-    renderer->AddLight(light);
+    
     ui->qvtkWidget->GetRenderWindow()->Render();
 }
+
+//function to see the Edge of the object
+void MainWindow::on_Edge_toggled(bool checked)
+{
+
+    if (checked)
+    {
+        actor->GetProperty()->SetRepresentationToWireframe();
+        
+    }
+    else 
+    {
+        actor->GetProperty()->SetRepresentationToSurface();
+        
+    }
+    ui->qvtkWidget->GetRenderWindow()->Render();
+}
+
 //Distance widget
 void MainWindow::handledistWid()
 {
@@ -616,6 +655,16 @@ void MainWindow::handledistWid()
         renderWindow->Render();
     }
 }
+
+// opacity ///
+
+void MainWindow::on_OpacitySlider_valueChanged(int value)
+{
+    if (ui->OpacitySlider->value() <= 1) actor->GetProperty()->SetOpacity(1.0);
+    else  actor->GetProperty()->SetOpacity(1 - (double)ui->OpacitySlider->value() / 100);
+    ui->qvtkWidget->GetRenderWindow()->Render();
+}
+
 //Axis label
 void MainWindow::AxisLabel()
 {
@@ -638,3 +687,4 @@ void MainWindow::AxisLabel()
     }
     }
     
+

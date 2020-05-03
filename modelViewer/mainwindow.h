@@ -57,12 +57,13 @@ class MainWindow;
  * Sets up the maindwindow ui. Connects all mainwindow buttons to functions
  * sets up additional window(s) and initalises vtk variables
  */
-class MainWindow : public QMainWindow
+ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
+   
 public:
-    explicit MainWindow(QWidget *parent = 0);
+    explicit MainWindow(QWidget* parent = 0);
     ~MainWindow();
 
     // closeEvent
@@ -105,6 +106,7 @@ public:
 
 
 
+
     /**
     * Handles the changing of the model's colour
     */
@@ -114,6 +116,13 @@ public:
     * Handles the changing of the background's colour
     */
     void handleBackgroundColor();
+
+
+
+
+
+private slots:
+
 
     //Distance widget //
     /**
@@ -127,14 +136,31 @@ public:
     */
     void AxisLabel();
 
+
 private slots:
+
+    //light intensity//
     /**
-    * 
+    * handles the sliding of the light intensity after checked the ON/OFF box
     */
     void on_Slider_sliderMoved(int position);
+    /**
+   * handles the ON/OFF box of the light intensity sliding 
+   */
     void on_checkBox_clicked(bool checked);
 
-    // Advanced filter options
+    //Edge//
+    /**
+   * handles the wireframe when checked the box 
+   */
+    void on_Edge_toggled(bool checked);
+
+    /// opacity //
+
+    /**
+   * handles the opacity when sliding
+   */
+    void on_OpacitySlider_valueChanged(int value);
 
     /**
     * This function displays the edit filters dialog
@@ -182,6 +208,7 @@ private slots:
 
 
 
+
 private:
     Ui::MainWindow* ui;
 
@@ -216,13 +243,20 @@ private:
     vtkSmartPointer<vtkBoxWidget> boxWidget;
     vtkSmartPointer<vtkRenderWindowInteractor> interactor;
 
+    /**
+   *vtkNamedColors is used to change the color of the objects
+   */
     vtkSmartPointer<vtkNamedColors> colors;
+    /**
+   *vtkLight is used to show the light intensity
+   */
     vtkSmartPointer<vtkLight> light;
  
     vtkSmartPointer<vtkDistanceWidget> distanceWidget = vtkSmartPointer<vtkDistanceWidget>::New();
     
     vtkSmartPointer<vtkAxesActor> axes = vtkSmartPointer<vtkAxesActor>::New();
     vtkSmartPointer<vtkOrientationMarkerWidget> orientationWidget = vtkSmartPointer<vtkOrientationMarkerWidget>::New();
+
 };
 
 // call back used for box widget

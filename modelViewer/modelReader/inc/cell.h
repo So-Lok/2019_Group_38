@@ -30,12 +30,36 @@ public:
 
     /**
     *  Ovveride costructor for tetrahedron cell type
+    * @param cellIdToSet new cell ID value
+    * @param typeOfCell new cell type value
+    * @param matIdToSet new material value
+    * @param vId1 ID for vector 1
+    * @param vId2 ID for vector 2
+    * @param vId3 ID for vector 3
+    * @param vId4 ID for vector 4
+    * @param temp1 temporary vector1 for storing purposes
+    * @param temp2 temporary vector2 for storing purposes
+    * @param temp3 temporary vector3 for storing purposes
+    * @param temp4 temporary vector4 for storing purposes
     */
     cell(int cellIdToSet, char typeOfCell, int matIdToSet,
          int vId1, int vId2, int vId3, int vId4,
          vectorClass temp1, vectorClass temp2, vectorClass temp3, vectorClass temp4);
     /**
     *  Ovveride costructor for pyramid cell type
+    * @param cellIdToSet new cell ID value
+    * @param typeOfCell new cell type value
+    * @param matIdToSet new material value
+    * @param vId1 ID for vector 1
+    * @param vId2 ID for vector 2
+    * @param vId3 ID for vector 3
+    * @param vId4 ID for vector 4
+    * @param vId5 ID for vector 5
+    * @param temp1 temporary vector1 for storing purposes
+    * @param temp2 temporary vector2 for storing purposes
+    * @param temp3 temporary vector3 for storing purposes
+    * @param temp4 temporary vector4 for storing purposes
+    * @param temp5 temporary vector5 for storing purposes
     */
     cell(int cellIdToSet, char typeOfCell, int matIdToSet,
          int vId1, int vId2, int vId3, int vId4,
@@ -45,6 +69,25 @@ public:
 
     /**
     *  Ovveride costructor for hexahedron cell type
+    * @param cellIdToSet new cell ID value
+    * @param typeOfCell new cell type value
+    * @param matIdToSet new material value
+    * @param vId1 ID for vector 1
+    * @param vId2 ID for vector 2
+    * @param vId3 ID for vector 3
+    * @param vId4 ID for vector 4
+    * @param vId5 ID for vector 5
+    * @param vId6 ID for vector 6
+    * @param vId7 ID for vector 7
+    * @param vId8 ID for vector 8
+    * @param temp1 temporary vector1 for storing purposes
+    * @param temp2 temporary vector2 for storing purposes
+    * @param temp3 temporary vector3 for storing purposes
+    * @param temp4 temporary vector4 for storing purposes
+    * @param temp5 temporary vector5 for storing purposes
+    * @param temp6 temporary vector6 for storing purposes
+    * @param temp7 temporary vector7 for storing purposes
+    * @param temp8 temporary vector8 for storing purposes
     */
     cell(int cellIdToSet, char typeOfCell, int matIdToSet,
          int vId1, int vId2, int vId3, int vId4,

@@ -87,6 +87,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     boxWidget = vtkSmartPointer<vtkBoxWidget>::New();
 
+    distanceWidget = vtkSmartPointer<vtkDistanceWidget>::New();
+    axes = vtkSmartPointer<vtkAxesActor>::New();
+    orientationWidget = vtkSmartPointer<vtkOrientationMarkerWidget>::New();
+
     // Define icon Files
     // file is determined by where you run the exe from
     // if you run withing debug then ../.. if in build then ../

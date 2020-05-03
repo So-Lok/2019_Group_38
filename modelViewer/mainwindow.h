@@ -1,6 +1,6 @@
 /**
 * @file mainwindow.h
-* Contains function declarations of the main window
+* @brief Contains function declarations of the main window
 */
 
 
@@ -205,8 +205,6 @@ private:
 
     // filter parameters
     //--------------Univessal-------------------
-    bool filterApplied;
-
     optionsFilter *opFilterDialog; ///< dialog class pointer for creation of the edit filters window
 
     bool applydist; ///< This parameter is for checking whether the distance widget checkbox has been check
@@ -237,10 +235,10 @@ private:
     vtkSmartPointer<vtkNamedColors> colors;
     vtkSmartPointer<vtkLight> light;
 
-    vtkSmartPointer<vtkDistanceWidget> distanceWidget = vtkSmartPointer<vtkDistanceWidget>::New();
+    vtkSmartPointer<vtkDistanceWidget> distanceWidget;
 
-    vtkSmartPointer<vtkAxesActor> axes = vtkSmartPointer<vtkAxesActor>::New();
-    vtkSmartPointer<vtkOrientationMarkerWidget> orientationWidget = vtkSmartPointer<vtkOrientationMarkerWidget>::New();
+    vtkSmartPointer<vtkAxesActor> axes;
+    vtkSmartPointer<vtkOrientationMarkerWidget> orientationWidget;
 
 };
 

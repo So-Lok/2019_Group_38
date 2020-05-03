@@ -2,6 +2,11 @@
 
 # Group 38
 
+[![Build Status](https://travis-ci.com/So-Lok/2019_Group_38.svg?token=Dw1Hp9TfHVSn6gfad5JW&branch=master)]
+
+# Doxygen Documentation
+https://so-lok.github.io/2019_Group_38/html
+
 ## GROUP MEMBERS PLEASE READ
 
 Please comment all of the features that you make using doxygen style in the .h file. As we are short on time I will not have any time to comment on your code in addition to the code in the main repo already. 
@@ -78,6 +83,14 @@ Debug\modelViewer.exe
 
 
 ```
+
+# Building the installer/package 
+
+build the code like above.
+
+If you are using Visual studio, you can open the modelViewer.sln and build the PACKAGE on the right. make sure you are in Debug mode, though this should be default. 
+
+This will create an installer in the build folder.
 
 
 

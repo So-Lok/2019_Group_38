@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1248</width>
-    <height>843</height>
+    <width>966</width>
+    <height>636</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,58 +19,19 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>1231</width>
-      <height>421</height>
+      <width>941</width>
+      <height>391</height>
      </rect>
     </property>
     <property name="autoFillBackground">
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="cameraReset">
-    <property name="geometry">
-     <rect>
-      <x>460</x>
-      <y>520</y>
-      <width>111</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Reset Camera</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="ObjectColor">
-    <property name="geometry">
-     <rect>
-      <x>890</x>
-      <y>500</y>
-      <width>151</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Object Color</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="BackgroundColor">
-    <property name="geometry">
-     <rect>
-      <x>890</x>
-      <y>450</y>
-      <width>151</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Background Color</string>
-    </property>
-   </widget>
    <widget class="QSlider" name="Slider">
     <property name="geometry">
      <rect>
-      <x>1070</x>
-      <y>520</y>
+      <x>470</x>
+      <y>510</y>
       <width>141</width>
       <height>21</height>
      </rect>
@@ -82,7 +43,7 @@
    <widget class="QCheckBox" name="checkBox">
     <property name="geometry">
      <rect>
-      <x>1070</x>
+      <x>470</x>
       <y>470</y>
       <width>141</width>
       <height>31</height>
@@ -95,7 +56,7 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>1070</x>
+      <x>470</x>
       <y>440</y>
       <width>141</width>
       <height>31</height>
@@ -105,39 +66,13 @@
      <string>Light intensity</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pyramidButton">
-    <property name="geometry">
-     <rect>
-      <x>460</x>
-      <y>470</y>
-      <width>80</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Pyramid</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="cubeButton">
-    <property name="geometry">
-     <rect>
-      <x>460</x>
-      <y>430</y>
-      <width>80</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Cube</string>
-    </property>
-   </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>20</x>
       <y>440</y>
-      <width>85</width>
-      <height>70</height>
+      <width>98</width>
+      <height>75</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -169,43 +104,106 @@
      </item>
     </layout>
    </widget>
-   <widget class="QPushButton" name="editFilters">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>120</x>
+      <x>130</x>
       <y>440</y>
-      <width>75</width>
-      <height>23</height>
+      <width>194</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="editFilters">
+       <property name="text">
+        <string>Edit Filters</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="cameraReset">
+       <property name="text">
+        <string>Reset Camera</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>440</y>
+      <width>113</width>
+      <height>64</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QPushButton" name="BackgroundColor">
+       <property name="text">
+        <string>Background Color</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="ObjectColor">
+       <property name="text">
+        <string>Object Color</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QPushButton" name="axisLabel">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>440</y>
+      <width>93</width>
+      <height>28</height>
      </rect>
     </property>
     <property name="text">
-     <string>Edit Filters</string>
+     <string>Axis</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="distWid">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>480</y>
+      <width>111</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Measurement</string>
     </property>
    </widget>
    <widget class="QCheckBox" name="EdgeCheckBox">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>520</y>
-      <width>81</width>
+      <x>130</x>
+      <y>480</y>
+      <width>101</width>
       <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string>Edge</string>
+     <string>Edge </string>
     </property>
    </widget>
    <zorder>layoutWidget</zorder>
-   <zorder>cameraReset</zorder>
-   <zorder>ObjectColor</zorder>
-   <zorder>BackgroundColor</zorder>
+   <zorder>layoutWidget</zorder>
+   <zorder>layoutWidget</zorder>
    <zorder>Slider</zorder>
    <zorder>checkBox</zorder>
    <zorder>label</zorder>
-   <zorder>pyramidButton</zorder>
-   <zorder>cubeButton</zorder>
    <zorder>qvtkWidget</zorder>
-   <zorder>editFilters</zorder>
+   <zorder>axisLabel</zorder>
+   <zorder>distWid</zorder>
    <zorder>EdgeCheckBox</zorder>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -214,7 +212,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1248</width>
+     <width>966</width>
      <height>21</height>
     </rect>
    </property>

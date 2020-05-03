@@ -9,5 +9,7 @@
 *.lib
 *.a
 *.exp
+*.ui.autosave
 
+html/
 build/

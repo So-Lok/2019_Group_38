@@ -1,38 +1,32 @@
-# specify the minimum required cmake version
 cmake_minimum_required( VERSION 2.8 )
 
-# Name of the project
-project( model )
+
+project( modelViewerTests)
+include(CTest)
 
 
+set( CMAKE_INCLUDE_CURRENT_DIR ON )
 
-# include directories to look into
-
-include_directories( inc )
-include_directories( src )
+include_directories( modelViewer/tests )
+include_directories( modelViewer/modelReader/src )
+include_directories( modelViewer/modelReader/inc )
 include_directories( modelFiles )
 
-# add a library (model.cpp)
-# library name and then the file to make into a library
-add_library( model src/model.cpp inc/model.h 
- 		   src/cell.cpp inc/cell.h
-		   src/vectorClass.cpp inc/vectorClass.h
-		   src/material.cpp inc/material.h)
+add_library(modelLib
+            modelViewer/modelReader/src/model.cpp modelViewer/modelReader/inc/model.h
+            modelViewer/modelReader/src/cell.cpp modelViewer/modelReader/inc/cell.h
+            modelViewer/modelReader/src/vectorClass.cpp modelViewer/modelReader/inc/vectorClass.h
+            modelViewer/modelReader/src/material.cpp modelViewer/modelReader/inc/material.h
+            )
 
-# create the execuatable using the test main
+add_executable(testModel modelViewer/tests/modelTest.cpp)
+add_executable(testVector modelViewer/tests/vectorTest.cpp)
 
-add_executable( modelTest src/main.cpp )
+target_link_libraries(testModel modelLib)
+target_link_libraries(testVector modelLib)
 
-target_link_libraries( modelTest model )
+add_test(testModel testModel)
+add_test(testVector testVector) 
 
-
-# copy example model files to the build folder so that executable 
-# can use the files
-
-file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/modelFiles/ExampleModel1.mod
-	  ${CMAKE_CURRENT_SOURCE_DIR}/modelFiles/ExampleModel2.mod
-	  ${CMAKE_CURRENT_SOURCE_DIR}/modelFiles/ExampleModel3.mod	
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/modelFiles/ExampleModel1.mod	
 DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
-
-
-

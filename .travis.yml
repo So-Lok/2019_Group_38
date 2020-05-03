@@ -1,0 +1,33 @@
+# .travis.yml
+sudo: false
+
+branches:
+  except:
+    - gh-pages
+
+env:
+  global:
+    - GH_REPO_NAME: 2019_Group_38
+    - DOXYFILE: $TRAVIS_BUILD_DIR/Doxyfile
+    - GH_REPO_REF: github.com/so-lok/2019_Group_38.git
+# travis virtual machine needs to be told to install doxygen
+
+addons:
+  apt:
+    packages:
+      - doxygen
+      - graphviz
+
+# code which travis has to run every time code is submitted
+script:
+  - cmake .
+  - make
+  - make test
+
+# after the code has been successfully built we tell
+# doxygen to scan the code files and generate a html documentation
+
+after_success:
+  - cd $TRAVIS_BUILD_DIR
+  - chmod +x generateDocumentationAndDeploy.sh
+  - ./generateDocumentationAndDeploy.sh

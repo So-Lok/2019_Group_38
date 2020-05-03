@@ -6,230 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-<<<<<<< Updated upstream
-    <width>851</width>
-    <height>565</height>
-=======
     <width>832</width>
     <height>622</height>
->>>>>>> Stashed changes
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-<<<<<<< Updated upstream
-   <widget class="QVTKOpenGLWidget" name="qvtkWidget">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>20</y>
-      <width>571</width>
-      <height>291</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="cameraReset">
-    <property name="geometry">
-     <rect>
-      <x>250</x>
-      <y>320</y>
-      <width>131</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Reset Camera</string>
-    </property>
-   </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>320</y>
-      <width>181</width>
-      <height>27</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout">
-       <item>
-        <widget class="QPushButton" name="cubeButton">
-         <property name="text">
-          <string>Cube</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pyramidButton">
-         <property name="text">
-          <string>Pyramid</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>360</y>
-      <width>162</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
-     <item>
-      <widget class="QCheckBox" name="clipFilter">
-       <property name="text">
-        <string>Clip Filter</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QCheckBox" name="shrinkFilter">
-       <property name="text">
-        <string>Shrink Filter</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QPushButton" name="ObjectColor">
-    <property name="geometry">
-     <rect>
-      <x>230</x>
-      <y>360</y>
-      <width>151</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Object Color</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="BackgroundColor">
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>360</y>
-      <width>191</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Background Color</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="xaxisButton">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>390</y>
-      <width>51</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>X  plane</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="xaxisButton2">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>390</y>
-      <width>51</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>-X Plane</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="YaxisButton">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>420</y>
-      <width>51</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Y  plane</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="YaxisButton2">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>420</y>
-      <width>51</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>-Y  plane</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="xaxisButton_5">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>51</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>X  plane</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="ZaxisButton">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>450</y>
-      <width>51</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Z  plane</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="ZaxisButton2">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>450</y>
-      <width>51</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>-Z  plane</string>
-    </property>
-   </widget>
-=======
    <layout class="QGridLayout" name="gridLayout">
     <item row="1" column="0" rowspan="2">
      <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -406,7 +190,6 @@
    </layout>
    <zorder>qvtkWidget</zorder>
    <zorder></zorder>
->>>>>>> Stashed changes
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QMenuBar" name="menubar">
@@ -414,11 +197,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-<<<<<<< Updated upstream
-     <width>851</width>
-=======
      <width>832</width>
->>>>>>> Stashed changes
      <height>21</height>
     </rect>
    </property>
@@ -432,7 +211,7 @@
     <property name="title">
      <string>Widgets</string>
     </property>
-    <addaction name="actionBox"/>
+    <addaction name="widgetBox"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuWidgets"/>
@@ -465,19 +244,22 @@
     <string>Ctrl+O</string>
    </property>
   </action>
-  <action name="actionBox">
+  <action name="widgetBox">
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="text">
     <string>Box Widget</string>
    </property>
+   <property name="toolTip">
+    <string>A box frame is placed around the model, it allows for adjustment of the model using the track balls</string>
+   </property>
   </action>
  </widget>
  <customwidgets>
   <customwidget>
    <class>QVTKOpenGLWidget</class>
-   <extends>QOpenGLWidget</extends>
+   <extends>QWidget</extends>
    <header>QVTKOpenGLWidget.h</header>
   </customwidget>
  </customwidgets>

@@ -61,6 +61,12 @@ class MainWindow;
 {
     Q_OBJECT
 
+    signals:
+    /**
+     * Signal emitted when a message is displayed in the status bar
+     */
+    void statusUpdateMessage(const QString& message, int timeout);
+
 public:
     explicit MainWindow(QWidget* parent = 0);
     ~MainWindow();
@@ -105,6 +111,7 @@ public:
 
 
 
+
     /**
     * Handles the changing of the model's colour
     */
@@ -134,6 +141,7 @@ private slots:
    */
     void handleaxisLabel();
 
+
 private slots:
 
     //light intensity//
@@ -152,8 +160,12 @@ private slots:
    */
     void on_EdgeCheckBox_toggled(bool checked);
 
+    /// opacity //
 
-    // Advanced filter options
+    /**
+   * handles the opacity when sliding
+   */
+    void on_OpacitySlider_valueChanged(int value);
 
     /**
     * This function displays the edit filters dialog

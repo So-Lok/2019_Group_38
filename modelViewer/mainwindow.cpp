@@ -45,6 +45,7 @@
 //light
 #include <vtkLight.h>
 
+
 // Box widget
 #include <vtkInteractorStyleTrackballCamera.h>
 
@@ -116,6 +117,8 @@ MainWindow::MainWindow(QWidget *parent) :
     //Axis widget
     connect(ui->axisLabel, &QPushButton::released, this, &MainWindow::handleaxisLabel);
 
+ 
+
 
     // SIGNAL(External window) connection to SLOTs(MainWindow)
 
@@ -147,6 +150,7 @@ MainWindow::MainWindow(QWidget *parent) :
     light->SetIntensity(0.5);
 
 
+    
     // Add the actor to the scene
     renderer->AddLight(light);
 
@@ -668,5 +672,14 @@ void MainWindow::handleaxisLabel()
     orientationWidget->SetInteractor(ui->qvtkWidget->GetRenderWindow()->GetInteractor());
     orientationWidget->SetEnabled(1);
     orientationWidget->InteractiveOff();
+}
+
+// opacity ///
+
+void MainWindow::on_OpacitySlider_valueChanged(int value)
+{
+    if (ui->OpacitySlider->value() <= 1) actor->GetProperty()->SetOpacity(1.0);
+    else  actor->GetProperty()->SetOpacity(1 - (double)ui->OpacitySlider->value() / 100);
+    ui->qvtkWidget->GetRenderWindow()->Render();
 }
 

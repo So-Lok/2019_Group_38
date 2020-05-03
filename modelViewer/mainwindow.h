@@ -57,12 +57,13 @@ class MainWindow;
  * Sets up the maindwindow ui. Connects all mainwindow buttons to functions
  * sets up additional window(s) and initalises vtk variables
  */
-class MainWindow : public QMainWindow
+ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
+
 public:
-    explicit MainWindow(QWidget *parent = 0);
+    explicit MainWindow(QWidget* parent = 0);
     ~MainWindow();
 
     // closeEvent
@@ -103,8 +104,6 @@ public:
     */
     void handleShrink();
 
-
-
     /**
     * Handles the changing of the model's colour
     */
@@ -113,23 +112,11 @@ public:
     /**
     * Handles the changing of the background's colour
     */
-    void handleBackgroundColor();
+    void handleBackgroundColor(); 
 
-    //Distance widget //
-       /**
-       * Handles the measuring of the distance if the check box has been checked
-       */
-    void handledistWid();
-
-   //Axis label //
-   /**
-   * Handles the marking of axes on screen
-   */
-    void handleaxisLabel(); 
-
-     /** 
-      * methods handle the different camera views buttons 
-      */
+    /** 
+    * Methods handle the different camera views buttons 
+    */
       
        // X plane view bottom 
 	void handleViewx();
@@ -154,14 +141,45 @@ public:
 		// -90 degrees switcher button
 		 void handleView902();
 
+
+
 private slots:
+
+
+    //Distance widget //
     /**
-    * 
+    * Handles the measuring of the distance between two points
+    */
+    void handledistWid();
+
+    //Axis label //
+    /**
+    * Handles the marking of axes on screen
+    */
+    void AxisLabel();
+
+    //light intensity//
+    /**
+    * handles the sliding of the light intensity after checked the ON/OFF box
     */
     void on_Slider_sliderMoved(int position);
+    /**
+   * handles the ON/OFF box of the light intensity sliding
+   */
     void on_checkBox_clicked(bool checked);
 
-    // Advanced filter options
+    //Edge//
+    /**
+   * handles the wireframe when checked the box
+   */
+    void on_Edge_toggled(bool checked);
+
+    /// opacity //
+
+    /**
+   * handles the opacity when sliding
+   */
+    void on_OpacitySlider_valueChanged(int value);
 
     /**
     * This function displays the edit filters dialog
@@ -209,13 +227,18 @@ private slots:
 
 
 
+
 private:
     Ui::MainWindow* ui;
 
+    // filter parameters
+    //--------------Univessal-------------------
+    bool filterApplied;
 
     optionsFilter *opFilterDialog; ///< dialog class pointer for creation of the edit filters window
 
     bool applydist; ///< This parameter is for checking whether the distance widget checkbox has been check
+
     // ------------------Clip Filter------------
     double clipOriginX = 0.0; ///< X value of the origin for the clip filter, 0.0 is initial value
     double clipNormalX = -1.0; ///< X value of the normal for the clip filter, -1.0 is initial value
@@ -242,20 +265,11 @@ private:
     vtkSmartPointer<vtkNamedColors> colors;
     vtkSmartPointer<vtkLight> light;
 
-    /**
-    *vtkDistanceWidget is used to measure the distance between two points.
-    */
     vtkSmartPointer<vtkDistanceWidget> distanceWidget = vtkSmartPointer<vtkDistanceWidget>::New();
 
-    /**
-    *vtkAxesActor is a 2d/3d actor representing 3 dimension axes on the screen.
-    */
     vtkSmartPointer<vtkAxesActor> axes = vtkSmartPointer<vtkAxesActor>::New();
-
-    /**
-    *vtkOrientationMarkerWidget is for manipulating the position,size,orientaion of a prop that represent the orientaion marker.
-    */
     vtkSmartPointer<vtkOrientationMarkerWidget> orientationWidget = vtkSmartPointer<vtkOrientationMarkerWidget>::New();
+
 };
 
 // call back used for box widget

@@ -4,6 +4,9 @@
 
 [![Build Status](https://travis-ci.com/So-Lok/2019_Group_38.svg?token=Dw1Hp9TfHVSn6gfad5JW&branch=master)]
 
+# Doxygen Documentation
+https://so-lok.github.io/2019_Group_38/html
+
 ## GROUP MEMBERS PLEASE READ
 
 Please comment all of the features that you make using doxygen style in the .h file. As we are short on time I will not have any time to comment on your code in addition to the code in the main repo already. 

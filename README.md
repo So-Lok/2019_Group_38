@@ -43,6 +43,10 @@ This will create an installer in the build folder.
 # Filters
 - Clip filter, clipping plane can be set with edit filters window. The default could clip an entire model so be sure to change the settings in edit filter if it does.
 - Shrink filter, shrinks the model's individual cells by a scale factor which can be changed in edit filters
+
+Can only be used one at a time
+compatible with wireframe, graphical changes such as colour, lighting, opacity
+
 # Widgets
 - box widget, allows the user to transform the model, in widgets tab  
 - axis widget, displays axis on screen, in widgets tab
@@ -57,8 +61,14 @@ Shows the number of cells and vertices/ points of each model
 - Light intensity slider and toggleable light
 # Models are installed alongside the program in models folder in bin
 
-# Please take note
+# Please take note, some known issues
 - at start up if no model has been imported in the program will crash if the user attempts to apply a filter to nothing. 
+- box widget will reset if enabled after disabling.
+- box widget will make the models retain the transform even after importing new model (permanent tranform to models)
+  A restart of the program fixes this
+- axis widget has some lighting issues
+- some problems with mixing widgets with filters
+- warning about window geometry when using colour buttons, has no effect on actual program however
 - there may be other issues which have not been found yet or ignored as not significant enough to affect the program massively
 
 ## GROUP MEMBERS PLEASE READ

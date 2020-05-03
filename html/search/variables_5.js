@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['shrinkfactor',['shrinkFactor',['../class_main_window.html#a197bf5ec9a95a8597f914911db767427',1,'MainWindow']]]
+  ['vectorlist',['vectorList',['../classmodel.html#abc3a862285a75aaa1cb53d5c9f7f4083',1,'model']]]
 ];

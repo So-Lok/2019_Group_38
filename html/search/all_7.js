@@ -11,6 +11,5 @@ var searchData=
   ['opfilterdialog',['opFilterDialog',['../class_main_window.html#a987b68a7da6cd6b772b6b7fee3ec89cb',1,'MainWindow']]],
   ['optionsfilter',['optionsFilter',['../classoptions_filter.html',1,'']]],
   ['optionsfilter_2ecpp',['optionsfilter.cpp',['../optionsfilter_8cpp.html',1,'']]],
-  ['optionsfilter_2eh',['optionsfilter.h',['../optionsfilter_8h.html',1,'']]],
-  ['orientationwidget',['orientationWidget',['../class_main_window.html#a8cedb541b9048b3983936803a9b4c659',1,'MainWindow']]]
+  ['optionsfilter_2eh',['optionsfilter.h',['../optionsfilter_8h.html',1,'']]]
 ];

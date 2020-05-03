@@ -130,8 +130,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a7fa793c4e4db2b7a9f7087d0f05196d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43054799b168c7f4ec09e711283aa62f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_main_window.html#a43054799b168c7f4ec09e711283aa62f">handledistWid</a> ()</td></tr>
 <tr class="separator:a43054799b168c7f4ec09e711283aa62f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7959fd4a5db55114abc0ca61d880714a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_main_window.html#a7959fd4a5db55114abc0ca61d880714a">handleaxisLabel</a> ()</td></tr>
-<tr class="separator:a7959fd4a5db55114abc0ca61d880714a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ffe7d6a8fc68bf887ccd0504787e376"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_main_window.html#a1ffe7d6a8fc68bf887ccd0504787e376">AxisLabel</a> ()</td></tr>
+<tr class="separator:a1ffe7d6a8fc68bf887ccd0504787e376"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-slots"></a>
 Private Slots</h2></td></tr>
@@ -163,6 +163,9 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a35466a70ed47252a0191168126a352a5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a35466a70ed47252a0191168126a352a5"></a>
 Ui::MainWindow *&#160;</td><td class="memItemRight" valign="bottom"><b>ui</b></td></tr>
 <tr class="separator:a35466a70ed47252a0191168126a352a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d518694d645c5f17daec3a752017528"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3d518694d645c5f17daec3a752017528"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>filterApplied</b></td></tr>
+<tr class="separator:a3d518694d645c5f17daec3a752017528"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a987b68a7da6cd6b772b6b7fee3ec89cb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a987b68a7da6cd6b772b6b7fee3ec89cb"></a>
 <a class="el" href="classoptions_filter.html">optionsFilter</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_main_window.html#a987b68a7da6cd6b772b6b7fee3ec89cb">opFilterDialog</a></td></tr>
 <tr class="memdesc:a987b68a7da6cd6b772b6b7fee3ec89cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">dialog class pointer for creation of the edit filters window <br /></td></tr>
@@ -229,11 +232,14 @@ vtkSmartPointer&lt; vtkNamedColors &gt;&#160;</td><td class="memItemRight" valig
 <tr class="memitem:a3f46f38f8603c05a64be2afb4c98e575"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3f46f38f8603c05a64be2afb4c98e575"></a>
 vtkSmartPointer&lt; vtkLight &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>light</b></td></tr>
 <tr class="separator:a3f46f38f8603c05a64be2afb4c98e575"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc147602fcc95805b97c4d9a38abd71a"><td class="memItemLeft" align="right" valign="top">vtkSmartPointer&lt; vtkDistanceWidget &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_main_window.html#abc147602fcc95805b97c4d9a38abd71a">distanceWidget</a> = vtkSmartPointer&lt;vtkDistanceWidget&gt;::New()</td></tr>
+<tr class="memitem:abc147602fcc95805b97c4d9a38abd71a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abc147602fcc95805b97c4d9a38abd71a"></a>
+vtkSmartPointer&lt; vtkDistanceWidget &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>distanceWidget</b> = vtkSmartPointer&lt;vtkDistanceWidget&gt;::New()</td></tr>
 <tr class="separator:abc147602fcc95805b97c4d9a38abd71a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2686fa5d5ac8802bf14f03c475dff699"><td class="memItemLeft" align="right" valign="top">vtkSmartPointer&lt; vtkAxesActor &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_main_window.html#a2686fa5d5ac8802bf14f03c475dff699">axes</a> = vtkSmartPointer&lt;vtkAxesActor&gt;::New()</td></tr>
+<tr class="memitem:a2686fa5d5ac8802bf14f03c475dff699"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2686fa5d5ac8802bf14f03c475dff699"></a>
+vtkSmartPointer&lt; vtkAxesActor &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>axes</b> = vtkSmartPointer&lt;vtkAxesActor&gt;::New()</td></tr>
 <tr class="separator:a2686fa5d5ac8802bf14f03c475dff699"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8cedb541b9048b3983936803a9b4c659"><td class="memItemLeft" align="right" valign="top">vtkSmartPointer&lt; vtkOrientationMarkerWidget &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_main_window.html#a8cedb541b9048b3983936803a9b4c659">orientationWidget</a> = vtkSmartPointer&lt;vtkOrientationMarkerWidget&gt;::New()</td></tr>
+<tr class="memitem:a8cedb541b9048b3983936803a9b4c659"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8cedb541b9048b3983936803a9b4c659"></a>
+vtkSmartPointer&lt; vtkOrientationMarkerWidget &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>orientationWidget</b> = vtkSmartPointer&lt;vtkOrientationMarkerWidget&gt;::New()</td></tr>
 <tr class="separator:a8cedb541b9048b3983936803a9b4c659"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -272,6 +278,22 @@ vtkSmartPointer&lt; vtkLight &gt;&#160;</td><td class="memItemRight" valign="bot
 
 </div>
 </div>
+<a class="anchor" id="a1ffe7d6a8fc68bf887ccd0504787e376"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MainWindow::AxisLabel </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Handles the marking of axes on screen </p>
+
+</div>
+</div>
 <a class="anchor" id="a4e20a4a065fbb0e4d3532a45a0a91425"></a>
 <div class="memitem">
 <div class="memproto">
@@ -286,22 +308,6 @@ vtkSmartPointer&lt; vtkLight &gt;&#160;</td><td class="memItemRight" valign="bot
       </table>
 </div><div class="memdoc">
 <p>Override of CloseEvent Used to terminate interactor if box widget is running whilst closing the program </p>
-
-</div>
-</div>
-<a class="anchor" id="a7959fd4a5db55114abc0ca61d880714a"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void MainWindow::handleaxisLabel </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Handles the marking of axes on screen </p>
 
 </div>
 </div>
@@ -349,7 +355,7 @@ vtkSmartPointer&lt; vtkLight &gt;&#160;</td><td class="memItemRight" valign="bot
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Handles the measuring of the distance if the check box has been checked </p>
+<p>Handles the measuring of the distance between two points </p>
 
 </div>
 </div>
@@ -664,70 +670,6 @@ vtkSmartPointer&lt; vtkLight &gt;&#160;</td><td class="memItemRight" valign="bot
       </table>
 </div><div class="memdoc">
 <p>Controls the box Wiget feature, allows user to alter size of model </p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="a2686fa5d5ac8802bf14f03c475dff699"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">vtkSmartPointer&lt;vtkAxesActor&gt; MainWindow::axes = vtkSmartPointer&lt;vtkAxesActor&gt;::New()</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>vtkAxesActor is a 2d/3d actor representing 3 dimension axes on the screen. </p>
-
-</div>
-</div>
-<a class="anchor" id="abc147602fcc95805b97c4d9a38abd71a"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">vtkSmartPointer&lt;vtkDistanceWidget&gt; MainWindow::distanceWidget = vtkSmartPointer&lt;vtkDistanceWidget&gt;::New()</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>vtkDistanceWidget is used to measure the distance between two points. </p>
-
-</div>
-</div>
-<a class="anchor" id="a8cedb541b9048b3983936803a9b4c659"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">vtkSmartPointer&lt;vtkOrientationMarkerWidget&gt; MainWindow::orientationWidget = vtkSmartPointer&lt;vtkOrientationMarkerWidget&gt;::New()</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>vtkOrientationMarkerWidget is for manipulating the position,size,orientaion of a prop that represent the orientaion marker. </p>
 
 </div>
 </div>

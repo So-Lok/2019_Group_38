@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['materials',['materials',['../classmodel.html#aa252e89fc0934ea00ce35a5ebbb8c1a3',1,'model']]]
+  ['opfilterdialog',['opFilterDialog',['../class_main_window.html#a987b68a7da6cd6b772b6b7fee3ec89cb',1,'MainWindow']]]
 ];

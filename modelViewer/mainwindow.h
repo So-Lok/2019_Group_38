@@ -61,7 +61,7 @@ class MainWindow;
 {
     Q_OBJECT
 
-   
+
 public:
     explicit MainWindow(QWidget* parent = 0);
     ~MainWindow();
@@ -104,9 +104,6 @@ public:
     */
     void handleShrink();
 
-
-
-
     /**
     * Handles the changing of the model's colour
     */
@@ -116,9 +113,6 @@ public:
     * Handles the changing of the background's colour
     */
     void handleBackgroundColor();
-
-
-
 
 
 private slots:
@@ -136,22 +130,19 @@ private slots:
     */
     void AxisLabel();
 
-
-private slots:
-
     //light intensity//
     /**
     * handles the sliding of the light intensity after checked the ON/OFF box
     */
     void on_Slider_sliderMoved(int position);
     /**
-   * handles the ON/OFF box of the light intensity sliding 
+   * handles the ON/OFF box of the light intensity sliding
    */
     void on_checkBox_clicked(bool checked);
 
     //Edge//
     /**
-   * handles the wireframe when checked the box 
+   * handles the wireframe when checked the box
    */
     void on_Edge_toggled(bool checked);
 
@@ -243,17 +234,11 @@ private:
     vtkSmartPointer<vtkBoxWidget> boxWidget;
     vtkSmartPointer<vtkRenderWindowInteractor> interactor;
 
-    /**
-   *vtkNamedColors is used to change the color of the objects
-   */
     vtkSmartPointer<vtkNamedColors> colors;
-    /**
-   *vtkLight is used to show the light intensity
-   */
     vtkSmartPointer<vtkLight> light;
- 
+
     vtkSmartPointer<vtkDistanceWidget> distanceWidget = vtkSmartPointer<vtkDistanceWidget>::New();
-    
+
     vtkSmartPointer<vtkAxesActor> axes = vtkSmartPointer<vtkAxesActor>::New();
     vtkSmartPointer<vtkOrientationMarkerWidget> orientationWidget = vtkSmartPointer<vtkOrientationMarkerWidget>::New();
 

@@ -79,16 +79,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->qvtkWidget->GetRenderWindow()->AddRenderer(renderer);
     actor = vtkSmartPointer<vtkActor>::New();
 
- 
-
-    //create a light 
-  
 
     mapper = vtkSmartPointer<vtkDataSetMapper>::New();
 
     // initialisation for features
     light = vtkSmartPointer<vtkLight>::New();
-
 
     boxWidget = vtkSmartPointer<vtkBoxWidget>::New();
 
@@ -102,6 +97,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->cameraReset, &QPushButton::released, this, &MainWindow::handleResetView);
     connect(ui->ObjectColor, &QPushButton::released, this, &MainWindow::handleObjectColor);
     connect(ui->BackgroundColor, &QPushButton::released, this, &MainWindow::handleBackgroundColor);
+    connect(ui->resetModel, &QPushButton::released, this, &MainWindow::resetFilter);
 
     // --------- Filters--------------
     connect(ui->clipFilter, &QCheckBox::released, this, &MainWindow::handleClip);
@@ -117,7 +113,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //Axis widget
     connect(ui->axisLabel, &QAction::toggled, this, &MainWindow::AxisLabel);
 
- 
+
 
 
     // SIGNAL(External window) connection to SLOTs(MainWindow)
@@ -139,34 +135,30 @@ MainWindow::MainWindow(QWidget *parent) :
     /////light intensity/////
 
     light = vtkSmartPointer<vtkLight>::New();
-    light->SetLightTypeToSceneLight();
-    light->SetPosition(5, 5, 15);
-    light->SetPositional(true);
+    light->SetLightTypeToHeadlight();
+    light->SetPositional(false);
+    light->PositionalOff();
     light->SetConeAngle(10);
-    light->SetFocalPoint(0, 0, 0);
     light->SetDiffuseColor(1, 1, 1);
     light->SetAmbientColor(1, 1, 1);
     light->SetSpecularColor(1, 1, 1);
     light->SetIntensity(0.5);
 
 
-    
+
+
     // Add the actor to the scene
     renderer->AddLight(light);
 
 
 }
 
-/**
-*  Delets the ui
-**/
+
 MainWindow::~MainWindow()
 {
     delete ui;
 }
-/**
-*
-*/
+
 void MainWindow::on_editFilters_clicked()
 {
   opFilterDialog->show();
@@ -428,6 +420,8 @@ void MainWindow::actionOpen()
 
 
 
+
+
     // create a copy of the current source to be used with filters if necessary
     source = actor->GetMapper()->GetInputConnection(0, 0)->GetProducer();
     // Setup the renderers's camera
@@ -438,6 +432,16 @@ void MainWindow::actionOpen()
 
 
     resetFilter();
+
+    // get statistics of the Model
+    int numberOfCells;
+    int numberOfVerts;
+
+    numberOfCells = reader->GetOutput()->GetNumberOfPolys();
+    numberOfVerts = reader->GetOutput()->GetNumberOfPoints();
+
+    ui->numCells->setNum(numberOfCells );
+    ui->numVerts->setNum(numberOfVerts );
   }
 
   if(fileName.endsWith(".mod", Qt::CaseSensitive) )
@@ -541,6 +545,13 @@ void MainWindow::actionOpen()
 
     resetFilter();
 
+    // set stats
+    int numberOfCells = readModFile.getCells().size();
+    int numberOfVerts = readModFile.getVectorList().size();
+    ui->numCells->setNum(numberOfCells );
+    ui->numVerts->setNum(numberOfVerts );
+
+
   }
 
 
@@ -591,7 +602,7 @@ void MainWindow::on_Slider_sliderMoved(int position)
     else {
         light->SetIntensity(0.5);
     }
-    
+
     ui->qvtkWidget->GetRenderWindow()->Render();
 
 
@@ -607,7 +618,7 @@ void MainWindow::on_checkBox_clicked(bool checked)
         light->SetIntensity(0.5);
     }
 
-    
+
     ui->qvtkWidget->GetRenderWindow()->Render();
 }
 
@@ -618,12 +629,12 @@ void MainWindow::on_Edge_toggled(bool checked)
     if (checked)
     {
         actor->GetProperty()->SetRepresentationToWireframe();
-        
+
     }
-    else 
+    else
     {
         actor->GetProperty()->SetRepresentationToSurface();
-        
+
     }
     ui->qvtkWidget->GetRenderWindow()->Render();
 }
@@ -644,7 +655,7 @@ void MainWindow::handledistWid()
     //if the checkbox is not check
     else if (ui->distWid->isChecked() == false)
     {
-        //Turn off the distance widget   
+        //Turn off the distance widget
         mapper->SetInputConnection(source->GetOutputPort());
 
         actor->SetMapper(mapper);
@@ -676,7 +687,7 @@ void MainWindow::AxisLabel()
         orientationWidget->SetInteractor(ui->qvtkWidget->GetRenderWindow()->GetInteractor());
         orientationWidget->SetEnabled(1);
         orientationWidget->InteractiveOff();
-        renderWindow->Render(); 
+        renderWindow->Render();
     }
     //if the checkbox is not check
     else if (ui->axisLabel->isChecked() == false)
@@ -686,5 +697,3 @@ void MainWindow::AxisLabel()
         renderWindow->Render();
     }
     }
-    
-

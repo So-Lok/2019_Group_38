@@ -1,6 +1,6 @@
 /**
 * @file mainwindow.cpp
-* Contains function definitions for features within the mainwindow
+* @brief Contains function definitions for features within the mainwindow
 *
 */
 

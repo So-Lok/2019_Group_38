@@ -11,5 +11,8 @@ var searchData=
   ['on_5feditfilters_5fclicked',['on_editFilters_clicked',['../class_main_window.html#a11c01ec4f05f074240db3758fa876c0a',1,'MainWindow']]],
   ['on_5fopacityslider_5fvaluechanged',['on_OpacitySlider_valueChanged',['../class_main_window.html#abd2ea86d722408c9bbbaa432d7dda63a',1,'MainWindow']]],
   ['on_5fshrinkfactor_5fvaluechanged',['on_shrinkFactor_valueChanged',['../classoptions_filter.html#a544053ddd80369be3b619dbd1434def5',1,'optionsFilter']]],
-  ['on_5fslider_5fslidermoved',['on_Slider_sliderMoved',['../class_main_window.html#ae339e918cbf94fb680c686f70869072f',1,'MainWindow']]]
+  ['on_5fslider_5fslidermoved',['on_Slider_sliderMoved',['../class_main_window.html#ae339e918cbf94fb680c686f70869072f',1,'MainWindow']]],
+  ['operator_2b',['operator+',['../classvector_class.html#a26556163388d1950509b41dfa0da76cc',1,'vectorClass']]],
+  ['operator_2d',['operator-',['../classvector_class.html#ac57bee685ec25e2fd524f31140edc646',1,'vectorClass']]],
+  ['operator_3d',['operator=',['../classvector_class.html#a8c95ede2827d57135505eb661a981be3',1,'vectorClass']]]
 ];

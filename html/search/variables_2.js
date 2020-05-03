@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['materials',['materials',['../classmodel.html#aa252e89fc0934ea00ce35a5ebbb8c1a3',1,'model']]]
+  ['light',['light',['../class_main_window.html#a3f46f38f8603c05a64be2afb4c98e575',1,'MainWindow']]]
 ];

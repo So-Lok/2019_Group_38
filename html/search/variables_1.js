@@ -6,5 +6,6 @@ var searchData=
   ['clipnormalz',['clipNormalZ',['../class_main_window.html#a2bee7219dff00386109a9b40890dc48c',1,'MainWindow']]],
   ['cliporiginx',['clipOriginX',['../class_main_window.html#a3ac950952e46a0032ed2aa319698b5a1',1,'MainWindow']]],
   ['cliporiginy',['clipOriginY',['../class_main_window.html#a5c98d0cc72b2e00e0cb535c415b947a7',1,'MainWindow']]],
-  ['cliporiginz',['clipOriginZ',['../class_main_window.html#aa6a768419e03cb7139efaf7aa2158881',1,'MainWindow']]]
+  ['cliporiginz',['clipOriginZ',['../class_main_window.html#aa6a768419e03cb7139efaf7aa2158881',1,'MainWindow']]],
+  ['colors',['colors',['../class_main_window.html#a7b3b309c1dc09c25ff2b8c9137735254',1,'MainWindow']]]
 ];

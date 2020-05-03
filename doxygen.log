@@ -103,24 +103,20 @@ Determining which /home/travis/build/So-Lok/2019_Group_38/modelViewer/modelReade
 /home/travis/build/So-Lok/2019_Group_38/modelViewer/modelReader/inc/cell.h:78: warning: Member matId (variable) of class cell is not documented.
 /home/travis/build/So-Lok/2019_Group_38/modelViewer/modelReader/inc/cell.h:81: warning: Member vectorIdList (variable) of class cell is not documented.
 /home/travis/build/So-Lok/2019_Group_38/modelViewer/modelReader/inc/cell.h:82: warning: Member vectorList (variable) of class cell is not documented.
-/home/travis/build/So-Lok/2019_Group_38/modelViewer/mainwindow.h:65: warning: Member MainWindow(QWidget *parent=0) (function) of class MainWindow is not documented.
-/home/travis/build/So-Lok/2019_Group_38/modelViewer/mainwindow.h:134: warning: Member on_Slider_sliderMoved(int position) (slot) of class MainWindow is not documented.
-/home/travis/build/So-Lok/2019_Group_38/modelViewer/mainwindow.h:135: warning: Member on_checkBox_clicked(bool checked) (slot) of class MainWindow is not documented.
-/home/travis/build/So-Lok/2019_Group_38/modelViewer/mainwindow.h:186: warning: Member ui (variable) of class MainWindow is not documented.
-/home/travis/build/So-Lok/2019_Group_38/modelViewer/mainwindow.h:190: warning: Member filterApplied (variable) of class MainWindow is not documented.
-/home/travis/build/So-Lok/2019_Group_38/modelViewer/mainwindow.h:207: warning: Member renderer (variable) of class MainWindow is not documented.
-/home/travis/build/So-Lok/2019_Group_38/modelViewer/mainwindow.h:208: warning: Member renderWindow (variable) of class MainWindow is not documented.
-/home/travis/build/So-Lok/2019_Group_38/modelViewer/mainwindow.h:210: warning: Member mapper (variable) of class MainWindow is not documented.
-/home/travis/build/So-Lok/2019_Group_38/modelViewer/mainwindow.h:211: warning: Member actor (variable) of class MainWindow is not documented.
-/home/travis/build/So-Lok/2019_Group_38/modelViewer/mainwindow.h:212: warning: Member source (variable) of class MainWindow is not documented.
-/home/travis/build/So-Lok/2019_Group_38/modelViewer/mainwindow.h:214: warning: Member camera (variable) of class MainWindow is not documented.
-/home/travis/build/So-Lok/2019_Group_38/modelViewer/mainwindow.h:216: warning: Member boxWidget (variable) of class MainWindow is not documented.
-/home/travis/build/So-Lok/2019_Group_38/modelViewer/mainwindow.h:217: warning: Member interactor (variable) of class MainWindow is not documented.
-/home/travis/build/So-Lok/2019_Group_38/modelViewer/mainwindow.h:219: warning: Member colors (variable) of class MainWindow is not documented.
-/home/travis/build/So-Lok/2019_Group_38/modelViewer/mainwindow.h:220: warning: Member light (variable) of class MainWindow is not documented.
-/home/travis/build/So-Lok/2019_Group_38/modelViewer/mainwindow.h:222: warning: Member distanceWidget (variable) of class MainWindow is not documented.
-/home/travis/build/So-Lok/2019_Group_38/modelViewer/mainwindow.h:224: warning: Member axes (variable) of class MainWindow is not documented.
-/home/travis/build/So-Lok/2019_Group_38/modelViewer/mainwindow.h:225: warning: Member orientationWidget (variable) of class MainWindow is not documented.
+/home/travis/build/So-Lok/2019_Group_38/modelViewer/mainwindow.h:66: warning: Member MainWindow(QWidget *parent=0) (function) of class MainWindow is not documented.
+/home/travis/build/So-Lok/2019_Group_38/modelViewer/mainwindow.h:213: warning: Member ui (variable) of class MainWindow is not documented.
+/home/travis/build/So-Lok/2019_Group_38/modelViewer/mainwindow.h:217: warning: Member filterApplied (variable) of class MainWindow is not documented.
+/home/travis/build/So-Lok/2019_Group_38/modelViewer/mainwindow.h:234: warning: Member renderer (variable) of class MainWindow is not documented.
+/home/travis/build/So-Lok/2019_Group_38/modelViewer/mainwindow.h:235: warning: Member renderWindow (variable) of class MainWindow is not documented.
+/home/travis/build/So-Lok/2019_Group_38/modelViewer/mainwindow.h:237: warning: Member mapper (variable) of class MainWindow is not documented.
+/home/travis/build/So-Lok/2019_Group_38/modelViewer/mainwindow.h:238: warning: Member actor (variable) of class MainWindow is not documented.
+/home/travis/build/So-Lok/2019_Group_38/modelViewer/mainwindow.h:239: warning: Member source (variable) of class MainWindow is not documented.
+/home/travis/build/So-Lok/2019_Group_38/modelViewer/mainwindow.h:241: warning: Member camera (variable) of class MainWindow is not documented.
+/home/travis/build/So-Lok/2019_Group_38/modelViewer/mainwindow.h:243: warning: Member boxWidget (variable) of class MainWindow is not documented.
+/home/travis/build/So-Lok/2019_Group_38/modelViewer/mainwindow.h:244: warning: Member interactor (variable) of class MainWindow is not documented.
+/home/travis/build/So-Lok/2019_Group_38/modelViewer/mainwindow.h:255: warning: Member distanceWidget (variable) of class MainWindow is not documented.
+/home/travis/build/So-Lok/2019_Group_38/modelViewer/mainwindow.h:257: warning: Member axes (variable) of class MainWindow is not documented.
+/home/travis/build/So-Lok/2019_Group_38/modelViewer/mainwindow.h:258: warning: Member orientationWidget (variable) of class MainWindow is not documented.
 /home/travis/build/So-Lok/2019_Group_38/modelViewer/modelReader/inc/material.h:15: warning: Member material(int matIdToSet, int densityToSet, string colourToSet, string nameToSet) (function) of class material is not documented.
 /home/travis/build/So-Lok/2019_Group_38/modelViewer/modelReader/inc/material.h:22: warning: Member getMatId() (function) of class material is not documented.
 /home/travis/build/So-Lok/2019_Group_38/modelViewer/modelReader/inc/material.h:23: warning: Member getDensity() (function) of class material is not documented.
@@ -158,7 +154,7 @@ Determining which /home/travis/build/So-Lok/2019_Group_38/modelViewer/modelReade
 /home/travis/build/So-Lok/2019_Group_38/modelViewer/modelReader/inc/vectorClass.h:55: warning: Member yCoord (variable) of class vectorClass is not documented.
 /home/travis/build/So-Lok/2019_Group_38/modelViewer/modelReader/inc/vectorClass.h:56: warning: Member zCoord (variable) of class vectorClass is not documented.
 /home/travis/build/So-Lok/2019_Group_38/modelViewer/modelReader/inc/vectorClass.h:58: warning: Member vectorId (variable) of class vectorClass is not documented.
-/home/travis/build/So-Lok/2019_Group_38/modelViewer/mainwindow.h:237: warning: Member New() (function) of class vtkMyCallback is not documented.
+/home/travis/build/So-Lok/2019_Group_38/modelViewer/mainwindow.h:271: warning: Member New() (function) of class vtkMyCallback is not documented.
 enums are documented
 Computing member relations...
 Building full member lists recursively...
@@ -220,5 +216,5 @@ Generating file member index...
 Generating example index...
 finalizing index lists...
 writing tag file...
-lookup cache used 230/65536 hits=1096 misses=236
+lookup cache used 236/65536 hits=1110 misses=242
 finished...

@@ -1,11 +1,12 @@
 var searchData=
 [
-  ['ui',['Ui',['../namespace_ui.html',1,'']]],
-  ['updateclipnormalx',['updateClipNormalX',['../class_main_window.html#a38f0242b166c346c4846a7dc8c031d8d',1,'MainWindow']]],
-  ['updateclipnormaly',['updateClipNormalY',['../class_main_window.html#a250c73e77e555226a1f83d21146482e2',1,'MainWindow']]],
-  ['updateclipnormalz',['updateClipNormalZ',['../class_main_window.html#aa81acad141de3ceac517249efe3edbe1',1,'MainWindow']]],
-  ['updatecliporiginx',['updateClipOriginX',['../class_main_window.html#ae663a25acce488299f2141a242b291bd',1,'MainWindow']]],
-  ['updatecliporiginy',['updateClipOriginY',['../class_main_window.html#afed64b55de70a507364c0cf0d4811d4e',1,'MainWindow']]],
-  ['updatecliporiginz',['updateClipOriginZ',['../class_main_window.html#a8827193e493780b5869a7f5f4e4a6ee4',1,'MainWindow']]],
-  ['updateshrinkfactor',['updateShrinkFactor',['../class_main_window.html#acbd66983d1414294bd01ab71e7e51649',1,'MainWindow']]]
+  ['savecurrentmodeltofile',['saveCurrentModelToFile',['../classmodel.html#a0b849a57794019b7304db1983d70f2c2',1,'model']]],
+  ['sendclipnormalx',['sendClipNormalX',['../classoptions_filter.html#ac9595047fa8153a8b0e41e2ef56d490c',1,'optionsFilter']]],
+  ['sendclipnormaly',['sendClipNormalY',['../classoptions_filter.html#abff460cfa079d942bc9ca0290c59dac0',1,'optionsFilter']]],
+  ['sendclipnormalz',['sendClipNormalZ',['../classoptions_filter.html#a316dfc5dbd4650cc3f84080df832c052',1,'optionsFilter']]],
+  ['sendcliporiginx',['sendClipOriginX',['../classoptions_filter.html#a96787fd474a7dc7299a9cc215800a1e7',1,'optionsFilter']]],
+  ['sendcliporiginy',['sendClipOriginY',['../classoptions_filter.html#ae78a2850ab39da2f851d8c75c7d0b828',1,'optionsFilter']]],
+  ['sendcliporiginz',['sendClipOriginZ',['../classoptions_filter.html#afdc585a325effc4f859aa3b04612d72e',1,'optionsFilter']]],
+  ['sendshrinkfactor',['sendShrinkFactor',['../classoptions_filter.html#a725e9bf69c17587cac4c57412988f8d8',1,'optionsFilter']]],
+  ['shrinkfactor',['shrinkFactor',['../class_main_window.html#a197bf5ec9a95a8597f914911db767427',1,'MainWindow']]]
 ];

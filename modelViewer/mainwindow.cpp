@@ -79,7 +79,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->qvtkWidget->GetRenderWindow()->AddRenderer(renderer);
     actor = vtkSmartPointer<vtkActor>::New();
 
-    actor->GetProperty()->EdgeVisibilityOn();
+ 
 
     //create a light 
   
@@ -613,17 +613,19 @@ void MainWindow::on_checkBox_clicked(bool checked)
     ui->qvtkWidget->GetRenderWindow()->Render();
 }
 
-//function to see the edge of the object
-void MainWindow::on_EdgeCheckBox_toggled(bool checked)
+//function to see the Edge of the object
+void MainWindow::on_Edge_toggled(bool checked)
 {
 
     if (checked)
     {
         actor->GetProperty()->SetRepresentationToWireframe();
+        
     }
-    else
+    else 
     {
         actor->GetProperty()->SetRepresentationToSurface();
+        
     }
     ui->qvtkWidget->GetRenderWindow()->Render();
 }

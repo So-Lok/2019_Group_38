@@ -61,12 +61,7 @@ class MainWindow;
 {
     Q_OBJECT
 
-    signals:
-    /**
-     * Signal emitted when a message is displayed in the status bar
-     */
-    void statusUpdateMessage(const QString& message, int timeout);
-
+   
 public:
     explicit MainWindow(QWidget* parent = 0);
     ~MainWindow();
@@ -156,9 +151,9 @@ private slots:
 
     //Edge//
     /**
-   * handles the edge when checked the box 
+   * handles the wireframe when checked the box 
    */
-    void on_EdgeCheckBox_toggled(bool checked);
+    void on_Edge_toggled(bool checked);
 
     /// opacity //
 

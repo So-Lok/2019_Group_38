@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QVTKOpenGLWidget" name="qvtkWidget" native="true">
+   <widget class="QVTKOpenGLWidget" name="qvtkWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -182,23 +182,23 @@
      <string>Measurement</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="EdgeCheckBox">
+   <widget class="QCheckBox" name="Edge">
     <property name="geometry">
      <rect>
       <x>130</x>
-      <y>510</y>
-      <width>101</width>
-      <height>31</height>
+      <y>480</y>
+      <width>161</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="text">
-     <string>Edge </string>
+     <string>Edge</string>
     </property>
    </widget>
    <widget class="QSlider" name="OpacitySlider">
     <property name="geometry">
      <rect>
-      <x>190</x>
+      <x>720</x>
       <y>480</y>
       <width>131</width>
       <height>16</height>
@@ -211,10 +211,10 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>480</y>
-      <width>61</width>
-      <height>21</height>
+      <x>720</x>
+      <y>440</y>
+      <width>121</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
@@ -230,7 +230,7 @@
    <zorder>qvtkWidget</zorder>
    <zorder>axisLabel</zorder>
    <zorder>distWid</zorder>
-   <zorder>EdgeCheckBox</zorder>
+   <zorder>Edge</zorder>
    <zorder>OpacitySlider</zorder>
    <zorder>label_2</zorder>
   </widget>
@@ -302,8 +302,8 @@
  <customwidgets>
   <customwidget>
    <class>QVTKOpenGLWidget</class>
-   <extends>QWidget</extends>
-   <header>QVTKOpenGLWidget.h</header>
+   <extends>QOpenGLWidget</extends>
+   <header>qvtkopenglwidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

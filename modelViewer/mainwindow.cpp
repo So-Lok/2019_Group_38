@@ -107,7 +107,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->distWid, &QCheckBox::released, this, &MainWindow::handledistWid);
 
     //Axis widget
-    connect(ui->axisLabel, &QPushButton::released, this, &MainWindow::handleaxisLabel);
+    connect(ui->axisLabel, &QAction::toggled, this, &MainWindow::AxisLabel);
 
 
     // SIGNAL(External window) connection to SLOTs(MainWindow)
@@ -356,8 +356,6 @@ void MainWindow::widgetBox()
 
     renderWindow->Render();
     interactor->Start();
-
-
   }
   else
   {
@@ -597,16 +595,17 @@ void MainWindow::handledistWid()
     //if the checkbox is checked
     if (ui->distWid->isChecked() == true)
     {
-        applydist = true;
+        //Turn on the distance widget
+        distanceWidget = vtkSmartPointer<vtkDistanceWidget>::New();
+        distanceWidget->SetInteractor(ui->qvtkWidget->GetRenderWindow()->GetInteractor());
+        distanceWidget->CreateDefaultRepresentation();
+        distanceWidget->On();
+        renderWindow->Render();
     }
     //if the checkbox is not check
     else if (ui->distWid->isChecked() == false)
     {
-        applydist = false;
-    }
-    //turn off the measurement
-    if (applydist == false)
-    {
+        //Turn off the distance widget   
         mapper->SetInputConnection(source->GetOutputPort());
 
         actor->SetMapper(mapper);
@@ -616,22 +615,26 @@ void MainWindow::handledistWid()
         distanceWidget->Off();
         renderWindow->Render();
     }
-    //turn on the measurement
-    if (applydist == true)
-    {
-        distanceWidget = vtkSmartPointer<vtkDistanceWidget>::New();
-        distanceWidget->SetInteractor(ui->qvtkWidget->GetRenderWindow()->GetInteractor());
-        distanceWidget->CreateDefaultRepresentation();
-        distanceWidget->On();
-        renderWindow->Render();
-    }
 }
 //Axis label
-void MainWindow::handleaxisLabel()
+void MainWindow::AxisLabel()
 {
-    //Turn on the axis
-    orientationWidget->SetOrientationMarker(axes);
-    orientationWidget->SetInteractor(ui->qvtkWidget->GetRenderWindow()->GetInteractor());
-    orientationWidget->SetEnabled(1);
-    orientationWidget->InteractiveOff();
-}
+    //if the checkbox is checked
+    if (ui->axisLabel->isChecked() == true)
+    {
+        //Turn on the axis widget
+        orientationWidget->SetOrientationMarker(axes);
+        orientationWidget->SetInteractor(ui->qvtkWidget->GetRenderWindow()->GetInteractor());
+        orientationWidget->SetEnabled(1);
+        orientationWidget->InteractiveOff();
+        renderWindow->Render(); 
+    }
+    //if the checkbox is not check
+    else if (ui->axisLabel->isChecked() == false)
+    {
+        //Turn off the axis widget
+        orientationWidget->Off();
+        renderWindow->Render();
+    }
+    }
+    

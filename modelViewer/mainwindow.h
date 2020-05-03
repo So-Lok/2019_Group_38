@@ -116,16 +116,16 @@ public:
     void handleBackgroundColor();
 
     //Distance widget //
-       /**
-       * Handles the measuring of the distance if the check box has been checked
-       */
+    /**
+    * Handles the measuring of the distance between two points
+    */
     void handledistWid();
 
-   //Axis label //
-   /**
-   * Handles the marking of axes on screen
-   */
-    void handleaxisLabel();
+    //Axis label //
+    /**
+    * Handles the marking of axes on screen
+    */
+    void AxisLabel();
 
 private slots:
     /**
@@ -185,10 +185,14 @@ private slots:
 private:
     Ui::MainWindow* ui;
 
+    // filter parameters
+    //--------------Univessal-------------------
+    bool filterApplied;
 
     optionsFilter *opFilterDialog; ///< dialog class pointer for creation of the edit filters window
 
     bool applydist; ///< This parameter is for checking whether the distance widget checkbox has been check
+
     // ------------------Clip Filter------------
     double clipOriginX = 0.0; ///< X value of the origin for the clip filter, 0.0 is initial value
     double clipNormalX = -1.0; ///< X value of the normal for the clip filter, -1.0 is initial value
@@ -214,20 +218,10 @@ private:
 
     vtkSmartPointer<vtkNamedColors> colors;
     vtkSmartPointer<vtkLight> light;
-
-    /**
-    *vtkDistanceWidget is used to measure the distance between two points.
-    */
+ 
     vtkSmartPointer<vtkDistanceWidget> distanceWidget = vtkSmartPointer<vtkDistanceWidget>::New();
-
-    /**
-    *vtkAxesActor is a 2d/3d actor representing 3 dimension axes on the screen.
-    */
+    
     vtkSmartPointer<vtkAxesActor> axes = vtkSmartPointer<vtkAxesActor>::New();
-
-    /**
-    *vtkOrientationMarkerWidget is for manipulating the position,size,orientaion of a prop that represent the orientaion marker.
-    */
     vtkSmartPointer<vtkOrientationMarkerWidget> orientationWidget = vtkSmartPointer<vtkOrientationMarkerWidget>::New();
 };
 

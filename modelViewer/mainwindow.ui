@@ -6,14 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
+<<<<<<< Updated upstream
     <width>851</width>
     <height>565</height>
+=======
+    <width>832</width>
+    <height>622</height>
+>>>>>>> Stashed changes
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+<<<<<<< Updated upstream
    <widget class="QVTKOpenGLWidget" name="qvtkWidget">
     <property name="geometry">
      <rect>
@@ -223,6 +229,184 @@
      <string>-Z  plane</string>
     </property>
    </widget>
+=======
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="1" column="0" rowspan="2">
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QCheckBox" name="shrinkFilter">
+        <property name="text">
+         <string>Shrink Filter</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="filterLabel">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Filters</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="clipFilter">
+        <property name="text">
+         <string>Clip Filter</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="1" column="2">
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QPushButton" name="editFilters">
+        <property name="text">
+         <string>Edit Filters</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="cameraReset">
+        <property name="text">
+         <string>Reset Camera</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="1" column="3" rowspan="2">
+     <layout class="QFormLayout" name="formLayout_2">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Light intensity</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QPushButton" name="axisLabel">
+        <property name="text">
+         <string>Axis</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QCheckBox" name="checkBox">
+        <property name="text">
+         <string>ON/OFF</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QCheckBox" name="distWid">
+        <property name="text">
+         <string>Measurement</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QSlider" name="Slider">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="2" column="2">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="ObjectColor">
+        <property name="text">
+         <string>Object Color</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="BackgroundColor">
+        <property name="text">
+         <string>Background Color</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="0" column="0" colspan="4">
+     <widget class="QVTKOpenGLWidget" name="qvtkWidget" native="true">
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1" rowspan="2">
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <widget class="QPushButton" name="xaxisButton">
+        <property name="text">
+         <string>X  plane</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QPushButton" name="xaxisButton2">
+        <property name="text">
+         <string>-X Plane</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QPushButton" name="YaxisButton">
+        <property name="text">
+         <string>Y  plane</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QPushButton" name="YaxisButton2">
+        <property name="text">
+         <string>-Y  plane</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QPushButton" name="ZaxisButton">
+        <property name="text">
+         <string>Z  plane</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QPushButton" name="ZaxisButton2">
+        <property name="text">
+         <string>-Z  plane</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QPushButton" name="degreesButton">
+        <property name="text">
+         <string>90 degrees</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QPushButton" name="degreesButton2">
+        <property name="text">
+         <string>-90 degrees</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+   <zorder>qvtkWidget</zorder>
+   <zorder></zorder>
+>>>>>>> Stashed changes
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QMenuBar" name="menubar">
@@ -230,7 +414,11 @@
     <rect>
      <x>0</x>
      <y>0</y>
+<<<<<<< Updated upstream
      <width>851</width>
+=======
+     <width>832</width>
+>>>>>>> Stashed changes
      <height>21</height>
     </rect>
    </property>

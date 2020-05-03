@@ -116,8 +116,27 @@ connect(ui->YaxisButon2, &QPushButton::released, this, &MainWindow::handleViewy2
 connect(ui->ZaxisButton, &QPushButton::released, this, &MainWindow::handleViewz);
 connect(ui->ZaxisButton2, &QPushButton::released, this, &MainWindow::handleViewz2);
 
+<<<<<<< Updated upstream
     // default model cube
     handleCube();
+=======
+    // SIGNAL(External window) connection to SLOTs(MainWindow) 
+
+//implementation of the camera botton's change for camera change
+
+connect(ui->xaxisButton, &QPushButton::released, this, &MainWindow::handleViewx);
+connect(ui->xaxisButton2, &QPushButton::released, this, &MainWindow::handleViewx2);
+connect(ui->YaxisButton, &QPushButton::released, this, &MainWindow::handleViewy);
+connect(ui->YaxisButton2, &QPushButton::released, this, &MainWindow::handleViewy2);
+connect(ui->ZaxisButton, &QPushButton::released, this, &MainWindow::handleViewz);
+connect(ui->ZaxisButton2, &QPushButton::released, this, &MainWindow::handleViewz2); 
+
+// 90 degrees switcher 
+
+connect(ui->degreesButton, &QPushButton::released, this, &MainWindow::handleView90);
+connect(ui->degreesButton2, &QPushButton::released, this, &MainWindow::handleView902);
+
+>>>>>>> Stashed changes
 
 
 }
@@ -591,6 +610,109 @@ void MainWindow::handleViewz()
 
 void MainWindow::handleViewz2()
 {
+<<<<<<< Updated upstream
+=======
+    //Turn on the axis
+    orientationWidget->SetOrientationMarker(axes);
+    orientationWidget->SetInteractor(ui->qvtkWidget->GetRenderWindow()->GetInteractor());
+    orientationWidget->SetEnabled(1);
+    orientationWidget->InteractiveOff();
+} 
+
+void MainWindow::handleViewx()
+{
+
+  vtkSmartPointer<vtkCamera> camera2 = vtkSmartPointer<vtkCamera>::New();  //VTK pointers
+
+
+	renderer->ResetCamera();
+	camera2 = renderer->GetActiveCamera();  //new camera renderer
+
+
+//create a new camera view to be shown
+	camera2->SetPosition(0, 0, 1);  //command to set the camera view in the respective place
+	camera2->SetFocalPoint(0, 0, 0);  //focal point of the camera
+	camera2->SetViewUp(0, 0, 0);
+
+	// To view the full bounds of your scene
+	renderer->ResetCamera();    //connect the camerq view to the renderer
+	ui->qvtkWidget->GetRenderWindow()->Render();  //widget
+
+
+}
+
+void MainWindow::handleViewx2()
+{
+
+  vtkSmartPointer<vtkCamera> camera2 = vtkSmartPointer<vtkCamera>::New();  //VTK pointers
+
+
+  renderer->ResetCamera();
+  camera2 = renderer->GetActiveCamera();  //new camera renderer
+  
+  
+  //create a new camera view to be shown
+  camera2->SetPosition(0, 0, -1);  //command to set the camera view in the respective place
+  camera2->SetFocalPoint(0, 0, 0);  //focal point of the camera
+  camera2->SetViewUp(0, 0, 0);
+
+  // To view the full bounds of your scene
+  renderer->ResetCamera();    //connect the camerq view to the renderer
+  ui->qvtkWidget->GetRenderWindow()->Render();  //widget
+
+
+}
+
+void MainWindow::handleViewy()
+{
+
+	vtkSmartPointer<vtkCamera> camera2 = vtkSmartPointer<vtkCamera>::New();  //VTK pointers
+
+
+	renderer->ResetCamera();
+	camera2 = renderer->GetActiveCamera();  //new camera renderer
+
+
+//create a new camera view to be shown
+	camera2->SetPosition( 0,20,-1);  //command to set the camera view in the respective place
+	camera2->SetFocalPoint(0, 0, 0);  //focal point of the camera
+	camera2->SetViewUp(0, 0, 0);
+
+	// To view the full bounds of your scene
+	renderer->ResetCamera();    //connect the camerq view to the renderer
+	ui->qvtkWidget->GetRenderWindow()->Render();  //widget
+
+}
+
+
+void MainWindow::handleViewy2()
+{
+
+  vtkSmartPointer<vtkCamera> camera2 = vtkSmartPointer<vtkCamera>::New();  //VTK pointers
+
+
+  renderer->ResetCamera();
+  camera2 = renderer->GetActiveCamera();  //new camera renderer
+
+
+  //create a new camera view to be shown
+  camera2->SetPosition(0, -20, 1);  //command to set the camera view in the respective place
+  camera2->SetFocalPoint(0, 0, 0);  //focal point of the camera
+  camera2->SetViewUp(0, 0, 0);
+
+  // To view the full bounds of your scene
+  renderer->ResetCamera();    //connect the camerq view to the renderer
+  ui->qvtkWidget->GetRenderWindow()->Render();  //widget
+
+
+}
+
+
+
+
+void MainWindow::handleViewz()
+{
+>>>>>>> Stashed changes
 
   vtkSmartPointer<vtkCamera> camera2 = vtkSmartPointer<vtkCamera>::New();  //VTK pointers
 
@@ -608,6 +730,65 @@ void MainWindow::handleViewz2()
   renderer->ResetCamera();    //connect the camerq view to the renderer
   ui->qvtkWidget->GetRenderWindow()->Render();  //widget
 
+<<<<<<< Updated upstream
+=======
+}
+
+
+void MainWindow::handleViewz2()
+{
+
+  vtkSmartPointer<vtkCamera> camera2 = vtkSmartPointer<vtkCamera>::New();  //VTK pointers
+
+
+  renderer->ResetCamera();
+  camera2 = renderer->GetActiveCamera();  //new camera renderer
+
+
+  //create a new camera view to be shown
+  camera2->SetPosition(-20, 0, 1);  //command to set the camera view in the respective place
+  camera2->SetFocalPoint(0, 0, 0);  //focal point of the camera
+  camera2->SetViewUp(0, 0, 0);
+
+  // To view the full bounds of your scene
+  renderer->ResetCamera();    //connect the camerq view to the renderer
+  ui->qvtkWidget->GetRenderWindow()->Render();  //widget
+
+
+} 
+
+void MainWindow::handleView90()
+{
+	vtkSmartPointer<vtkCamera> camera2 = vtkSmartPointer<vtkCamera>::New();  //VTK pointers
+
+
+	renderer->ResetCamera();
+	camera2 = renderer->GetActiveCamera();  //new camera renderer
+	
+	camera2->Azimuth(90);
+	// To view the full bounds of your scene
+	renderer->ResetCamera();    //connect the camerq view to the renderer
+	ui->qvtkWidget->GetRenderWindow()->Render();  //widget
+
+
+
+}
+
+void MainWindow::handleView902()
+{
+	vtkSmartPointer<vtkCamera> camera2 = vtkSmartPointer<vtkCamera>::New();  //VTK pointers
+
+
+	renderer->ResetCamera();
+	camera2 = renderer->GetActiveCamera();  //new camera renderer
+
+	camera2->Azimuth(-90);
+	// To view the full bounds of your scene
+	renderer->ResetCamera();    //connect the camerq view to the renderer
+	ui->qvtkWidget->GetRenderWindow()->Render();  //widget
+
+
+>>>>>>> Stashed changes
 
 }
 

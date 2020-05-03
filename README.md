@@ -7,6 +7,59 @@
 # Doxygen Documentation
 https://so-lok.github.io/2019_Group_38/html
 
+## (MARKER) PLEASE READ ON FOR FEATURES AND THINGS TO TAKE NOTE OF 
+
+## Running Semester 2 program ~~05/03~~ 3rd May update
+
+Navgigate to the modelViewer directory, create a build folder and in the build folder create generate the files with the following code.
+The following may differ depending on the location of your vtk and qt files.
+
+```
+set PATH=%PATH%;C:\VTK\MSVC2017_64\bin;C:\Qt\5.12.5\msvc2017_64\bin // ignore this line if you have already setup the path
+cmake -DCMAKE_PREFIX_PATH="C:\VTK\MSVC2017_64\bin;C:\Qt\5.12.5\msvc2017_64\bin" -G"Visual Studio 16 2019" ..
+// use the compiler for the version of visual studio which you have installed.
+
+// building the code
+msbuild modelViewer.sln
+
+// if build is successful 
+Debug\modelViewer.exe
+
+
+```
+
+# Building the installer/package 
+
+build the code like above.
+
+If you are using Visual studio, you can open the modelViewer.sln and build the PACKAGE on the right. make sure you are in Debug mode, though this should be default. 
+
+This will create an installer in the build folder.
+
+## Features
+
+# Open/import STL files and .mod files from semester 1
+
+# Filters
+- Clip filter, clipping plane can be set with edit filters window. The default could clip an entire model so be sure to change the settings in edit filter if it does.
+- Shrink filter, shrinks the model's individual cells by a scale factor which can be changed in edit filters
+# Widgets
+- box widget, allows the user to transform the model, in widgets tab  
+- axis widget, displays axis on screen, in widgets tab
+- Ruler widget on mainwindow
+# Colour 
+The colour of the model and the background can be changed
+# Statistics 
+Shows the number of cells and vertices/ points of each model
+# Other
+- Wireframe representation
+- Opacity slider
+- Light intensity slider and toggleable light
+
+# Please take note
+- at start up if no model has been imported in the program will crash if the user attempts to apply a filter to nothing. 
+- there may be other issues which have not been found yet or ignored as not significant enough to affect the program massively
+
 ## GROUP MEMBERS PLEASE READ
 
 Please comment all of the features that you make using doxygen style in the .h file. As we are short on time I will not have any time to comment on your code in addition to the code in the main repo already. 
@@ -64,34 +117,6 @@ cmake -G "Visual Studio 16 2019" ..
 msbuild model.sln
 Debug\modelTest.exe
 ```
-
-## Running Semester 2 program 05/03
-
-Navgigate to the modelViewer directory, create a build folder and in the build folder create generate the files with the following code.
-The following may differ depending on the location of your vtk and qt files.
-
-```
-set PATH=%PATH%;C:\VTK\MSVC2017_64\bin;C:\Qt\5.12.5\msvc2017_64\bin // ignore this line if you have already setup the path
-cmake -DCMAKE_PREFIX_PATH="C:\VTK\MSVC2017_64\bin;C:\Qt\5.12.5\msvc2017_64\bin" -G"Visual Studio 16 2019" ..
-// use the compiler for the version of visual studio which you have installed.
-
-// building the code
-msbuild modelViewer.sln
-
-// if build is successful 
-Debug\modelViewer.exe
-
-
-```
-
-# Building the installer/package 
-
-build the code like above.
-
-If you are using Visual studio, you can open the modelViewer.sln and build the PACKAGE on the right. make sure you are in Debug mode, though this should be default. 
-
-This will create an installer in the build folder.
-
 
 
 

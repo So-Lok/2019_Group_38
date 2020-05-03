@@ -108,8 +108,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8b244be8b7b7db1b08de2a2acb9409db"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8b244be8b7b7db1b08de2a2acb9409db"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>MainWindow</b> (QWidget *parent=0)</td></tr>
 <tr class="separator:a8b244be8b7b7db1b08de2a2acb9409db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae98d00a93bc118200eeef9f9bba1dba7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_main_window.html#ae98d00a93bc118200eeef9f9bba1dba7">~MainWindow</a> ()</td></tr>
-<tr class="separator:ae98d00a93bc118200eeef9f9bba1dba7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e20a4a065fbb0e4d3532a45a0a91425"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_main_window.html#a4e20a4a065fbb0e4d3532a45a0a91425">closeEvent</a> (QCloseEvent *event)</td></tr>
 <tr class="separator:a4e20a4a065fbb0e4d3532a45a0a91425"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4af5b388fdbba0f93d8b0ca76a4ea08"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_main_window.html#ae4af5b388fdbba0f93d8b0ca76a4ea08">widgetBox</a> ()</td></tr>
@@ -229,9 +227,11 @@ vtkSmartPointer&lt; vtkBoxWidget &gt;&#160;</td><td class="memItemRight" valign=
 <tr class="memitem:ad52a7058b471464fbf0e741cd33e6bb0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad52a7058b471464fbf0e741cd33e6bb0"></a>
 vtkSmartPointer&lt; vtkRenderWindowInteractor &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>interactor</b></td></tr>
 <tr class="separator:ad52a7058b471464fbf0e741cd33e6bb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b3b309c1dc09c25ff2b8c9137735254"><td class="memItemLeft" align="right" valign="top">vtkSmartPointer&lt; vtkNamedColors &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_main_window.html#a7b3b309c1dc09c25ff2b8c9137735254">colors</a></td></tr>
+<tr class="memitem:a7b3b309c1dc09c25ff2b8c9137735254"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7b3b309c1dc09c25ff2b8c9137735254"></a>
+vtkSmartPointer&lt; vtkNamedColors &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>colors</b></td></tr>
 <tr class="separator:a7b3b309c1dc09c25ff2b8c9137735254"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f46f38f8603c05a64be2afb4c98e575"><td class="memItemLeft" align="right" valign="top">vtkSmartPointer&lt; vtkLight &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_main_window.html#a3f46f38f8603c05a64be2afb4c98e575">light</a></td></tr>
+<tr class="memitem:a3f46f38f8603c05a64be2afb4c98e575"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3f46f38f8603c05a64be2afb4c98e575"></a>
+vtkSmartPointer&lt; vtkLight &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>light</b></td></tr>
 <tr class="separator:a3f46f38f8603c05a64be2afb4c98e575"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc147602fcc95805b97c4d9a38abd71a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abc147602fcc95805b97c4d9a38abd71a"></a>
 vtkSmartPointer&lt; vtkDistanceWidget &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>distanceWidget</b> = vtkSmartPointer&lt;vtkDistanceWidget&gt;::New()</td></tr>
@@ -245,24 +245,7 @@ vtkSmartPointer&lt; vtkOrientationMarkerWidget &gt;&#160;</td><td class="memItem
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Sets up the maindwindow ui. Connects all mainwindow buttons to functions sets up additional window(s) and initalises vtk variables </p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="ae98d00a93bc118200eeef9f9bba1dba7"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">MainWindow::~MainWindow </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Delets the ui </p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a82d432c5ae7fb3ee64a35952efa0263a"></a>
 <div class="memitem">
 <div class="memproto">
@@ -789,49 +772,6 @@ vtkSmartPointer&lt; vtkOrientationMarkerWidget &gt;&#160;</td><td class="memItem
       </table>
 </div><div class="memdoc">
 <p>Controls the box Wiget feature, allows user to alter size of model </p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="a7b3b309c1dc09c25ff2b8c9137735254"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">vtkSmartPointer&lt;vtkNamedColors&gt; MainWindow::colors</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>vtkNamedColors is used to change the color of the objects </p>
-
-</div>
-</div>
-<a class="anchor" id="a3f46f38f8603c05a64be2afb4c98e575"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">vtkSmartPointer&lt;vtkLight&gt; MainWindow::light</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>vtkLight is used to show the light intensity </p>
 
 </div>
 </div>

@@ -59,10 +59,7 @@ int main(int argc, char *argv[])
       operatorFunctions = true;
     }
 
-
-
     if(vectorTest.magnitude() > 1.7319 && vectorTest.magnitude() < 1.7321)
-
 
     if(getSetFunctions==true &&
        operatorFunctions==true &&

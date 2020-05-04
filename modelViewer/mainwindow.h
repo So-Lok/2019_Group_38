@@ -1,6 +1,10 @@
 /**
 * @file mainwindow.h
+
 * Contains function declarations of the main window
+
+* @brief Contains function declarations of the main window
+
 */
 
 
@@ -27,6 +31,7 @@
 #include <vtkCommand.h>
 #include <vtkTransform.h>
 
+
 // close event
 #include <QCloseEvent>
 #include <QMessageBox>
@@ -37,6 +42,20 @@
 //Distance widget
 #include <vtkDistanceWidget.h>
 #include <vtkDistanceRepresentation.h>
+
+
+
+// close event
+#include <QCloseEvent>
+#include <QMessageBox>
+
+// Additonal windows
+#include "optionsfilter.h"
+
+//Distance widget
+#include <vtkDistanceWidget.h>
+#include <vtkDistanceRepresentation.h>
+
 
 //Axis widget
 #include <vtkVersion.h>
@@ -89,6 +108,7 @@ public:
 
     // display/render function, for use of filters.
 
+
     /**
     * Removes all active filters and reloads the current model to its' initial state
     */
@@ -105,6 +125,25 @@ public:
     void handleShrink();
 
     /**
+
+
+    /**
+    * Removes all active filters and reloads the current model to its' initial state
+    */
+    void resetFilter();
+    /**
+    * Handles the application of the clip filter
+    * Clips a part of the model using preset values
+    */
+    void handleClip();
+    /**
+    * Handles the application of the shrink filter
+    * Shrinks the model by a scaling factor
+    */
+    void handleShrink();
+
+    /**
+
     * Handles the changing of the model's colour
     */
     void handleObjectColor();
@@ -112,6 +151,7 @@ public:
     /**
     * Handles the changing of the background's colour
     */
+
     void handleBackgroundColor(); 
 
     /** 
@@ -227,17 +267,111 @@ private slots:
 
 
 
+    void handleBackgroundColor();
+
+
+
+private slots:
+
+
+    //Distance widget //
+    /**
+    * Handles the measuring of the distance between two points
+    */
+    void handledistWid();
+
+    //Axis label //
+    /**
+    * Handles the marking of axes on screen
+    */
+    void AxisLabel();
+
+    //light intensity//
+    /**
+    * handles the sliding of the light intensity after checked the ON/OFF box
+    */
+    void on_Slider_sliderMoved(int position);
+    /**
+   * handles the ON/OFF box of the light intensity sliding
+   */
+    void on_checkBox_clicked(bool checked);
+
+    //Edge//
+    /**
+   * handles the wireframe when checked the box
+   */
+    void on_Edge_toggled(bool checked);
+
+    /// opacity //
+
+    /**
+   * handles the opacity when sliding
+   */
+    void on_OpacitySlider_valueChanged(int value);
+
+    /**
+    * This function displays the edit filters dialog
+    */
+    void on_editFilters_clicked();
+    //----------- Clip Filter--------------
+    /**
+    * This handles the value received from the signal emitted from the edit filters window for clipOriginX
+    * @param value equals to the slider value changed in the edit filters window
+    */
+    void updateClipOriginX(int value);
+    /**
+    * This handles the value received from the signal emitted from the edit filters window for clipNormalX
+    * @param value equals to the slider value changed in the edit filters window
+    */
+    void updateClipNormalX(int value);
+    /**
+    * This handles the value received from the signal emitted from the edit filters window for clipOriginY
+    * @param value equals to the slider value changed in the edit filters window
+    */
+    void updateClipOriginY(int value);
+    /**
+    * This handles the value received from the signal emitted from the edit filters window for clipNormalY
+    * @param value equals to the slider value changed in the edit filters window
+    */
+    void updateClipNormalY(int value);
+    /**
+    * This handles the value received from the signal emitted from the edit filters window for clipOriginZ
+    * @param value equals to the slider value changed in the edit filters window
+    */
+    void updateClipOriginZ(int value);
+    /**
+    * This handles the value received from the signal emitted from the edit filters window for clipNormalZ
+    * @param value equals to the slider value changed in the edit filters window
+    */
+    void updateClipNormalZ(int value);
+    //-------------------------------------
+
+    //------------Shrink Filter--------
+    /**
+    * This handles the value received from the signal emitted from the edit filters window for shrinkFactor
+    * @param value equals to the slider value changed in the edit filters window
+    */
+    void updateShrinkFactor(int value);
+
+
+
 
 private:
     Ui::MainWindow* ui;
 
     // filter parameters
     //--------------Univessal-------------------
+
     bool filterApplied;
 
     optionsFilter *opFilterDialog; ///< dialog class pointer for creation of the edit filters window
 
     bool applydist; ///< This parameter is for checking whether the distance widget checkbox has been check
+
+    optionsFilter *opFilterDialog; ///< dialog class pointer for creation of the edit filters window
+
+    bool applydist; ///< This parameter is for checking whether the distance widget checkbox has been check
+
 
     // ------------------Clip Filter------------
     double clipOriginX = 0.0; ///< X value of the origin for the clip filter, 0.0 is initial value
@@ -265,10 +399,17 @@ private:
     vtkSmartPointer<vtkNamedColors> colors;
     vtkSmartPointer<vtkLight> light;
 
+
     vtkSmartPointer<vtkDistanceWidget> distanceWidget = vtkSmartPointer<vtkDistanceWidget>::New();
 
     vtkSmartPointer<vtkAxesActor> axes = vtkSmartPointer<vtkAxesActor>::New();
     vtkSmartPointer<vtkOrientationMarkerWidget> orientationWidget = vtkSmartPointer<vtkOrientationMarkerWidget>::New();
+
+    vtkSmartPointer<vtkDistanceWidget> distanceWidget;
+
+    vtkSmartPointer<vtkAxesActor> axes;
+    vtkSmartPointer<vtkOrientationMarkerWidget> orientationWidget;
+
 
 };
 

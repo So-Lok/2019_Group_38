@@ -1,6 +1,10 @@
 /**
 * @file mainwindow.cpp
+
 * Contains function definitions for features within the mainwindow
+=======
+* @brief Contains function definitions for features within the mainwindow
+
 *
 */
 
@@ -87,6 +91,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     boxWidget = vtkSmartPointer<vtkBoxWidget>::New();
 
+
+
+    distanceWidget = vtkSmartPointer<vtkDistanceWidget>::New();
+    axes = vtkSmartPointer<vtkAxesActor>::New();
+    orientationWidget = vtkSmartPointer<vtkOrientationMarkerWidget>::New();
+
+
     // Define icon Files
     // file is determined by where you run the exe from
     // if you run withing debug then ../.. if in build then ../
@@ -109,6 +120,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Distance widget
     connect(ui->distWid, &QCheckBox::released, this, &MainWindow::handledistWid);
+
 
     //Axis widget
     connect(ui->axisLabel, &QAction::toggled, this, &MainWindow::AxisLabel); 
@@ -167,6 +179,44 @@ connect(ui->degreesButton2, &QPushButton::released, this, &MainWindow::handleVie
 
 
 
+
+    //Axis widget
+    connect(ui->axisLabel, &QAction::toggled, this, &MainWindow::AxisLabel);
+
+
+
+
+    // SIGNAL(External window) connection to SLOTs(MainWindow)
+
+    // --------------------Clip Filter--------------------
+    connect(opFilterDialog, SIGNAL(sendClipOriginX(int)), this, SLOT(updateClipOriginX(int) ) );
+    connect(opFilterDialog, SIGNAL(sendClipOriginY(int)), this, SLOT(updateClipOriginY(int) ) );
+    connect(opFilterDialog, SIGNAL(sendClipOriginZ(int)), this, SLOT(updateClipOriginZ(int) ) );
+
+    connect(opFilterDialog, SIGNAL(sendClipNormalX(int)), this, SLOT(updateClipNormalX(int) ) );
+    connect(opFilterDialog, SIGNAL(sendClipNormalY(int)), this, SLOT(updateClipNormalY(int) ) );
+    connect(opFilterDialog, SIGNAL(sendClipNormalZ(int)), this, SLOT(updateClipNormalZ(int) ) );
+    //--------------------Clip Filter---------------------------------
+    // shrink filter
+    connect(opFilterDialog, SIGNAL(sendShrinkFactor(int)), this, SLOT(updateShrinkFactor(int) ) );
+
+    renderer->RemoveAllViewProps();
+
+    /////light intensity/////
+
+    light = vtkSmartPointer<vtkLight>::New();
+    light->SetLightTypeToHeadlight();
+    light->SetPositional(false);
+    light->PositionalOff();
+    light->SetConeAngle(10);
+    light->SetDiffuseColor(1, 1, 1);
+    light->SetAmbientColor(1, 1, 1);
+    light->SetSpecularColor(1, 1, 1);
+    light->SetIntensity(0.5);
+
+
+
+
     // Add the actor to the scene
     renderer->AddLight(light);
 
@@ -184,6 +234,7 @@ void MainWindow::on_editFilters_clicked()
   opFilterDialog->show();
 }
 
+
 void MainWindow::updateClipOriginX(int value)
 {
   double newValue = value/10;
@@ -191,6 +242,32 @@ void MainWindow::updateClipOriginX(int value)
   if(ui->clipFilter->isChecked()==true)
       handleClip();
 }
+
+void MainWindow::updateClipOriginY(int value)
+{
+  double newValue = value/10;
+  clipOriginY = newValue;
+
+
+void MainWindow::updateClipOriginX(int value)
+{
+  double newValue = value/10;
+  clipOriginX = newValue;
+
+  if(ui->clipFilter->isChecked()==true)
+      handleClip();
+}
+
+
+void MainWindow::updateClipOriginZ(int value)
+{
+  double newValue = value/10;
+  clipOriginZ = newValue;
+  if(ui->clipFilter->isChecked()==true)
+      handleClip();
+
+}
+
 
 void MainWindow::updateClipOriginY(int value)
 {
@@ -208,6 +285,7 @@ void MainWindow::updateClipOriginZ(int value)
       handleClip();
 
 }
+
 
 void MainWindow::updateClipNormalX(int value)
 {
@@ -378,6 +456,7 @@ void MainWindow::widgetBox()
     boxWidget->SetPlaceFactor( 1.25 ); // Make the box 1.25x larger than the actor
     boxWidget->PlaceWidget();
 
+
     vtkSmartPointer<vtkMyCallback> callback =
                     vtkSmartPointer<vtkMyCallback>::New();
     boxWidget->AddObserver( vtkCommand::InteractionEvent, callback );
@@ -392,6 +471,24 @@ void MainWindow::widgetBox()
     interactor->TerminateApp();
     boxWidget->Off();
     renderWindow->Render();
+
+
+
+    vtkSmartPointer<vtkMyCallback> callback =
+                    vtkSmartPointer<vtkMyCallback>::New();
+    boxWidget->AddObserver( vtkCommand::InteractionEvent, callback );
+
+    boxWidget->On();
+
+    renderWindow->Render();
+    interactor->Start();
+  }
+  else
+  {
+    interactor->TerminateApp();
+    boxWidget->Off();
+    renderWindow->Render();
+
 
   }
 
@@ -600,8 +697,68 @@ void MainWindow::handleBackgroundColor()
       //  ui->qvtkWidget->GetRenderWindow()->Render();
       renderWindow->Render();
 
+
+
     }
 }
+
+
+void MainWindow::closeEvent (QCloseEvent *event)
+{
+  // checckBox is for box widget
+  if(ui->checkBox->isChecked())
+    interactor->TerminateApp();
+}
+
+
+
+
+void MainWindow::on_Slider_sliderMoved(int position)
+{
+    if (ui->checkBox->isChecked()) {
+        light->SetIntensity((float)(100 - position) / 100);
+    }
+    else {
+        light->SetIntensity(0.5);
+    }
+
+    ui->qvtkWidget->GetRenderWindow()->Render();
+
+
+}
+
+//checked box before adjust the light intensity
+void MainWindow::on_checkBox_clicked(bool checked)
+{
+    if (checked) {
+        light->SetIntensity((float)(100 - ui->Slider->value()) / 100);
+    }
+    else {
+        light->SetIntensity(0.5);
+    }
+
+
+    ui->qvtkWidget->GetRenderWindow()->Render();
+}
+
+//function to see the Edge of the object
+void MainWindow::on_Edge_toggled(bool checked)
+{
+
+    if (checked)
+    {
+        actor->GetProperty()->SetRepresentationToWireframe();
+
+    }
+    else
+    {
+        actor->GetProperty()->SetRepresentationToSurface();
+
+
+    }
+    ui->qvtkWidget->GetRenderWindow()->Render();
+}
+
 
 
 void MainWindow::closeEvent (QCloseEvent *event)
@@ -658,6 +815,8 @@ void MainWindow::on_Edge_toggled(bool checked)
     }
     ui->qvtkWidget->GetRenderWindow()->Render();
 }
+
+
 
 //Distance widget
 void MainWindow::handledistWid()
@@ -716,6 +875,7 @@ void MainWindow::AxisLabel()
         orientationWidget->Off();
         renderWindow->Render();
     }
+
     } 
 
 
@@ -886,4 +1046,7 @@ void MainWindow::handleView902()
 
 
 }
+
+
+    }
 

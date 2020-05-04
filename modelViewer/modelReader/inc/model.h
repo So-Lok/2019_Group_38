@@ -1,3 +1,11 @@
+
+/**
+* @file model.h
+* @brief contains declarations of all functions used in the model class
+*        to be used with vectorClass.h, cell.h and material.h
+*/
+
+
 #ifndef MODEL_H_INCLUDED
 #define MODEL_H_INCLUDED
 
@@ -23,13 +31,21 @@ public:
 
 
     /**
+
     * Standard constructor
+
+    * default constructor
+
     */
     model();
 
 
     /**
+
     * Standard constructor
+
+    * default destructor
+
     */
     ~model();
 
@@ -89,7 +105,6 @@ public:
     void dispNumberOfVertices();
 
 
-
     // get functions
     /**
     *  Returns the number of vertices
@@ -109,6 +124,7 @@ public:
 private:
 
     // vector list of vertices
+
     /**
     *  vector of the vectorList class
     */
@@ -121,6 +137,11 @@ private:
     *  vector of the cell class
     */
     std::vector<cell> cells;
+
+    std::vector<vectorClass> vectorList;///< vector array of the vectorList class
+    std::vector<material> materials;///< vector array of the materials class
+    std::vector<cell> cells;///< vector array of the cell class
+
 
 };
 

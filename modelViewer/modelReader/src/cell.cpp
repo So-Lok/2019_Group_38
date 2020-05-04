@@ -1,4 +1,11 @@
+
 //cell.cpp
+
+/**
+* @file cell.cpp
+* @brief definitions of functions declared in cell.h
+*/
+
 
 
 #include "cell.h"

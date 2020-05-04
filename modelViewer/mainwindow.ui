@@ -64,6 +64,7 @@
       </widget>
      </item>
     </layout>
+
    </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
@@ -90,13 +91,68 @@
       </widget>
      </item>
     </layout>
+
    </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
+
       <x>130</x>
       <y>440</y>
       <width>82</width>
+      <height>83</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_3">
+     <item>
+      <widget class="QPushButton" name="editFilters">
+       <property name="text">
+        <string>Edit Filters</string>
+
+      <x>220</x>
+      <y>440</y>
+      <width>113</width>
+      <height>64</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QPushButton" name="BackgroundColor">
+       <property name="text">
+        <string>Background Color</string>
+
+       </property>
+      </widget>
+     </item>
+     <item>
+
+      <widget class="QPushButton" name="cameraReset">
+       <property name="text">
+        <string>Reset Camera</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="resetModel">
+       <property name="text">
+        <string>Reset</string>
+       </property>
+      </widget>
+
+      <widget class="QPushButton" name="ObjectColor">
+       <property name="text">
+        <string>Object Color</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>440</y>
+      <width>78</width>
       <height>83</height>
      </rect>
     </property>
@@ -121,10 +177,11 @@
         <string>Reset</string>
        </property>
       </widget>
+
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="layoutWidget">
+   <widget class="QWidget" name="">
     <property name="geometry">
      <rect>
       <x>350</x>
@@ -150,7 +207,11 @@
      </item>
     </layout>
    </widget>
+
    <widget class="QWidget" name="layoutWidget">
+
+   <widget class="QWidget" name="">
+
     <property name="geometry">
      <rect>
       <x>440</x>
@@ -243,7 +304,11 @@
      </item>
     </layout>
    </widget>
+
    <widget class="QWidget" name="layoutWidget">
+
+   <widget class="QWidget" name="">
+
     <property name="geometry">
      <rect>
       <x>610</x>
@@ -349,6 +414,7 @@
       </layout>
      </item>
     </layout>
+
    </widget>
    <widget class="QWidget" name="layoutWidget_2">
     <property name="geometry">
@@ -417,15 +483,38 @@
       </widget>
      </item>
     </layout>
+
    </widget>
    <zorder>layoutWidget</zorder>
    <zorder>layoutWidget</zorder>
    <zorder>layoutWidget</zorder>
+
    <zorder>layoutWidget</zorder>
    <zorder>layoutWidget</zorder>
    <zorder>layoutWidget</zorder>
    <zorder>qvtkWidget</zorder>
    <zorder>layoutWidget_2</zorder>
+
+   <zorder>Slider</zorder>
+   <zorder>checkBox</zorder>
+   <zorder>label</zorder>
+   <zorder>qvtkWidget</zorder>
+   <zorder>distWid</zorder>
+   <zorder>Edge</zorder>
+   <zorder>OpacitySlider</zorder>
+   <zorder>label_2</zorder>
+   <zorder>resetModel</zorder>
+   <zorder>horizontalSpacer</zorder>
+   <zorder>horizontalSpacer_2</zorder>
+   <zorder>label_3</zorder>
+   <zorder>label_4</zorder>
+   <zorder>numCells</zorder>
+   <zorder>labelVerts</zorder>
+   <zorder>numVerts</zorder>
+   <zorder>horizontalSpacer_3</zorder>
+   <zorder>horizontalSpacer_4</zorder>
+   <zorder>horizontalSpacer_5</zorder>
+
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QMenuBar" name="menubar">

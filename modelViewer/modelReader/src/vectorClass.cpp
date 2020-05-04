@@ -1,11 +1,7 @@
-
-// vectorClass.cpp
-=======
 /**
 * @file vectorClass.cpp
 * @brief definitions of all functions declared in vectorClass.cpp
 */
-
 
 #include "vectorClass.h"
 

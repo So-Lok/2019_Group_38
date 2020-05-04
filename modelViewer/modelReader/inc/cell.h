@@ -30,8 +30,6 @@ public:
 
     /**
     *  Ovveride costructor for tetrahedron cell type
-
-
     * @param cellIdToSet new cell ID value
     * @param typeOfCell new cell type value
     * @param matIdToSet new material value
@@ -43,15 +41,12 @@ public:
     * @param temp2 temporary vector2 for storing purposes
     * @param temp3 temporary vector3 for storing purposes
     * @param temp4 temporary vector4 for storing purposes
-
     */
     cell(int cellIdToSet, char typeOfCell, int matIdToSet,
          int vId1, int vId2, int vId3, int vId4,
          vectorClass temp1, vectorClass temp2, vectorClass temp3, vectorClass temp4);
     /**
     *  Ovveride costructor for pyramid cell type
-
-
     * @param cellIdToSet new cell ID value
     * @param typeOfCell new cell type value
     * @param matIdToSet new material value
@@ -65,7 +60,6 @@ public:
     * @param temp3 temporary vector3 for storing purposes
     * @param temp4 temporary vector4 for storing purposes
     * @param temp5 temporary vector5 for storing purposes
-
     */
     cell(int cellIdToSet, char typeOfCell, int matIdToSet,
          int vId1, int vId2, int vId3, int vId4,
@@ -75,8 +69,6 @@ public:
 
     /**
     *  Ovveride costructor for hexahedron cell type
-
-
     * @param cellIdToSet new cell ID value
     * @param typeOfCell new cell type value
     * @param matIdToSet new material value
@@ -96,7 +88,6 @@ public:
     * @param temp6 temporary vector6 for storing purposes
     * @param temp7 temporary vector7 for storing purposes
     * @param temp8 temporary vector8 for storing purposes
-
     */
     cell(int cellIdToSet, char typeOfCell, int matIdToSet,
          int vId1, int vId2, int vId3, int vId4,
@@ -162,14 +153,6 @@ public:
     /* Calculation Functions */
 
     // vectorlist passed from model
-
-    
-    float calcVolume();
-
-    vectorClass centreOfGravity();
-
-    float calcWeight(int density);
-
     /**
     * Calculates the volume of the cell depending on its type
     * only works for tetrahedron, hexahedron and pyramid
@@ -190,7 +173,6 @@ public:
     /**
     * Displays the cell's vectors to the command line
     */
-
     void dispCellVectors();
 
     // for the model to use vector Id list
@@ -198,15 +180,6 @@ public:
 
 private:
     /* Base Cell variables */
-
-    int cellId;
-    char type;
-    int matId;
-
-    // stores the IDs of the vectors in the cell
-    std::vector<int> vectorIdList;
-    std::vector<vectorClass> vectorList;
-
     int cellId; ///< Cell's ID
     char type; ///< Cell's type
     int matId; ///< the material ID of the cell
@@ -214,7 +187,6 @@ private:
     // stores the IDs of the vectors in the cell
     std::vector<int> vectorIdList; ///< vector array of vector IDs
     std::vector<vectorClass> vectorList; ///< vector array of vectors within the cell
-
 
     // address to the models vector list, to be set during the reading of the model file
     //std::vector<vectorClass> vectorListAddress;

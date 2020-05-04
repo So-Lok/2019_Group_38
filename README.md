@@ -1,7 +1,7 @@
 ## H62PEP Computing Project
 
 # Group 38
-=======
+
 # Group 38 - modelViewer
 
 
@@ -11,7 +11,7 @@
 https://so-lok.github.io/2019_Group_38/html
 
 
-=======
+
 ## (MARKER) PLEASE READ ON FOR FEATURES AND THINGS TO TAKE NOTE OF 
 
 ## Running Semester 2 program ~~05/03~~ 3rd May update 

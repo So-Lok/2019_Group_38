@@ -1,11 +1,7 @@
-
-// model.cpp
-
 /**
 * @file model.cpp
 * @brief definitions of functions declared in model.h
 */
-
 
 #include "model.h"
 
